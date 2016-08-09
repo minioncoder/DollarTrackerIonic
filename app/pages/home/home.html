@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-navbar>
+  <ion-navbar primary>
     <ion-title>Home</ion-title>
   </ion-navbar>
 </ion-header>
@@ -10,6 +10,20 @@
    Welcome to Dollar tracker App
    </h3>
    <p>
-   This is a Dashboard Page
+    <ion-list>
+      <ion-item>
+        <ion-label primary>Username</ion-label>
+        <ion-input placeholder="Username Input"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label primary> Password </ion-label>
+      <ion-input placeholder="Password Input"></ion-input>
+  </ion-item>
+  <div class="row">
+    <div class="col text-center">
+      <button secondary>Register</button>
+    </div>
+  </div>
+  </ion-list>
   </p>
 </ion-content>
