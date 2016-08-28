@@ -7,11 +7,16 @@
 </ion-header>
 
 <ion-content>
-  <ion-list>
-    <ion-list-header></ion-list-header>
-    <ion-item>
-      <ion-icon name="ionic" item-left></ion-icon>
-      This is Dashboard Page layout....
-    </ion-item>
-  </ion-list>
+<h1>Recent Activity</h1>
+ <ion-list *ngIf="dashboardStats">
+  <ion-item *ngFor="let ra of dashboardStats.recentlyAdded">
+    <ion-avatar item-left>
+      <img src="https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mm&f=y">
+    </ion-avatar>
+   <p>You spent 
+       <strong>${{ra.amount|number}}</strong> for <strong>{{ra.categoryDescription}}</strong> 
+    </p>  
+    <p>{{ra.expenseDtUtc | date:"MMM"}}, {{ra.expenseDtUtc | date:"dd"}}</p>
+  </ion-item>
+</ion-list>
 </ion-content>
