@@ -9,20 +9,27 @@ export class JwtService {
     constructor(){
         this._localStorage = new Storage(LocalStorage);
     }
-
+    private data;
     public get():string {
         var data;
         this._localStorage.get(this._jwtKey)
-        .then(x=>{data = x;});
-        return data;
+       .then(x=>{this.data = x;});
+     
+       return this.data;
+     //   .then(x=>{data = x;});
+      //  return data;
     }
     
     public set(token: string){
+        console.log('SETTING JWT token', token);
         this._localStorage.set(this._jwtKey, token);
     }
+
     
-public isAuthenticated(){
-    let token = this.get();
+public isAuthenticated():boolean{
+   //this.get(); 
+    let token = localStorage.getItem(this._jwtKey);
+    console.log('jwt service isAuthenticated', token);
     if(!token) return false;
     let decoded = this.decodeToken(token)
     if(typeof decoded == "undefined" || decoded == null || typeof decoded.exp === "undefined") {

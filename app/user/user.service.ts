@@ -1,18 +1,17 @@
 import {Injectable} from '@angular/core';
 import {JwtService} from '../shared/jwt/jwt.service'
-import {IUser} from './user.model'
+import {IUser} from '../shared/models/user.model'
 import {Subject, BehaviorSubject, Observable} from 'rxjs/Rx';
-import {Router} from '@angular/router'
 import {ApiUrl} from '../shared/apiurl.service';
 import {ApiService} from '../shared/api/api.service';
 @Injectable()
-export class UserService{
+export class UserService {
 
     private userKey:string = "dollarTrackerUser"
     isAuthenticated:Subject<boolean> = new BehaviorSubject<boolean>(false);
     currentUser: Subject<IUser> = new BehaviorSubject<IUser>(null);
     public user:IUser = null;
-    constructor(private _jwtService:JwtService, private _router:Router, private _apiUrl:ApiUrl,
+    constructor(private _jwtService:JwtService,  private _apiUrl:ApiUrl,
      private _apiService:ApiService) {
         this.currentUser.subscribe(user =>{
             this.user = user;
@@ -33,20 +32,21 @@ export class UserService{
        else {
           this.isAuthenticated.next(isAuthenticated);
            console.log('navigate to dashboard');
-           this._router.navigate(['dashboard']);
+          // this._router.navigate(['dashboard']);
        }
     }
 
     public isUserAuthenticated():boolean
     {
         let isAuthenticated = this._jwtService.isAuthenticated();
+        console.log("user serive isUserAuthenticated", isAuthenticated);
         if(!isAuthenticated){
             this.clear();
         }
         return isAuthenticated;
     }
 
-    public add(loginResponse:ILoginResponse){
+    public add(loginResponse:any){
        this._jwtService.set(loginResponse.token);
        this.isAuthenticated.next(true);
        this.setCurrent(loginResponse.user);
@@ -81,6 +81,6 @@ export class UserService{
 
     public logout(){
         this.clear();
-        this._router.navigate(['login']);
+     //   this._router.navigate(['login']);
     }
 }
