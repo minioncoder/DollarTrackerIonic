@@ -9,7 +9,8 @@ import {ApiUrl} from './shared/apiurl.service';
 import {ApiService} from './shared/api/api.service';
 import {JwtService} from './shared/jwt/jwt.service';
 import {DashboardPage} from './pages/dashboard/dashboard';
-import {ExpenseReportPage} from './pages/expenseReport/expenseReport'
+import {ExpenseReportPage} from './pages/expenseReport/expenseReport';
+import {IconMapperService} from './shared/iconmapper/iconmapper.service'
 interface PageObj {
   title: string;
   component: any;
@@ -103,4 +104,4 @@ export class DollarTrackerApp {
 // Set any config for your app as the third argument, see the docs for
 // more ways to configure your app:
 // http://ionicframework.com/docs/v2/api/config/Config/
-ionicBootstrap(DollarTrackerApp,[LoginService, UserService, ApiUrl, ApiService, JwtService]);
+ionicBootstrap(DollarTrackerApp,[LoginService, UserService, ApiUrl, ApiService, JwtService, IconMapperService]);
