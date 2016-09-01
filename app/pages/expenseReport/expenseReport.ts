@@ -1,6 +1,7 @@
 import {Component} from '@angular/core';
 import {ExpenseStoryService} from '../expenseStory/expenseStory.service';
 import { AlertController, App, ItemSliding, List, ModalController, NavController } from 'ionic-angular';
+import {ExpenseStoryDetailsPage} from '../expenseStory/expenseStoryDetails';
 @Component({
   templateUrl: 'build/pages/expenseReport/expenseReport.html',
   providers: [ExpenseStoryService]
@@ -11,6 +12,7 @@ export class ExpenseReportPage {
   }
   goToDetails(es:any) {
     console.log("in go to details");
+    this.navCtrl.push(ExpenseStoryDetailsPage, es);
   }
   removeReport(slidingItem: ItemSliding, sessionData, title) {
     let alert = this.alertCtrl.create({

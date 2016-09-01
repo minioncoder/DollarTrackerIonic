@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {Observable,BehaviorSubject} from 'rxjs/Rx';
-import {Expense} from '../expense/expense';
+import {Expense} from '../expense/expense.model';
 import {ApiUrl} from '../../shared/apiurl.service';
 import {ApiService} from '../../shared/api/api.service';
 import {Http, Response} from '@angular/http';

@@ -1,0 +1,20 @@
+<ion-header>
+  <ion-navbar primary>
+    <ion-title>
+      Details
+      <!--<ion-icon name="add-circle"></ion-icon>-->
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+   <div text-center>
+       <h3>{{expenseStorySummary.expenseStory.title}}</h3>
+          <p>
+            Total Expenditure: ${{expenseStorySummary.totalExpenses | number}} <br />
+            Expense Count: #{{expenseStorySummary.totalExpenseCount }}
+          </p>
+   </div>
+   <div>
+       <!--<textarea>{{expensesByCategory|json}}</textarea>-->
+   </div>
+</ion-content>
