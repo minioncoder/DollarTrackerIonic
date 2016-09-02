@@ -14,7 +14,36 @@
             Expense Count: #{{expenseStorySummary.totalExpenseCount }}
           </p>
    </div>
-   <div>
+   <!--<div>-->
        <!--<textarea>{{expensesByCategory|json}}</textarea>-->
-   </div>
+   <!--</div>-->
+   <ion-card *ngFor="let ck of categoryKeys">
+       <ion-card-header>
+            {{ck|uppercase}} ({{expensesByCategory[ck].expenses.length}})
+            <small side = "right">Total : ${{expensesByCategory[ck].total | number}}</small>
+        </ion-card-header>
+   
+   <ion-list>
+     <ion-item-sliding *ngFor="let es of expensesByCategory[ck].expenses">
+       <ion-item>
+           <i item-left class="fa-2x" [ngClass]=" _iconMapper.mapper[es.expenseSubCategoryId]?_iconMapper.mapper[es.expenseSubCategoryId] :'fa fa-list'"></i>
+            <p>
+                Date: {{es.expenseUtcDt|date:"MMM"}} ,  {{es.expenseUtcDt|date:"dd"}} <br />
+                Description: {{_expenseStoryService.expenseCategoryById[es.expenseSubCategoryId].description}} <br />
+                Store Name: {{es.storeName}} <br />
+                You Paid: ${{es.amount}} <br />
+                Comments: {{es.comments}}
+            </p>
+       </ion-item>
+       <ion-item-options side="right">
+          <button danger (click)="removeReport(slidingItem, es, 'Delete Report')" >
+            Remove
+          </button>
+           <button secondary  (click)="removeReport(slidingItem, es, 'Delete Report')" >
+                Edit
+          </button>
+        </ion-item-options>
+      </ion-item-sliding>    
+   </ion-list>
+   </ion-card>    
 </ion-content>
