@@ -7,10 +7,11 @@ import { NavParams } from 'ionic-angular';
 import {Expense} from '../expense/expense.model';
 import {IconMapperService} from '../../shared/iconmapper/iconmapper.service';
 import {ExpenseStory, ExpenseStorySummary} from './expenseStory.model';
-
+import {ExpensePage} from '../expense/expense';
 @Component({
     templateUrl: 'build/pages/expenseStory/expenseStoryDetails.html',
-    providers:[ExpenseStoryService]
+    providers:[ExpenseStoryService],
+    directives:[ExpensePage]
 })
 export class ExpenseStoryDetailsPage {
     private sub: any;
