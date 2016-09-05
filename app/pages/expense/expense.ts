@@ -1,6 +1,7 @@
 import {Component} from '@angular/core';
 import {ExpenseModalPage} from  './expense.modal';
 import {ModalController, Platform, NavParams, ViewController} from 'ionic-angular';
+import {Expense} from './expense.model';
 @Component({
     selector: 'expense',
     template: `
@@ -10,10 +11,11 @@ import {ModalController, Platform, NavParams, ViewController} from 'ionic-angula
     `
 })
 export class ExpensePage {
-    constructor(public modalCtrl: ModalController) { }
+  constructor(public modalCtrl: ModalController) { }
+
 
   openModal() {
-
+   
     let modal = this.modalCtrl.create(ExpenseModalPage);
     modal.present();
   }
