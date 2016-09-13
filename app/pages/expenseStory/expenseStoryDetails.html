@@ -4,7 +4,6 @@
       Details
       <!--<ion-icon name="add-circle"></ion-icon>-->
     </ion-title>
-    <expense></expense>
   </ion-navbar>
 </ion-header>
 <ion-content>
@@ -14,6 +13,8 @@
             Total Expenditure: ${{expenseStorySummary.totalExpenses | number}} <br />
             Expense Count: #{{expenseStorySummary.totalExpenseCount }}
           </p>
+    <expense [expenseStory]="expenseStorySummary.expenseStory"></expense>
+          
    </div>
    <!--<div>-->
        <!--<textarea>{{expensesByCategory|json}}</textarea>-->

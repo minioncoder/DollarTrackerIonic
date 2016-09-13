@@ -8,8 +8,8 @@ import {TabsPage} from '../tabs/tabs';
   templateUrl: 'build/pages/login/login.html'
 })
 export class LoginPage {
-    @Input() email:string;
-    @Input() password:string;
+     email:string = '';
+     password:string= '';
     private EMAIL_REGEXP = /^[a-z0-9!#$%&'*+\/=?^_`{|}~.-]+@[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)*$/i;
    
     private invalidEmailAlert;

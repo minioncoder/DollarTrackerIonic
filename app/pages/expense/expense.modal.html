@@ -9,6 +9,11 @@
         <ion-icon name="md-close"></ion-icon>
       </button>
     </ion-buttons>
+    <ion-buttons end>
+      <button (click)="save()">
+        Save
+      </button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
@@ -16,19 +21,19 @@
   <ion-card>
     <ion-item>
       <i class="fa fa-list" item-left></i>
-      <ion-input placeholder="Enter description"></ion-input>
+      <ion-input [(ngModel)]="expense.expenseSubCategoryId"  placeholder="Enter description"></ion-input>
     </ion-item> 
     <ion-item>
        <i class="fa fa-usd" item-left></i>
-      <ion-input placeholder="0.00"></ion-input>
+      <ion-input [(ngModel)] = "expense.amount" placeholder="0.00"></ion-input>
     </ion-item>
    <ion-item>
       <i class="fa fa-shopping-bag" item-left></i>
-      <ion-input placeholder="Store Name"></ion-input>
+      <ion-input [(ngModel)]="expense.storeName" placeholder="Store Name"></ion-input>
     </ion-item>  
    <ion-item>
     <ion-label>Date</ion-label>
-    <ion-datetime displayFormat="MM/DD/YYYY" [(ngModel)]="_expense.expenseUtcDt"></ion-datetime>
+    <ion-datetime displayFormat="MM/DD/YYYY" [(ngModel)]="expense.expenseUtcDt"></ion-datetime>
   </ion-item>
   <ion-item>
     <button secondar (click)="uploadReceipt()">Upload</button>
