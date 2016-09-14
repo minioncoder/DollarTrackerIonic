@@ -5,12 +5,13 @@ import {Camera} from 'ionic-native';
 import {ExpenseService} from './expense.service';
 import {ExpenseStory} from '../expenseStory/expenseStory.model';
 import {Plugins} from '../../shared/upload/plugins.service';
-import 'whatwg-fetch';
 import {Transfer} from 'ionic-native';
+import {IonicSearchSelectPage} from '../../shared/ionic-select/ionic-search-select';
 
 @Component({
     templateUrl: 'build/pages/expense/expense.modal.html',
-    providers: [ExpenseService]
+    providers: [ExpenseService],
+    directives:[IonicSearchSelectPage]
 })
 export class ExpenseModalPage {
     private expenseStory: ExpenseStory;
@@ -77,7 +78,15 @@ export class ExpenseModalPage {
                 this.images.push(imgUrl);
             }, error => { console.log("image upload error", error) })
     }
-
+    onSelectCategory(category:any) {
+        console.log("onSelectCategory");
+        console.log(category);
+        if(category) {
+            this.expense.expenseCategoryId = category.expenseCategoryId;
+            this.expense.expenseSubCategoryId = category.expenseSubCategoryId;
+            this.expense.subCategoryDescription = category.description;
+        }
+    }
     dismiss() {
         this.viewCtrl.dismiss();
         this.loading.dismiss();

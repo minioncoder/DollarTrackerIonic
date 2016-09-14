@@ -19,10 +19,9 @@
 
 <ion-content>
   <ion-card>
-    <ion-item>
-      <i class="fa fa-list" item-left></i>
-      <ion-input [(ngModel)]="expense.expenseSubCategoryId"  placeholder="Enter description"></ion-input>
-    </ion-item> 
+      <!--<i class="fa fa-list" item-left></i>
+      <ion-input [(ngModel)]="expense.expenseSubCategoryId"  placeholder="Enter description"></ion-input>-->
+    <ionic-search-select (notify)='onSelectCategory($event)'></ionic-search-select>
     <ion-item>
        <i class="fa fa-usd" item-left></i>
       <ion-input [(ngModel)] = "expense.amount" placeholder="0.00"></ion-input>
