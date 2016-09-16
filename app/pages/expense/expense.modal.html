@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-navbar primary>
     <ion-title>
       Add a bill
     </ion-title>
@@ -14,28 +14,28 @@
         Save
       </button>
     </ion-buttons>
-  </ion-toolbar>
+  </ion-navbar>
 </ion-header>
 
 <ion-content>
   <ion-card>
-      <!--<i class="fa fa-list" item-left></i>
+    <!--<i class="fa fa-list" item-left></i>
       <ion-input [(ngModel)]="expense.expenseSubCategoryId"  placeholder="Enter description"></ion-input>-->
     <ionic-search-select (notify)='onSelectCategory($event)'></ionic-search-select>
     <ion-item>
-       <i class="fa fa-usd" item-left></i>
-      <ion-input [(ngModel)] = "expense.amount" placeholder="0.00"></ion-input>
+      <i class="fa fa-usd" item-left></i>
+      <ion-input [(ngModel)]="expense.amount" placeholder="0.00"></ion-input>
     </ion-item>
-   <ion-item>
+    <ion-item>
       <i class="fa fa-shopping-bag" item-left></i>
       <ion-input [(ngModel)]="expense.storeName" placeholder="Store Name"></ion-input>
-    </ion-item>  
-   <ion-item>
-    <ion-label>Date</ion-label>
-    <ion-datetime displayFormat="MM/DD/YYYY" [(ngModel)]="expense.expenseUtcDt"></ion-datetime>
-  </ion-item>
-  <ion-item>
-    <button secondar (click)="uploadReceipt()">Upload</button>
-  </ion-item>
+    </ion-item>
+    <ion-item>
+      <ion-label>Date</ion-label>
+      <ion-datetime displayFormat="MM/DD/YYYY" [(ngModel)]="expense.expenseUtcDt"></ion-datetime>
+    </ion-item>
+    <ion-item>
+      <button secondar (click)="uploadReceipt()">Upload</button>
+    </ion-item>
   </ion-card>
 </ion-content>

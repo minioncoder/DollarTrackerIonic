@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {LoadingController, NavController, ModalController, Platform, NavParams, ViewController, AlertController} from 'ionic-angular';
+import {NavController, ModalController, Platform, NavParams, ViewController, AlertController} from 'ionic-angular';
 import {Expense} from './expense.model';
 import {Camera} from 'ionic-native';
 import {ExpenseService} from './expense.service';
@@ -7,6 +7,7 @@ import {ExpenseStory} from '../expenseStory/expenseStory.model';
 import {Plugins} from '../../shared/upload/plugins.service';
 import {Transfer} from 'ionic-native';
 import {IonicSearchSelectPage} from '../../shared/ionic-select/ionic-search-select';
+import {LoadingService} from '../../shared/loading/loading.service';
 
 @Component({
     templateUrl: 'build/pages/expense/expense.modal.html',
@@ -18,7 +19,7 @@ export class ExpenseModalPage {
     private expense: Expense = new Expense();
     private _imageBlob: any = null;
     images: Array<string> = [];
-    loading: any;
+    loading:any;
     constructor(
         public platform: Platform,
         public params: NavParams,
@@ -27,14 +28,14 @@ export class ExpenseModalPage {
         private expenseService: ExpenseService,
         private plugins: Plugins,
         private navCtrl: NavController,
-        private loadingCtrl: LoadingController
+        private loadingService: LoadingService
     ) {
         let dt = new Date();
         this.expenseStory = params.data;
         this.expense.expenseUtcDt = dt.toISOString();
         this.expenseStory = params.data;
         this.expense.expenseStoryId = this.expenseStory.expenseStoryId;
-        this.loading = loadingCtrl.create();
+        this.loading = loadingService.loading;
     }
 
     makeFileIntoBlob(_imagePath) {
@@ -47,20 +48,8 @@ export class ExpenseModalPage {
 
     save() {
         var fileName = 'receipt-' + new Date().getTime() + '.jpg';
-        console.log("images:", JSON.stringify(this.images));
         if (this.images.length > 0) {
             this.loading.present();
-            let alert1 = this.alertCtrl.create({
-                title: 'Adding expense now'
-            });
-            // alert1.present();
-            //TODO: temporary solution
-            if (!this.expense.expenseCategoryId) {
-                this.expense.expenseCategoryId = 'HOMEEXPENSES';
-            }
-            if (!this.expense.expenseSubCategoryId) {
-                this.expense.expenseSubCategoryId = 'CABLE';
-            }
             var file = new File(this._imageBlob, fileName);
             var files: Array<any> = [file];
             this.expenseService

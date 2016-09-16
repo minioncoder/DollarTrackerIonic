@@ -6,9 +6,9 @@ import {ExpenseStory} from '../expenseStory/expenseStory.model'
 @Component({
     selector: 'expense',
     template: `
-    <ionic-buttons end>
-      <i class="fa fa-2x fa-plus" (click)="openModal()"></i>
-   </ionic-buttons>   
+      <button (click)="openModal()">
+        <i class="fa fa-2x fa-plus"></i>
+      </button>
     `
 })
 export class ExpensePage {

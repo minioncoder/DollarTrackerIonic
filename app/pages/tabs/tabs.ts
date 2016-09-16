@@ -10,8 +10,8 @@ export class TabsPage {
 
   private tab1Root: any = DashboardPage;
   private tab2Root: any = ExpenseReportPage;
- 
-   mySelectedIndex: number;
+
+  mySelectedIndex: number;
 
   constructor(navParams: NavParams) {
     this.mySelectedIndex = navParams.data.tabIndex || 0;
