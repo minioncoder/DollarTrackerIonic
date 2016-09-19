@@ -7,7 +7,7 @@ import {ExpenseStory} from '../expenseStory/expenseStory.model'
     selector: 'expense',
     template: `
       <button (click)="openModal()">
-        <i class="fa fa-2x fa-plus"></i>
+        <i class="fa fa-1x fa-plus"></i>
       </button>
     `
 })

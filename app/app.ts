@@ -13,7 +13,6 @@ import {ExpenseReportPage} from './pages/expenseReport/expenseReport';
 import {IconMapperService} from './shared/iconmapper/iconmapper.service';
 import {UploadService} from './shared/upload/upload.service';
 import {Plugins} from './shared/upload/plugins.service';
-import {LoadingService} from './shared/loading/loading.service';
 interface PageObj {
   title: string;
   component: any;
@@ -24,7 +23,6 @@ interface PageObj {
 @Component({
   template: `
               <ion-menu id="loggedOutMenu" [content]="content">
-
   <ion-toolbar>
     <ion-title>Menu</ion-title>
   </ion-toolbar>
@@ -107,4 +105,4 @@ export class DollarTrackerApp {
 // Set any config for your app as the third argument, see the docs for
 // more ways to configure your app:
 // http://ionicframework.com/docs/v2/api/config/Config/
-ionicBootstrap(DollarTrackerApp,[LoginService, UserService, ApiUrl, ApiService, JwtService, IconMapperService, UploadService, Plugins, LoadingService]);
+ionicBootstrap(DollarTrackerApp,[LoginService, UserService, ApiUrl, ApiService, JwtService, IconMapperService, UploadService, Plugins]);

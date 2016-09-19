@@ -1,23 +1,22 @@
 import {Component, Input} from '@angular/core';
-import {NavController, AlertController} from 'ionic-angular';
+import {NavController, AlertController,LoadingController} from 'ionic-angular';
 import {LoginService} from './login.service';
 import {DashboardPage} from '../dashboard/dashboard';
 import {UserService} from '../../user/user.service';
 import {TabsPage} from '../tabs/tabs';
-import {LoadingService} from '../../shared/loading/loading.service';
 @Component({
     templateUrl: 'build/pages/login/login.html'
 })
 export class LoginPage {
-    email: string = '';
-    password: string = '';
+    email: string = 'jsrao15@gmail.com';
+    password: string = 'a';
     private EMAIL_REGEXP = /^[a-z0-9!#$%&'*+\/=?^_`{|}~.-]+@[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)*$/i;
     private invalidEmailAlert;
     private invalidPasswordAlert;
     private loading: any;
     constructor(private navCtrl: NavController, private alert: AlertController, private _loginService: LoginService, private _userService: UserService,
-        private loadingService: LoadingService) {
-        this.loading = loadingService.loading;
+        private loadingCtrl: LoadingController) {
+        this.loading = loadingCtrl.create();
         this.invalidEmailAlert = this.alert.create({
             title: 'Invalid Input',
             message: 'Please enter a valid email',

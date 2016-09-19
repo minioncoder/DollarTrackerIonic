@@ -20,8 +20,6 @@ export class IonicSelectPage{
     } 
    
     selected(expenseCategory:any) {
-        console.log("YOU Have selected");
-        console.log(JSON.stringify(expenseCategory))
         this.dismiss(expenseCategory);
     }
  getItems(ev: any) {
