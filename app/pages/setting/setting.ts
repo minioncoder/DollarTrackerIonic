@@ -4,6 +4,8 @@ import {ApiService} from '../../shared/api/api.service';
 import {UserService} from '../../user/user.service';
 import {NavController,Nav} from  'ionic-angular';
 import {LoginPage} from '../login/login';
+import {TabsPage} from '../tabs/tabs';
+
 @Component({
     templateUrl: 'build/pages/setting/setting.html'
 })
@@ -17,8 +19,8 @@ export class SettingPage {
     }
 
     logout(){
-        this.navCtrl.setRoot(LoginPage);
-        this.navCtrl.popToRoot();
         this.userService.logout();
+        this.navCtrl.pop();
+        this.navCtrl.setRoot(LoginPage);
     }
 }

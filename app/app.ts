@@ -22,35 +22,6 @@ interface PageObj {
 
 @Component({
   template: `
-              <ion-menu id="loggedOutMenu" [content]="content">
-  <ion-toolbar>
-    <ion-title>Menu</ion-title>
-  </ion-toolbar>
-
-  <ion-content class="outer-content">
-
-    <ion-list>
-      <ion-list-header>
-        Navigate
-      </ion-list-header>
-      <button ion-item menuClose *ngFor="let p of appPages" (click)="openPage(p)">
-        <ion-icon item-left [name]="p.icon"></ion-icon>
-        {{p.title}}
-      </button>
-    </ion-list>
-
-    <ion-list>
-      <ion-list-header>
-        Account
-      </ion-list-header>
-      <button ion-item menuClose *ngFor="let p of loggedOutPages" (click)="openPage(p)">
-        <ion-icon item-left [name]="p.icon"></ion-icon>
-        {{p.title}}
-      </button>
-    </ion-list>
-  </ion-content>
-
-</ion-menu>
               <ion-nav [root]="rootPage" swipeBackEnabled="false"></ion-nav>
             `
           })

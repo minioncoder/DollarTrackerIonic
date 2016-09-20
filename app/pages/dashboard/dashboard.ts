@@ -11,14 +11,14 @@ export class DashboardPage {
   private loading: any;
   constructor(private navCtrl: NavController, private _dashboardService: DashboardService,
     private _iconMapper: IconMapperService) {
-  }
-  ionViewWillEnter() {
-    this._dashboardService.getDashboardStats()
+      this._dashboardService.getDashboardStats()
       .subscribe(ds => {
         this.dashboardStats = ds.data;
       },
       e => { },
       () => { }
       );
+  }
+  ionViewWillEnter() {
   }
 }

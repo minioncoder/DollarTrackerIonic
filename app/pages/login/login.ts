@@ -1,11 +1,12 @@
-import {Component, Input} from '@angular/core';
+import {Component, Input, ChangeDetectionStrategy, ChangeDetectorRef} from '@angular/core';
 import {NavController, AlertController,LoadingController} from 'ionic-angular';
 import {LoginService} from './login.service';
 import {DashboardPage} from '../dashboard/dashboard';
 import {UserService} from '../../user/user.service';
 import {TabsPage} from '../tabs/tabs';
 @Component({
-    templateUrl: 'build/pages/login/login.html'
+    templateUrl: 'build/pages/login/login.html',
+    changeDetection:ChangeDetectionStrategy.OnPush
 })
 export class LoginPage {
     email: string = 'jsrao15@gmail.com';
@@ -15,7 +16,8 @@ export class LoginPage {
     private invalidPasswordAlert;
     private loading: any;
     constructor(private navCtrl: NavController, private alert: AlertController, private _loginService: LoginService, private _userService: UserService,
-        private loadingCtrl: LoadingController) {
+        private loadingCtrl: LoadingController, private _changeDetectorRef:ChangeDetectorRef) {
+        setTimeout( () => this._changeDetectorRef.markForCheck(), 10);    
         this.loading = loadingCtrl.create();
         this.invalidEmailAlert = this.alert.create({
             title: 'Invalid Input',

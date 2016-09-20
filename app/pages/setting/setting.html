@@ -6,7 +6,7 @@
   </ion-navbar>
 </ion-header>
 <ion-content>
-    <ion-item>
+    <ion-item *ngIf="userService.user">
         <ion-img [src]="avatarUrl" height="50" width="50" item-left></ion-img>
         {{userService.user.displayName}} <br />
         Member Since: {{userService.user.memberSince | date}} 
