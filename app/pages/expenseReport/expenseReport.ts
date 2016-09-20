@@ -8,6 +8,8 @@ import {ExpenseStoryDetailsPage} from '../expenseStory/expenseStoryDetails';
 })
 export class ExpenseReportPage {
   constructor(private alertCtrl: AlertController, private navCtrl: NavController, private _expenseStoryService:ExpenseStoryService) {
+  }
+  ionViewWillEnter() {
      this._expenseStoryService.loadExpenseStorySummaries(false);
   }
   goToDetails(es:any) {

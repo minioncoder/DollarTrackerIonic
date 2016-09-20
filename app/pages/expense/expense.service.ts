@@ -12,15 +12,10 @@ export class ExpenseService {
         private _jwtService: JwtService) { }
 
     addOnlyExpense(payload: any): Observable<any> {
-        var pl = { "expenseStoryId": "201665f895ca2c3c1480", "amount": "100", "expenseCategoryId": "ENTERTAINMENT", "expenseSubCategoryId": "BOOKS", "storeName": "Testing", "expenseUtcDt": "09/07/2016", "comments": "testing" };
-        return this._apiService.post(this._apiurl.addOnlyExpense, pl)
+        return this._apiService.post(this._apiurl.addOnlyExpense, payload)
     }
     addExpense(payload, files: Array<any>): Observable<any> {
-        //alert(files[0]);
-        console.log('files:', files[0]);
         return this.upload(files[0], payload);
-        //return this._uploadService
-        //  .makeFileRequest(this._apiurl.addExpense, [JSON.stringify(payload)], files);
     }
     updateOnlyExpense(payload: any): Observable<any> {
         return this._apiService.post(this._apiurl.updateOnlyExpense, payload)

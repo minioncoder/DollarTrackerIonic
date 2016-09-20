@@ -29,9 +29,9 @@ export class Plugins {
                 destinationType: 1,
                 sourceType: 1,
                 encodingType: 0,
-                quality:100,
+                quality:50,
                 allowEdit: false,
-                saveToPhotoAlbum: true,            
+                saveToPhotoAlbum: false,            
                 correctOrientation: true,
             };        
             return Camera.getPicture(options).then((imgUrl) => {

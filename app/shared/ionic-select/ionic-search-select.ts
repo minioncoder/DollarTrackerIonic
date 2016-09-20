@@ -7,7 +7,7 @@ import {IconMapperService} from '../iconmapper/iconmapper.service';
     template: `
         <ion-item>
             <i [ngClass] ="categoryIcon" item-left></i>
-            <ion-input placeholder="Select category" [(ngModel)] = "expenseCategory.description" (click)="openModal()"></ion-input>
+            <ion-input placeholder="Select category" [(ngModel)] = "expenseCategory.description" readonly (focus)="openModal()"></ion-input>
         </ion-item>
     `,
     directives: [IonicSelectPage]

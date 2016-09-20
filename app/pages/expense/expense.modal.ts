@@ -11,20 +11,20 @@ import {IonicSearchSelectPage} from '../../shared/ionic-select/ionic-search-sele
 @Component({
     templateUrl: 'build/pages/expense/expense.modal.html',
     providers: [ExpenseService],
-    directives:[IonicSearchSelectPage]
+    directives: [IonicSearchSelectPage]
 })
 export class ExpenseModalPage {
     private expenseStory: ExpenseStory;
     private expense: Expense = new Expense();
     private _imageBlob: any = null;
     images: Array<string> = [];
-    loading:any;
-    base64Image:string = null;
+    loading: any;
+    base64Image: string = null;
     constructor(
         public platform: Platform,
         public params: NavParams,
         public viewCtrl: ViewController,
-        private alertCtrl: AlertController,
+        private alert: AlertController,
         private expenseService: ExpenseService,
         private plugins: Plugins,
         private navCtrl: NavController,
@@ -38,43 +38,72 @@ export class ExpenseModalPage {
         this.loading = loadingCtrl.create();
     }
     save() {
-        var fileName = 'receipt-' + new Date().getTime() + '.jpg';
+        if (!this.validate()) return;
+        var fn;
         if (this.images.length > 0) {
+            var fileName = 'receipt-' + new Date().getTime() + '.jpg';
             this.loading.present();
-           
+
             var file = new File(this._imageBlob, fileName);
             var files: Array<any> = [file];
-            this.expenseService
-                .addExpense(this.expense, this.images)
-                .subscribe((response) => {
-                    this.dismiss();
-                }, error => {
-                    console.log("--got error---");
-                    console.log(error); 
-                    this.dismiss(); 
-                }, () => { this.dismiss(); }); //TODO: display proper error message in case of failure
+            fn = this.expenseService
+                .addExpense(this.expense, this.images);
         }
+        else {
+            fn = this.expenseService.addOnlyExpense(this.expense)
+        }
+        if (fn) {
+            fn.subscribe((response) => {
+                this.dismiss(response);
+            }, error => {
+                this.dismiss(null);
+            }, () => { this.dismiss(null); }); //TODO: display proper error message in case of failure
+        }
+    }
+
+    validate(): boolean {
+        let isValid = false;
+        if (this.expense.expenseSubCategoryId == null) {
+            this.showError("Please select a valid expense category");
+        }
+        else if (this.expense.amount == null || this.expense.amount <= 0) {
+            this.showError("Please enter a valid amount");
+        }
+        else if (this.expense.expenseUtcDt == null) {
+            this.showError("Please select a valid expense date");
+        }
+        else {
+            isValid = true;
+        }
+        return isValid;
+    }
+
+    private showError(message) {
+        let errorAlert = this.alert.create({
+            title: 'Invalid Input',
+            message: message,
+            buttons: ['OK'],
+            enableBackdropDismiss: true
+        });
+        errorAlert.present();
     }
 
     uploadReceipt() {
         this.plugins.camera.open()
             .then(imgUrl => {
-                console.log("image url:", imgUrl);
                 this.images.push(imgUrl);
                 this.base64Image = imgUrl;
             }, error => { console.log("image upload error", error) })
     }
-    onSelectCategory(category:any) {
-        console.log("onSelectCategory");
-        console.log(category);
-        if(category) {
+    onSelectCategory(category: any) {
+        if (category) {
             this.expense.expenseCategoryId = category.expenseCategoryId;
             this.expense.expenseSubCategoryId = category.expenseSubCategoryId;
             this.expense.subCategoryDescription = category.description;
         }
     }
-    dismiss() {
-        this.viewCtrl.dismiss();
+    dismiss(response) {
+        this.viewCtrl.dismiss(response);
         this.loading.dismiss();
     }
 }

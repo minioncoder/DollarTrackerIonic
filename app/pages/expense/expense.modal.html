@@ -32,11 +32,11 @@
       <ion-label>Date</ion-label>
       <ion-datetime displayFormat="MM/DD/YYYY" [(ngModel)]="expense.expenseUtcDt"></ion-datetime>
     </ion-item>
-    <!--<ion-item>
+    <ion-item>
       <ion-textarea placeholder="Comments" [(ngModel)] ="expense.comments"></ion-textarea>
-    </ion-item>-->
+    </ion-item>
     <ion-item *ngIf="images.length == 0"> 
-      <button secondary (click)="uploadReceipt()">Upload</button>
+      <button secondary (click)="uploadReceipt()">Upload Receipt</button>
     </ion-item>
     <ion-item *ngIf="images.length > 0">
       <ion-img [src]= "base64Image" height="256" class="image" tappable> </ion-img>

@@ -2,7 +2,6 @@
     <ion-navbar primary>
         <ion-title>
             Select Category
-            <!--<ion-icon name="add-circle"></ion-icon>-->
         </ion-title>
         <ion-buttons start>
             <button (click)="dismiss()">
@@ -11,8 +10,8 @@
       </button>
         </ion-buttons>
     </ion-navbar>
-    <ion-toolbar no-border-top>
-        <ion-searchbar primary [(ngModel)]="queryText" (ionInput)="getItems($event)" placeholder="Search">
+    <ion-toolbar>
+        <ion-searchbar [(ngModel)]="queryText" (ionInput)="getItems($event)" placeholder="Search">
         </ion-searchbar>
     </ion-toolbar>
 

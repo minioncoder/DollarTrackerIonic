@@ -10,38 +10,37 @@ import {ExpenseStory, ExpenseStorySummary} from './expenseStory.model';
 import {ExpensePage} from '../expense/expense';
 @Component({
     templateUrl: 'build/pages/expenseStory/expenseStoryDetails.html',
-    providers:[ExpenseStoryService],
-    directives:[ExpensePage]
+    providers: [ExpenseStoryService],
+    directives: [ExpensePage]
 })
 export class ExpenseStoryDetailsPage {
     private sub: any;
     private expensesByCategory;
-    private expenseStorySummary:any;
-    private categoryKeys =[];
-    constructor( private _expenseStoryService:ExpenseStoryService, private _iconMapper:IconMapperService, public navParams: NavParams) {
-        
-            this.expenseStorySummary = navParams.data;
-            
-            this._expenseStoryService
+    private expenseStorySummary: any;
+    private categoryKeys = [];
+    constructor(private _expenseStoryService: ExpenseStoryService, private _iconMapper: IconMapperService, public navParams: NavParams) {
+        this.expenseStorySummary = navParams.data;
+        //get expenseStorySummary TODO: need to optimize this call
+        // this._expenseStoryService
+        // .getExpenseStorySummary(id)
+        // .subscribe(es =>{
+        //     this.expenseStorySummary = es.data;
+        // });
+    }
+    ionViewWillEnter() {
+        this.loadExpenses();
+    }
+    private loadExpenses() {
+        this._expenseStoryService
             .getAllExpensesByCategory(this.expenseStorySummary.expenseStory.expenseStoryId)
             .subscribe(es => {
                 this.expensesByCategory = es.data;
                 this.categoryKeys = Object.keys(es.data);
             });
-
-            //get expenseStorySummary TODO: need to optimize this call
-            // this._expenseStoryService
-            // .getExpenseStorySummary(id)
-            // .subscribe(es =>{
-            //     this.expenseStorySummary = es.data;
-            // });
-     }
-
-    onNotify(expense:Expense):void {
-        let exl = this.expensesByCategory[expense.expenseCategoryId.toLowerCase()];
-        if(exl){
-            var idx = exl.indexOf(expense);
-            this.expensesByCategory[expense.expenseCategoryId.toLowerCase()].splice(idx,1);
+    }
+    onNotify(expense: Expense): void {
+        if (expense) {
+            this.loadExpenses();
         }
     }
 }
