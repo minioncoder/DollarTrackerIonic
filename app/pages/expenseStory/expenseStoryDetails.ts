@@ -17,7 +17,9 @@ export class ExpenseStoryDetailsPage {
     private sub: any;
     private expensesByCategory;
     private expenseStorySummary: any;
+    private items;
     private categoryKeys = [];
+    private itemKeys = [];
     constructor(private _expenseStoryService: ExpenseStoryService, private _iconMapper: IconMapperService, public navParams: NavParams) {
         this.expenseStorySummary = navParams.data;
         //get expenseStorySummary TODO: need to optimize this call
@@ -35,12 +37,35 @@ export class ExpenseStoryDetailsPage {
             .getAllExpensesByCategory(this.expenseStorySummary.expenseStory.expenseStoryId)
             .subscribe(es => {
                 this.expensesByCategory = es.data;
+                this.items = es.data;
                 this.categoryKeys = Object.keys(es.data);
+                this.itemKeys = Object.keys(es.data);
             });
     }
     onNotify(expense: Expense): void {
         if (expense) {
             this.loadExpenses();
+        }
+    }
+
+    getItems(ev: any) {
+
+        // set val to the value of the searchbar
+        let val = ev.target.value;
+        this.expensesByCategory = this.items;
+        this.categoryKeys = this.categoryKeys;
+        // if the value is an empty string don't filter the items
+        if (val && val.trim() != '') {
+            this.expensesByCategory = {};
+            this.categoryKeys = [];
+            for (let obj in this.items) {
+                var exs = this.items[obj].expenses.filter((e) => e.expenseSubCategoryId.toLowerCase().includes(val.toLowerCase()))
+                if (exs && exs.length > 0) {
+                    this.expensesByCategory[obj] = this.items[obj];
+                    this.expensesByCategory[obj].expenses = exs;
+                    this.categoryKeys.push(obj);
+                }
+            }
         }
     }
 }

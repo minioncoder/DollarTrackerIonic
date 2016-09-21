@@ -8,6 +8,10 @@
       <expense (notify)="onNotify($event)" [expenseStory]="expenseStorySummary.expenseStory"></expense>
     </ion-buttons>
   </ion-navbar>
+  <ion-toolbar>
+    <ion-searchbar [(ngModel)]="queryText" (ionInput)="getItems($event)" placeholder="Search">
+    </ion-searchbar>
+  </ion-toolbar>
 </ion-header>
 <ion-content>
   <div text-center>
@@ -37,7 +41,7 @@
             Date: {{es.expenseUtcDt|date:"MMM"}} , {{es.expenseUtcDt|date:"dd"}} <br /> Description: {{_expenseStoryService.expenseCategoryById[es.expenseSubCategoryId].description}}
             <br /> Store Name: {{es.storeName}} <br /> You Paid: ${{es.amount}} <br /> Comments: {{es.comments}}
           </p>
-           <ion-img src="data:image/png;base64,{{es.receiptThumbnail}}" item-right height="60" width="60" alt="User Image" *ngIf="es.receiptThumbnail"></ion-img>
+          <ion-img src="data:image/png;base64,{{es.receiptThumbnail}}" item-right height="60" width="60" alt="User Image" *ngIf="es.receiptThumbnail"></ion-img>
         </ion-item>
         <ion-item-options side="right">
           <button danger (click)="removeReport(slidingItem, es, 'Delete Report')">
