@@ -54,7 +54,6 @@ export class LoginPage {
                     this.showLoginError(result.message);
                     return;
                 }
-                console.log("LOGIN success", result);
                 this.navCtrl.push(TabsPage);
                 this._userService.add(result);
             },

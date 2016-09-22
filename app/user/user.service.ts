@@ -7,7 +7,7 @@ import {ApiService} from '../shared/api/api.service';
 @Injectable()
 export class UserService {
 
-    private userKey:string = "dollarTrackerUser"
+    private userKey:string = "dollarTrackerIonicUser"
     isAuthenticated:Subject<boolean> = new BehaviorSubject<boolean>(false);
     currentUser: Subject<IUser> = new BehaviorSubject<IUser>(null);
     public user:IUser = null;
@@ -31,15 +31,12 @@ export class UserService {
        }
        else {
           this.isAuthenticated.next(isAuthenticated);
-           console.log('navigate to dashboard');
-          // this._router.navigate(['dashboard']);
        }
     }
 
     public isUserAuthenticated():boolean
     {
         let isAuthenticated = this._jwtService.isAuthenticated();
-        console.log("user serive isUserAuthenticated", isAuthenticated);
         if(!isAuthenticated){
             this.clear();
         }
@@ -81,6 +78,5 @@ export class UserService {
 
     public logout(){
         this.clear();
-     //   this._router.navigate(['login']);
     }
 }
