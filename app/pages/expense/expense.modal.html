@@ -1,0 +1,45 @@
+<ion-header>
+  <ion-navbar primary>
+    <ion-title>
+      Add a bill
+    </ion-title>
+    <ion-buttons start>
+      <button (click)="dismiss()">
+        <!--<span primary showWhen="ios">X</span>-->
+        <ion-icon name="md-close"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-buttons end>
+      <button (click)="save()">
+        Save
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <ionic-search-select (notify)='onSelectCategory($event)'></ionic-search-select>
+    <ion-item>
+      <i class="fa fa-usd" item-left></i>
+      <ion-input [(ngModel)]="expense.amount" placeholder="0.00"></ion-input>
+    </ion-item>
+    <ion-item>
+      <i class="fa fa-shopping-bag" item-left></i>
+      <ion-input [(ngModel)]="expense.storeName" placeholder="Store Name"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Date</ion-label>
+      <ion-datetime displayFormat="MM/DD/YYYY" [(ngModel)]="expense.expenseUtcDt"></ion-datetime>
+    </ion-item>
+    <ion-item>
+      <ion-textarea placeholder="Comments" [(ngModel)] ="expense.comments"></ion-textarea>
+    </ion-item>
+    <ion-item *ngIf="images.length == 0"> 
+      <button secondary (click)="uploadReceipt()">Upload Receipt</button>
+    </ion-item>
+    <ion-item *ngIf="images.length > 0">
+      <ion-img [src]= "base64Image" height="256" class="image" tappable> </ion-img>
+    </ion-item>
+  </ion-card>
+</ion-content>

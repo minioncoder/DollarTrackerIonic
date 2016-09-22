@@ -1,0 +1,71 @@
+import { Injectable } from '@angular/core';
+
+@Injectable()
+export class IconMapperService {
+
+    constructor() { }
+
+    public mapper =  {
+        APPLIANCES: "fa fa-shopping-bag",
+        AUTOINSURANCE: "fa fa-credit-card",
+        BANKFEES: "fa fa-university",
+        BOOKS: "fa fa-book",
+        BUS: "fa fa-bus",
+        CABLE: "fa fa-television",
+        CHARITABLEDONATIONS: "fa fa-gift",
+        CLEANING: "fa fa-credit-card",
+        CLOTHING: "fa fa-shopping-bag",
+        CONCERTS: "fa fa-music",
+        DOCTOR: "fa fa-user-md",
+        DUES: "fa fa-credit-card",
+        ELECTRICITY: "fa fa-plug",
+        FURNISHINGS: "fa fa-bed",
+        GADGETS: "fa fa-credit-card",
+        GAMES: "fa fa-gamepad",
+        GARDEN: "fa fa-paint-brush",
+        GAS: "fa fa-fire-extinguisher",
+        GIFTS: "fa fa-gift",
+        GROCERIES: "fa fa-shopping-cart",
+        HEALTHCLUBDUES: "fa fa-heart",
+        HEALTHINSURANCE: "fa fa-heartbeat",
+        HOMEINSURANCE: "fa fa-home",
+        HOTEL: "fa fa-h-square",
+        IMPROVEMENTS: "fa fa-cart-plus",
+        INTERNET: "fa fa-internet-explorer",
+        LICENSE: "fa fa-file-image-o",
+        LIFEINSURANCE: "fa fa-user-plus",
+        MAGAZINES: "fa fa-book",
+        MAINTENANCE: "fa fa-bank",
+        MEDICINE: "fa fa-medkit",
+        MEMBERSHIPS: "fa fa-users",
+        MORTGAGE: "fa fa-university",
+        MUSIC: "fa fa-music",
+        NEWSPAPER: "fa fa-newspaper",
+        OTHER: "fa fa-credit-card",
+        OUTDOORRECREATION: "fa fa-glass", //revisit
+        PERSONALSUPPLIES: "fa fa-female", //revisit
+        PETFOOD: "fa fa-paw",
+        PHONE: "fa fa-phone",
+        PHOTOS: "fa fa-camera-retro",
+        POSTAGE: "fa fa-envelope",
+        REGISTRATION: "fa fa-registered",
+        RELIGIOUSDONATIONS: "fa fa-bell",
+        RENT: "fa fa-credit-card-alt",
+        RENTALINSURANCE: "fa fa-credit-card-alt",
+        RENTALS: "fa fa-home",
+        RESTAURANT: "fa fa-cutlery",
+        SALON: "fa fa-meh-o",
+        SEWER: "fa fa-trash",
+        SPORTS: "fa fa-street-view",
+        TAXI: "fa fa-car",
+        THEATER: "fa fa-film",
+        TOYS: "fa fa-binoculars",
+        TRAINFARE: "fa fa-train",
+        TRASH: "fa fa-trash",
+        TRAVEL: "fa fa-automobile",
+        VEHICLEPAYMENTS: "fa fa-cc-visa",
+        VETERINARIAN: "fa fa-wheelchair",
+        VIDEOS: "fa fa-youtube",
+        WATER: "fa fa-tint"
+    }
+}

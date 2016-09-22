@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-navbar>
+  <ion-navbar primary>
     <ion-title>Login</ion-title>
   </ion-navbar>
 </ion-header>
@@ -10,23 +10,25 @@
 
     <ion-item>
       <ion-label floating>Email</ion-label>
-      <ion-input type="text" value=""></ion-input>
+      <ion-input type="text" [(ngModel)] ="email"></ion-input>
     </ion-item>
 
     <ion-item>
       <ion-label floating>Password</ion-label>
-      <ion-input type="password" value=""></ion-input>
+      <ion-input type="password" [(ngModel)] ="password"></ion-input>
     </ion-item>
 
   </ion-list>
 
   <div padding>
-    <button primary block>Sign In</button>
-  </div>
-    <div class="padding row">
+    <button primary block (click) = 'submit()'>Sign In</button> 
+    <br />
+    <div>
         <a class="col text-left">Forgot Password?</a>
         <span class="text-right">
             <a class="col">Join now</a>
         </span>
     </div>
+  </div>
+    
 </ion-content>

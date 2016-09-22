@@ -1,19 +1,24 @@
 <ion-header>
   <ion-navbar primary>
     <ion-title center>
-    Dashboard Page
-    <ion-icon name="ios-bulb" item-right></ion-icon>
+       Dashboard
     </ion-title>
-
   </ion-navbar>
 </ion-header>
 
 <ion-content>
-  <ion-list>
-    <ion-list-header></ion-list-header>
-    <ion-item>
-      <ion-icon name="ionic" item-left></ion-icon>
-      This is Dashboard Page layout....
-    </ion-item>
-  </ion-list>
+<h1>Recent Activity</h1>
+ <ion-list *ngIf="dashboardStats">
+  <ion-item *ngFor="let ra of dashboardStats.recentlyAdded">
+    <!--<ion-avatar item-left>
+      <!--<img src="https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mm&f=y">
+      <!--<i [ngClass]=" _iconMapper.mapper[ra.expenseSubCategoryId]?_iconMapper.mapper[ra.expenseSubCategoryId] :'fa fa-list'" class="fa-2x"></i>
+    </ion-avatar>-->
+   <p>
+     <i [ngClass]=" _iconMapper.mapper[ra.expenseSubCategoryId]?_iconMapper.mapper[ra.expenseSubCategoryId] :'fa fa-list'" class="fa-2x"> </i>
+      You spent 
+       <strong>${{ra.amount|number}}</strong> for <strong>{{ra.categoryDescription}}</strong>  on {{ra.expenseDtUtc | date:"MMM"}}, {{ra.expenseDtUtc | date:"dd"}} 
+    </p>  
+  </ion-item>
+</ion-list>
 </ion-content>

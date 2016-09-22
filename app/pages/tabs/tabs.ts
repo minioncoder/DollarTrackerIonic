@@ -2,19 +2,20 @@ import {Component} from '@angular/core';
 import {HomePage} from '../home/home';
 import {DashboardPage} from '../dashboard/dashboard';
 import {ExpenseReportPage} from '../expenseReport/expenseReport';
-import {LoginPage} from '../login/login.component';
+import {SettingPage} from '../setting/setting';
+import { NavParams } from 'ionic-angular';
 @Component({
   templateUrl: 'build/pages/tabs/tabs.html'
 })
 export class TabsPage {
 
-  private tab1Root: any;
-  private tab2Root: any;
-  private tab3Root: any;
+  private tab1Root: any = DashboardPage;
+  private tab2Root: any = ExpenseReportPage;
+  private settingTab: any = SettingPage;
+  
+  mySelectedIndex: number;
 
-  constructor() {
-    this.tab1Root = LoginPage;
-    this.tab2Root = DashboardPage;
-    this.tab3Root = ExpenseReportPage;
+  constructor(navParams: NavParams) {
+    this.mySelectedIndex = navParams.data.tabIndex || 0;
   }
 }
