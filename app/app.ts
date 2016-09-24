@@ -13,6 +13,7 @@ import {ExpenseReportPage} from './pages/expenseReport/expenseReport';
 import {IconMapperService} from './shared/iconmapper/iconmapper.service';
 import {UploadService} from './shared/upload/upload.service';
 import {Plugins} from './shared/upload/plugins.service';
+import {FriendsService} from './pages/friends/friends.service';
 interface PageObj {
   title: string;
   component: any;
@@ -76,4 +77,4 @@ export class DollarTrackerApp {
 // Set any config for your app as the third argument, see the docs for
 // more ways to configure your app:
 // http://ionicframework.com/docs/v2/api/config/Config/
-ionicBootstrap(DollarTrackerApp,[LoginService, UserService, ApiUrl, ApiService, JwtService, IconMapperService, UploadService, Plugins]);
+ionicBootstrap(DollarTrackerApp,[LoginService, UserService, ApiUrl, ApiService, JwtService, IconMapperService, UploadService, FriendsService, Plugins]);

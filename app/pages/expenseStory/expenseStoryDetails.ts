@@ -57,9 +57,14 @@ export class ExpenseStoryDetailsPage {
         // if the value is an empty string don't filter the items
         if (val && val.trim() != '') {
             this.expensesByCategory = {};
+            let val1 = val.toLowerCase();
             this.categoryKeys = [];
             for (let obj in this.items) {
-                var exs = this.items[obj].expenses.filter((e) => e.expenseSubCategoryId.toLowerCase().includes(val.toLowerCase()))
+                var exs = this.items[obj].expenses
+                .filter((e) => 
+                e.expenseSubCategoryId.toLowerCase().includes(val1)); 
+                // || e.description.toLowerCase().includes(val1) 
+                // || e.storeName.toLowerCase().includes(val1));
                 if (exs && exs.length > 0) {
                     this.expensesByCategory[obj] = this.items[obj];
                     this.expensesByCategory[obj].expenses = exs;

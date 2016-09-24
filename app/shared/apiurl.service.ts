@@ -32,4 +32,8 @@ export class ApiUrl {
     public updatePassword = this.baseUrl + "/api/updatePassword";
     public profile = this.baseUrl + "/api/profile";
     public updateUser = this.baseUrl + "/api/updateUser";
+    public friends = this.baseUrl + "/api/user/friends";
+    public inviteFriend = this.baseUrl + "/api/user/friend/invite";
+    public newConnections = this.baseUrl + "/api/user/newConnections";
+    public myFriendInvitations = this.baseUrl + "/api/user/friendinvitations";
 }
