@@ -9,11 +9,6 @@
         <ion-icon name="md-close"></ion-icon>
       </button>
         </ion-buttons>
-        <ion-buttons end>
-            <button (click)="save()">
-        Save
-      </button>
-        </ion-buttons>
     </ion-navbar>
     <ion-toolbar>
         <ion-segment [(ngModel)]="friends">
@@ -32,13 +27,12 @@
     <div [ngSwitch]="friends">
         <ion-list *ngSwitchCase="'search'" no-border-bottom>
             <ion-toolbar>
-                <ion-searchbar primary [(ngModel)]="queryText" placeholder="Search">
+                <ion-searchbar primary [(ngModel)]="queryText" (ionInput)="getItems($event)" placeholder="Search">
                 </ion-searchbar>
             </ion-toolbar>
             <ion-item *ngFor="let connection of newConnections">
-                {{connection.displayName}} <br/>
-                 {{connection.email}}
-                 <i class="fa fa-user-plus fa-2x" (click)="inviteUser(connection.userId)" item-right></i>
+                {{connection.displayName}} <br/> {{connection.email}}
+                <i class="fa fa-user-plus fa-2x" (click)="inviteUser(connection.userId)" item-right></i>
             </ion-item>
         </ion-list>
         <ion-list *ngSwitchCase="'email'" no-border-bottom>

@@ -36,4 +36,9 @@ export class ApiUrl {
     public inviteFriend = this.baseUrl + "/api/user/friend/invite";
     public newConnections = this.baseUrl + "/api/user/newConnections";
     public myFriendInvitations = this.baseUrl + "/api/user/friendinvitations";
+    public acceptFriendInvitation = this.baseUrl + "/api/friend/acceptFriendInvitation";
+    public declineFriendInvitation = this.baseUrl + "/api/friend/declineFriendInvitation";
+
+    public addCollaborator = this.baseUrl + "/api/expenseStory/addCollaborator";
+    public getAllCollaborators = this.baseUrl + "/api/expenseStory/getAllCollaborators";
 }

@@ -14,6 +14,7 @@
   </ion-toolbar>
 </ion-header>
 <ion-content>
+  
   <div text-center>
     <h3>{{expenseStorySummary.expenseStory.title}}</h3>
     <p>
@@ -21,6 +22,16 @@
       }}
     </p>
   </div>
+   <ion-item no-border-bottom>
+    <figure style="display:inline-block" *ngFor="let c of collaborators">
+      <img src = "data:image/png;base64,{{c.profilePic}}" height=25 width=25 *ngIf="c.profilePic" />
+      <img src = "images/user.jpg" height=25 width=25 *ngIf="!c.profilePic" />
+      <figcaption>{{c.displayName}}</figcaption>
+    </figure>
+    <button item-right (click)="addCollaborator()">
+        <ion-icon name="people"></ion-icon>
+      </button>
+  </ion-item>
   <ion-card *ngFor="let ck of categoryKeys">
     <ion-card-header>
       <ion-row no-padding>

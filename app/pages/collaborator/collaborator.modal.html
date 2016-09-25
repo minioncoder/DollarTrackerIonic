@@ -1,0 +1,25 @@
+<ion-header>
+    <ion-navbar primary>
+        <ion-title>
+            Add Collaborators
+        </ion-title>
+        <ion-buttons start>
+            <button (click)="dismiss()">
+        <!--<span primary showWhen="ios">X</span>-->
+        <ion-icon name="md-close"></ion-icon>
+      </button>
+        </ion-buttons>
+    </ion-navbar>
+    <ion-toolbar>
+        <ion-searchbar primary [(ngModel)]="queryText" (ionInput)="getItems($event)" placeholder="Search">
+        </ion-searchbar>
+    </ion-toolbar>
+</ion-header>
+<ion-content>
+      <ion-list no-border-bottom>
+            <ion-item *ngFor="let connection of connections">
+                {{connection.displayName}} <br/> {{connection.email}}
+                <ion-icon name="add-circle" (click)="add(connection.userId)" item-right></ion-icon>
+            </ion-item>
+        </ion-list>
+</ion-content>

@@ -1,16 +1,18 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import {ExpenseStoryService} from './expenseStory.service';
-import {Observable} from 'rxjs/Rx';
-import { NavParams } from 'ionic-angular';
+import { Component, OnInit, ViewChild, Output, EventEmitter } from '@angular/core';
+import { ExpenseStoryService } from './expenseStory.service';
+import { Observable } from 'rxjs/Rx';
+import { ModalController, Platform, NavParams, ViewController } from 'ionic-angular';
 
 //import {ExpenseService} from '../expense/expense.service';
-import {Expense} from '../expense/expense.model';
-import {IconMapperService} from '../../shared/iconmapper/iconmapper.service';
-import {ExpenseStory, ExpenseStorySummary} from './expenseStory.model';
-import {ExpensePage} from '../expense/expense';
+import { Expense } from '../expense/expense.model';
+import { IconMapperService } from '../../shared/iconmapper/iconmapper.service';
+import { ExpenseStory, ExpenseStorySummary } from './expenseStory.model';
+import { ExpensePage } from '../expense/expense';
+import { CollaboratorModalPage } from '../collaborator/collaborator.modal';
+import { CollaboratorService } from '../collaborator/collaborator.service';
 @Component({
     templateUrl: 'build/pages/expenseStory/expenseStoryDetails.html',
-    providers: [ExpenseStoryService],
+    providers: [ExpenseStoryService, CollaboratorService],
     directives: [ExpensePage]
 })
 export class ExpenseStoryDetailsPage {
@@ -20,7 +22,10 @@ export class ExpenseStoryDetailsPage {
     private items;
     private categoryKeys = [];
     private itemKeys = [];
-    constructor(private _expenseStoryService: ExpenseStoryService, private _iconMapper: IconMapperService, public navParams: NavParams) {
+    private collaborators = [];
+    @Output() notify: EventEmitter<boolean> = new EventEmitter<boolean>();
+    constructor(private _expenseStoryService: ExpenseStoryService, private _iconMapper: IconMapperService,
+     public navParams: NavParams, public modalCtrl: ModalController, private collaboratorService: CollaboratorService) {
         this.expenseStorySummary = navParams.data;
         //get expenseStorySummary TODO: need to optimize this call
         // this._expenseStoryService
@@ -31,6 +36,13 @@ export class ExpenseStoryDetailsPage {
     }
     ionViewWillEnter() {
         this.loadExpenses();
+        this.loadCollaborators();
+    }
+    private loadCollaborators() {
+        this.collaboratorService.getAll(this.expenseStorySummary.expenseStory.expenseStoryId)
+            .subscribe(result => {
+                this.collaborators = result.data;
+            })
     }
     private loadExpenses() {
         this._expenseStoryService
@@ -61,8 +73,8 @@ export class ExpenseStoryDetailsPage {
             this.categoryKeys = [];
             for (let obj in this.items) {
                 var exs = this.items[obj].expenses
-                .filter((e) => 
-                e.expenseSubCategoryId.toLowerCase().includes(val1)); 
+                    .filter((e) =>
+                        e.expenseSubCategoryId.toLowerCase().includes(val1));
                 // || e.description.toLowerCase().includes(val1) 
                 // || e.storeName.toLowerCase().includes(val1));
                 if (exs && exs.length > 0) {
@@ -72,5 +84,17 @@ export class ExpenseStoryDetailsPage {
                 }
             }
         }
+    }
+
+    addCollaborator() {
+        var self = this;
+        let modal = this.modalCtrl.create(CollaboratorModalPage, this.expenseStorySummary.expenseStory);
+        modal.present();
+        modal.onDidDismiss(function (response) {
+            if (response && response.success) {
+                self.loadCollaborators();
+                self.notify.emit(response.data);
+            }
+        })
     }
 }

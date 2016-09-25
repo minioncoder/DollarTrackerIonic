@@ -20,4 +20,12 @@ export class FriendsService {
         var url = this.apiUrl.inviteFriend + "/" + userId;
         return this.apiService.post(url, null);
     }
+    acceptFriendInvitation(userId) {
+        var url = this.apiUrl.acceptFriendInvitation + "/" + userId;
+        return this.apiService.post(url, null);
+    }
+    declineFriendInvitation(userId) {
+        var url = this.apiUrl.declineFriendInvitation + "/" + userId;
+        return this.apiService.post(url, null);
+    }
 }
