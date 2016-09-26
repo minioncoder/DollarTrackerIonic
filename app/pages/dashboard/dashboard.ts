@@ -21,4 +21,11 @@ export class DashboardPage {
       () => { }
       );
   }
+   doRefresh(refresher) {
+      this._dashboardService.getDashboardStats()
+      .subscribe(ds => {
+        this.dashboardStats = ds.data;
+        refresher.complete();
+      });
+   }
 }

@@ -54,6 +54,17 @@ export class ExpenseStoryDetailsPage {
                 this.itemKeys = Object.keys(es.data);
             });
     }
+    doRefresh(refresher) {
+         this._expenseStoryService
+            .getAllExpensesByCategory(this.expenseStorySummary.expenseStory.expenseStoryId)
+            .subscribe(es => {
+                this.expensesByCategory = es.data;
+                this.items = es.data;
+                this.categoryKeys = Object.keys(es.data);
+                this.itemKeys = Object.keys(es.data);
+                refresher.complete();
+            });
+    }
     onNotify(expense: Expense): void {
         if (expense) {
             this.loadExpenses();

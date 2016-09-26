@@ -7,7 +7,9 @@
 </ion-header>
 
 <ion-content>
-<h1>Recent Activity</h1>
+ <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
  <ion-list *ngIf="dashboardStats">
   <ion-item *ngFor="let ra of dashboardStats.recentlyAdded">
     <!--<ion-avatar item-left>

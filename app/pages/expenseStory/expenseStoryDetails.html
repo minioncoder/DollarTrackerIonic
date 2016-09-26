@@ -14,7 +14,10 @@
   </ion-toolbar>
 </ion-header>
 <ion-content>
-  
+ <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
   <div text-center>
     <h3>{{expenseStorySummary.expenseStory.title}}</h3>
     <p>
