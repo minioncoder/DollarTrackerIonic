@@ -2,15 +2,27 @@ import {Component} from '@angular/core';
 import {ExpenseStoryService} from '../expenseStory/expenseStory.service';
 import { AlertController, App, ItemSliding, List, ModalController, NavController } from 'ionic-angular';
 import {ExpenseStoryDetailsPage} from '../expenseStory/expenseStoryDetails';
+import {ApiService} from '../../shared/api/api.service';
+import {ApiUrl} from '../../shared/apiurl.service';
 @Component({
   templateUrl: 'build/pages/expenseReport/expenseReport.html',
   providers: [ExpenseStoryService]
 })
 export class ExpenseReportPage {
-  constructor(private alertCtrl: AlertController, private navCtrl: NavController, private _expenseStoryService:ExpenseStoryService) {
+  constructor(private alertCtrl: AlertController, private navCtrl: NavController, private _expenseStoryService:ExpenseStoryService, private apiService:ApiService, private _apiUrl:ApiUrl) {
   }
   ionViewWillEnter() {
      this._expenseStoryService.loadExpenseStorySummaries(false);
+  }
+  doRefresh(refresher) {
+    //todo: change this
+    var url = this._apiUrl.report+"?active="+false;
+        this.apiService
+        .get(url)
+        .subscribe((rs) => {
+          refresher.complete();
+            this._expenseStoryService.expenseStorySummaries.next(rs.data.expenseStorySummaries);
+        })
   }
   goToDetails(es:any) {
     console.log("in go to details");

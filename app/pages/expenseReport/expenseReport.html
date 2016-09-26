@@ -15,6 +15,9 @@
 </ion-header>
 
 <ion-content>
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
   <!--<ion-card *ngFor="let es of  (_expenseStoryService.expenseStorySummaries|async)">
     <ion-card-header>
         <b> {{es.expenseStory.title}}</b>
