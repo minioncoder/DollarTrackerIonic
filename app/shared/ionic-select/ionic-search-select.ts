@@ -1,4 +1,4 @@
-import { Component, Output, EventEmitter } from '@angular/core';
+import { Component, Output, EventEmitter, Input } from '@angular/core';
 import { IonicSelectPage} from './ionic-select';
 import {ModalController} from 'ionic-angular';
 import {IconMapperService} from '../iconmapper/iconmapper.service';
@@ -13,7 +13,7 @@ import {IconMapperService} from '../iconmapper/iconmapper.service';
     directives: [IonicSelectPage]
 })
 export class IonicSearchSelectPage {
-
+    @Input() expense;
     private description = null;
     private categoryIcon = 'fa fa-list';
     private expenseCategory = {
@@ -21,7 +21,15 @@ export class IonicSearchSelectPage {
         expenseCategoryId: null,
         expenseSubCategoryId: null
     }
-    constructor(public modalCtrl: ModalController, private iconMapper:IconMapperService) { }
+    constructor(public modalCtrl: ModalController, private iconMapper:IconMapperService) { 
+        if(this.expense) {
+            console.log("expense");
+            this.description = this.expense.description;
+              if(this.expense.expenseSubCategoryId && this.iconMapper.mapper[this.expense.expenseSubCategoryId]) {
+                  this.categoryIcon = this.iconMapper.mapper[this.expense.expenseSubCategoryId];
+              }
+        }
+    }
     @Output() notify: EventEmitter<any> = new EventEmitter<any>();
     openModal() {
         let modal = this.modalCtrl.create(IonicSelectPage);

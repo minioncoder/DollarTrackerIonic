@@ -31,10 +31,15 @@ export class ExpenseModalPage {
         private loadingCtrl: LoadingController
     ) {
         let dt = new Date();
-        this.expenseStory = params.data;
+        this.expenseStory = params.data.expenseStory;
         this.expense.expenseUtcDt = dt.toISOString();
-        this.expenseStory = params.data;
-        this.expense.expenseStoryId = this.expenseStory.expenseStoryId;
+        
+        if(params.data.expense) {
+            this.expense = params.data.expense;
+        }
+        else {
+            this.expense.expenseStoryId = this.expenseStory.expenseStoryId;
+        }
         this.loading = loadingCtrl.create();
     }
     save() {

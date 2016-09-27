@@ -10,6 +10,8 @@ import { ExpenseStory, ExpenseStorySummary } from './expenseStory.model';
 import { ExpensePage } from '../expense/expense';
 import { CollaboratorModalPage } from '../collaborator/collaborator.modal';
 import { CollaboratorService } from '../collaborator/collaborator.service';
+import {ExpenseModalPage} from  '../expense/expense.modal';
+
 @Component({
     templateUrl: 'build/pages/expenseStory/expenseStoryDetails.html',
     providers: [ExpenseStoryService, CollaboratorService],
@@ -64,6 +66,16 @@ export class ExpenseStoryDetailsPage {
                 this.itemKeys = Object.keys(es.data);
                 refresher.complete();
             });
+    }
+    edit(expense) {
+        var self = this;
+        let modal = this.modalCtrl.create(ExpenseModalPage, {expenseStory:this.expenseStorySummary.expenseStory, expense:expense});
+        modal.present();
+        modal.onDidDismiss(function(response) {
+        if(response && response.success) {
+        //    self.notify.emit(<Expense>response.data);
+        }
+        })
     }
     onNotify(expense: Expense): void {
         if (expense) {

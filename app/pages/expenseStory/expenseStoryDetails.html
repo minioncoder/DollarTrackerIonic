@@ -50,10 +50,13 @@
     <ion-list>
       <ion-item-sliding *ngFor="let es of expensesByCategory[ck].expenses">
         <ion-item>
-          <i item-left class="fa-2x" [ngClass]=" _iconMapper.mapper[es.expenseSubCategoryId]?_iconMapper.mapper[es.expenseSubCategoryId] :'fa fa-list'"></i>
+          
           <p>
-            Date: {{es.expenseUtcDt|date:"MMM"}} , {{es.expenseUtcDt|date:"dd"}} <br /> Description: {{_expenseStoryService.expenseCategoryById[es.expenseSubCategoryId].description}}
-            <br /> Store Name: {{es.storeName}} <br /> You Paid: ${{es.amount}} <br /> Comments: {{es.comments}}
+            <i item-left class="fa-2x" [ngClass]=" _iconMapper.mapper[es.expenseSubCategoryId]?_iconMapper.mapper[es.expenseSubCategoryId] :'fa fa-list'"></i> {{_expenseStoryService.expenseCategoryById[es.expenseSubCategoryId].description}}
+            <span item-right><i class="fa fa-1x fa-usd"> {{es.amount}}</i></span>
+            <br /> 
+            <i class="fa fa-2x fa-calendar" item-left></i> {{es.expenseUtcDt|date:"MMM"}} , {{es.expenseUtcDt|date:"dd"}}  &nbsp;<i class="fa fa-2x fa-shopping-cart" item-right></i> {{es.storeName}} 
+            <span *ngIf="es.comments"><br /> <i class="fa fa-2x fa fa-comments"></i> {{es.comments}}</span>
           </p>
           <ion-img src="data:image/png;base64,{{es.receiptThumbnail}}" item-right height="60" width="60" alt="User Image" *ngIf="es.receiptThumbnail"></ion-img>
         </ion-item>
@@ -61,7 +64,7 @@
           <button danger (click)="removeReport(slidingItem, es, 'Delete Report')">
             Remove
           </button>
-          <button secondary (click)="removeReport(slidingItem, es, 'Delete Report')">
+          <button secondary (click)="edit(es)">
                 Edit
           </button>
         </ion-item-options>

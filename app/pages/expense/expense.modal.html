@@ -19,7 +19,7 @@
 
 <ion-content>
   <ion-card>
-    <ionic-search-select (notify)='onSelectCategory($event)'></ionic-search-select>
+    <ionic-search-select (expense) = "expense" (notify)='onSelectCategory($event)'></ionic-search-select>
     <ion-item>
       <i class="fa fa-usd" item-left></i>
       <ion-input [(ngModel)]="expense.amount" placeholder="0.00"></ion-input>
