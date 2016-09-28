@@ -10,8 +10,8 @@ import { ExpenseStory, ExpenseStorySummary } from './expenseStory.model';
 import { ExpensePage } from '../expense/expense';
 import { CollaboratorModalPage } from '../collaborator/collaborator.modal';
 import { CollaboratorService } from '../collaborator/collaborator.service';
-import {ExpenseModalPage} from  '../expense/expense.modal';
-
+import { ExpenseModalPage } from '../expense/expense.modal';
+import { ImageViewerModalPage } from './image-viewer-modal';
 @Component({
     templateUrl: 'build/pages/expenseStory/expenseStoryDetails.html',
     providers: [ExpenseStoryService, CollaboratorService],
@@ -27,7 +27,7 @@ export class ExpenseStoryDetailsPage {
     private collaborators = [];
     @Output() notify: EventEmitter<boolean> = new EventEmitter<boolean>();
     constructor(private _expenseStoryService: ExpenseStoryService, private _iconMapper: IconMapperService,
-     public navParams: NavParams, public modalCtrl: ModalController, private collaboratorService: CollaboratorService) {
+        public navParams: NavParams, public modalCtrl: ModalController, private collaboratorService: CollaboratorService) {
         this.expenseStorySummary = navParams.data;
         //get expenseStorySummary TODO: need to optimize this call
         // this._expenseStoryService
@@ -35,11 +35,10 @@ export class ExpenseStoryDetailsPage {
         // .subscribe(es =>{
         //     this.expenseStorySummary = es.data;
         // });
-    }
-    ionViewWillEnter() {
         this.loadExpenses();
         this.loadCollaborators();
     }
+    
     private loadCollaborators() {
         this.collaboratorService.getAll(this.expenseStorySummary.expenseStory.expenseStoryId)
             .subscribe(result => {
@@ -57,7 +56,7 @@ export class ExpenseStoryDetailsPage {
             });
     }
     doRefresh(refresher) {
-         this._expenseStoryService
+        this._expenseStoryService
             .getAllExpensesByCategory(this.expenseStorySummary.expenseStory.expenseStoryId)
             .subscribe(es => {
                 this.expensesByCategory = es.data;
@@ -67,14 +66,20 @@ export class ExpenseStoryDetailsPage {
                 refresher.complete();
             });
     }
+
+    viewReceipt(expense) {
+        let modal = this.modalCtrl.create(ImageViewerModalPage, expense);
+        modal.present();
+    }
+
     edit(expense) {
         var self = this;
-        let modal = this.modalCtrl.create(ExpenseModalPage, {expenseStory:this.expenseStorySummary.expenseStory, expense:expense});
+        let modal = this.modalCtrl.create(ExpenseModalPage, { expenseStory: this.expenseStorySummary.expenseStory, expense: expense });
         modal.present();
-        modal.onDidDismiss(function(response) {
-        if(response && response.success) {
-        //    self.notify.emit(<Expense>response.data);
-        }
+        modal.onDidDismiss(function (response) {
+            if (response && response.success) {
+                //    self.notify.emit(<Expense>response.data);
+            }
         })
     }
     onNotify(expense: Expense): void {
