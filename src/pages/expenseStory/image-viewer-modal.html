@@ -1,0 +1,18 @@
+<ion-header>
+    <ion-navbar color="primary">
+    <ion-title>
+      Receipt
+    </ion-title>
+    <ion-buttons start>
+      <button (click)="dismiss()">
+        <!--<span primary showWhen="ios">X</span>-->
+        <ion-icon name="md-close"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+    <ion-card>
+        <img [src]="receipt" />
+    </ion-card>
+</ion-content>

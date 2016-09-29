@@ -1,0 +1,39 @@
+<ion-header>
+    <ion-navbar color="primary">
+        <ion-title>
+            Select Category
+        </ion-title>
+        <ion-buttons start>
+            <button ion-button icon-only (click)="dismiss()">
+        <!--<span primary showWhen="ios">X</span>-->
+        <ion-icon name="md-close"></ion-icon>
+      </button>
+        </ion-buttons>
+    </ion-navbar>
+    <ion-toolbar>
+        <ion-searchbar [(ngModel)]="queryText" (ionInput)="getItems($event)" placeholder="Search">
+        </ion-searchbar>
+    </ion-toolbar>
+
+</ion-header>
+<ion-content>
+    <ion-list *ngIf="expenseCategories.length >0">
+        <ion-item *ngFor="let ec of expenseCategories" (click)="selected(ec)">
+            <h4>{{ec.description}}</h4>
+            <h4>Category : {{ec.expenseCategoryId}}</h4>
+        </ion-item>
+    </ion-list>
+</ion-content>
+
+
+
+
+
+
+
+
+
+
+
+
++
