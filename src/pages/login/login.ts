@@ -1,19 +1,22 @@
 import {Component, Input, ChangeDetectionStrategy, ChangeDetectorRef} from '@angular/core';
 import {NavController, AlertController,LoadingController} from 'ionic-angular';
+import {TouchID} from 'ionic-native';
 import {LoginService} from './login.service';
 import {DashboardPage} from '../dashboard/dashboard';
 import {UserService} from '../../user/user.service';
 import {TabsPage} from '../tabs/tabs';
+import {Observable} from 'rxjs/Rx';
 @Component({
     templateUrl: 'login.html'
 })
 export class LoginPage {
-    email: string = 'jsrao15@gmail.com';
-    password: string = 'a';
-    private EMAIL_REGEXP = /^[a-z0-9!#$%&'*+\/=?^_`{|}~.-]+@[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)*$/i;
-    private invalidEmailAlert;
-    private invalidPasswordAlert;
-    private loading: any;
+    public email: string = 'jsrao15@gmail.com';
+    public password: string = 'a';
+    public EMAIL_REGEXP = /^[a-z0-9!#$%&'*+\/=?^_`{|}~.-]+@[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)*$/i;
+    public invalidEmailAlert;
+    public invalidPasswordAlert;
+    public loading: any;
+    public touchIdAvailable = false;
     constructor(private navCtrl: NavController, private alert: AlertController, private _loginService: LoginService, private _userService: UserService,
         private loadingCtrl: LoadingController) {
 

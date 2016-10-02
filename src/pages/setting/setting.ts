@@ -10,11 +10,11 @@ import {TabsPage} from '../tabs/tabs';
     templateUrl: 'setting.html'
 })
 export class SettingPage {
-    private avatarUrl;
+    public avatarUrl;
   @ViewChild(Nav) nav:Nav;
     
-    constructor(private apiUrl: ApiUrl, private api: ApiService, 
-    private userService:UserService, private navCtrl: NavController){
+    constructor(public apiUrl: ApiUrl, public api: ApiService, 
+    public userService:UserService, public navCtrl: NavController){
         this.avatarUrl = `${apiUrl.profilePicUrl}/${userService.user.userId}`;
     }
 

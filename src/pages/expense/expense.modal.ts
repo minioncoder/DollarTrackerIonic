@@ -9,25 +9,24 @@ import {Transfer} from 'ionic-native';
 import {IonicSearchSelectPage} from '../../shared/ionic-select/ionic-search-select';
 
 @Component({
-    templateUrl: 'expense.modal.html',
-    providers: [ExpenseService]
+    templateUrl: 'expense.modal.html'
 })
 export class ExpenseModalPage {
-    private expenseStory: ExpenseStory;
-    private expense: Expense = new Expense();
-    private _imageBlob: any = null;
-    images: Array<string> = [];
-    loading: any;
-    base64Image: string = null;
+    public expenseStory: ExpenseStory;
+    public expense: Expense = new Expense();
+    public _imageBlob: any = null;
+    public images: Array<string> = [];
+    public loading: any;
+    public base64Image: string = null;
     constructor(
         public platform: Platform,
         public params: NavParams,
         public viewCtrl: ViewController,
-        private alert: AlertController,
-        private expenseService: ExpenseService,
-        private plugins: Plugins,
-        private navCtrl: NavController,
-        private loadingCtrl: LoadingController
+        public alert: AlertController,
+        public expenseService: ExpenseService,
+        public plugins: Plugins,
+        public navCtrl: NavController,
+        public loadingCtrl: LoadingController
     ) {
         let dt = new Date();
         this.expenseStory = params.data.expenseStory;
@@ -41,7 +40,7 @@ export class ExpenseModalPage {
         }
         this.loading = loadingCtrl.create();
     }
-    save() {
+    public save() {
         if (!this.validate()) return;
         var fn;
         if (this.images.length > 0) {
@@ -65,7 +64,7 @@ export class ExpenseModalPage {
         }
     }
 
-    validate(): boolean {
+    public validate(): boolean {
         let isValid = false;
         if (this.expense.expenseSubCategoryId == null) {
             this.showError("Please select a valid expense category");
@@ -82,7 +81,7 @@ export class ExpenseModalPage {
         return isValid;
     }
 
-    private showError(message) {
+    public showError(message) {
         let errorAlert = this.alert.create({
             title: 'Invalid Input',
             message: message,
@@ -92,21 +91,21 @@ export class ExpenseModalPage {
         errorAlert.present();
     }
 
-    uploadReceipt() {
+    public uploadReceipt() {
         this.plugins.camera.open()
             .then(imgUrl => {
                 this.images.push(imgUrl);
                 this.base64Image = imgUrl;
             }, error => { console.log("image upload error", error) })
     }
-    onSelectCategory(category: any) {
+    public onSelectCategory(category: any) {
         if (category) {
             this.expense.expenseCategoryId = category.expenseCategoryId;
             this.expense.expenseSubCategoryId = category.expenseSubCategoryId;
             this.expense.subCategoryDescription = category.description;
         }
     }
-    dismiss(response) {
+    public dismiss(response) {
         this.viewCtrl.dismiss(response);
         this.loading.dismiss();
     }

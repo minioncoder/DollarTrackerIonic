@@ -8,7 +8,8 @@ import {ApiUrl} from '../../shared/apiurl.service';
   templateUrl: 'expenseReport.html'
 })
 export class ExpenseReportPage {
-  constructor(private alertCtrl: AlertController, private navCtrl: NavController, private _expenseStoryService:ExpenseStoryService, private apiService:ApiService, private _apiUrl:ApiUrl) {
+  public queryText='';
+  constructor(private alertCtrl: AlertController, private navCtrl: NavController, public _expenseStoryService:ExpenseStoryService, private apiService:ApiService, private _apiUrl:ApiUrl) {
   }
   ionViewWillEnter() {
      this._expenseStoryService.loadExpenseStorySummaries(false);

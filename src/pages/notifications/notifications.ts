@@ -5,7 +5,8 @@ import {NotificationLog} from './notifications.model'
     templateUrl: 'notifications.html'
 })
 export class NotificationsPage {
-    constructor(private notificationsService: NotificationsService) {
+    public queryText='';
+    constructor(public notificationsService: NotificationsService) {
         notificationsService.readMessage();
  }
 }

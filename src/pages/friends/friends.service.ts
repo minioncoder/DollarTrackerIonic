@@ -4,7 +4,7 @@ import {ApiService} from '../../shared/api/api.service';
 import {Observable} from 'rxjs/Rx';
 @Injectable()
 export class FriendsService {
-    constructor(private apiUrl:ApiUrl, private apiService:ApiService) { }
+    constructor(public apiUrl:ApiUrl, public apiService:ApiService) { }
     getFriends(userId) {
         var url = this.apiUrl.friends + "/" + userId;
         return this.apiService.get(url);

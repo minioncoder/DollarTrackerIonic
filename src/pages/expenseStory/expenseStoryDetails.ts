@@ -16,16 +16,17 @@ import { ImageViewerModalPage } from './image-viewer-modal';
     templateUrl: 'expenseStoryDetails.html',
 })
 export class ExpenseStoryDetailsPage {
-    private sub: any;
-    private expensesByCategory;
-    private expenseStorySummary: any;
-    private items;
-    private categoryKeys = [];
-    private itemKeys = [];
-    private collaborators = [];
+    public expensesByCategory;
+    public expenseStorySummary: any;
+    public items;
+    public sub: any;
+    public categoryKeys = [];
+    public itemKeys = [];
+    public collaborators = [];
+    public queryText = '';
     @Output() notify: EventEmitter<boolean> = new EventEmitter<boolean>();
-    constructor(private _expenseStoryService: ExpenseStoryService, private _iconMapper: IconMapperService,
-        public navParams: NavParams, public modalCtrl: ModalController, private collaboratorService: CollaboratorService) {
+    constructor(public _expenseStoryService: ExpenseStoryService, public _iconMapper: IconMapperService,
+        public navParams: NavParams, public modalCtrl: ModalController, public collaboratorService: CollaboratorService) {
         this.expenseStorySummary = navParams.data;
         //get expenseStorySummary TODO: need to optimize this call
         // this._expenseStoryService

@@ -9,9 +9,10 @@ import {ApiService} from '../api/api.service';
     templateUrl: 'ionic-select.html'
 })
 export class IonicSelectPage {
-    private expenseCategories = [];
-    private items = [];
-    constructor(public viewCtrl: ViewController, private _apiUrl:ApiUrl, private _apiService:ApiService) { 
+    public expenseCategories = [];
+    public items = [];
+    public queryText='';
+    constructor(public viewCtrl: ViewController, public _apiUrl:ApiUrl, public _apiService:ApiService) { 
         
     }
     ionViewWillEnter(){

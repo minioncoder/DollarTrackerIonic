@@ -13,14 +13,14 @@ import {IconMapperService} from '../iconmapper/iconmapper.service';
 })
 export class IonicSearchSelectPage {
     @Input() expense;
-    private description = null;
-    private categoryIcon = 'fa fa-list';
-    private expenseCategory = {
+    public description = null;
+    public categoryIcon = 'fa fa-list';
+    public expenseCategory = {
         description : null,
         expenseCategoryId: null,
         expenseSubCategoryId: null
     }
-    constructor(public modalCtrl: ModalController, private iconMapper:IconMapperService) { 
+    constructor(public modalCtrl: ModalController, public iconMapper:IconMapperService) { 
         if(this.expense) {
             console.log("expense");
             this.description = this.expense.description;

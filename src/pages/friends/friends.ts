@@ -6,10 +6,10 @@ import {InviteFriendPage} from './invite-friend';
     templateUrl: 'friends.html'
 })
 export class FriendsPage {
-    private friends = "invitations";
-    private invitations = [];
-    private connections = [];
-    constructor(private friendsService:FriendsService, private userService:UserService) {
+    public friends = "invitations";
+    public invitations = [];
+    public connections = [];
+    constructor(public friendsService:FriendsService, public userService:UserService) {
           this.loadMyConnections();
           this.loadMyFriendInvitations();
     }

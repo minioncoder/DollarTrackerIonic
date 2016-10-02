@@ -8,9 +8,9 @@ import {IconMapperService} from '../../shared/iconmapper/iconmapper.service'
 })
 export class DashboardPage {
   public dashboardStats: any;
-  private loading: any;
-  constructor(private navCtrl: NavController, private _dashboardService: DashboardService,
-    private _iconMapper: IconMapperService) {
+  public loading: any;
+  constructor(public navCtrl: NavController, public _dashboardService: DashboardService,
+    public _iconMapper: IconMapperService) {
   }
   ionViewWillEnter() {
     this._dashboardService.getDashboardStats()

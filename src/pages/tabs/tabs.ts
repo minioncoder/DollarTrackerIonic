@@ -11,11 +11,11 @@ import { NavParams } from 'ionic-angular';
 })
 export class TabsPage {
 
-  private tab1Root: any = DashboardPage;
-  private tab2Root: any = ExpenseReportPage;
-  private settingTab: any = SettingPage;
-  private notificationsTab: any = NotificationsPage;
-  private friendsTab: any = FriendsPage;
+  public tab1Root: any = DashboardPage;
+  public tab2Root: any = ExpenseReportPage;
+  public settingTab: any = SettingPage;
+  public notificationsTab: any = NotificationsPage;
+  public friendsTab: any = FriendsPage;
   mySelectedIndex: number;
 
   constructor(navParams: NavParams) {

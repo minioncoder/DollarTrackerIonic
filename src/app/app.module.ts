@@ -1,7 +1,7 @@
 import {NgModule} from '@angular/core';
 import {IonicApp, IonicModule} from 'ionic-angular';
 import {Storage} from '@ionic/storage';
-
+//import {MomentModule} from 'angular2-moment';
 
 import {DollarTrackerApp} from './app.component';
 
@@ -91,6 +91,7 @@ const DT_SERVICES = [
         DT_COMPONENTS
     ],
     imports: [
+   //     MomentModule,
         IonicModule.forRoot(DollarTrackerApp),
     ],
     bootstrap: [IonicApp],

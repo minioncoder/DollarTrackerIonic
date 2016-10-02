@@ -6,24 +6,25 @@ import { ViewController } from 'ionic-angular';
     templateUrl: 'invite-friend.modal.html'
 })
 export class InviteFriendModalPage {
-    private friends = "search";
-    private newConnections = [];
-    private items = [];
-    constructor(public viewCtrl: ViewController, private friendsService: FriendsService) {
+    public friends = "search";
+    public newConnections = [];
+    public items = [];
+    public queryText = '';
+    constructor(public viewCtrl: ViewController, public friendsService: FriendsService) {
         this.friendsService.getNewConnections()
             .subscribe(result => {
                 this.newConnections = result.data;
                 this.items = result.data;
             })
     }
-    inviteUser(userId) {
+    public inviteUser(userId) {
         this.friendsService.inviteFriend(userId)
             .subscribe(x => {
                 console.log('You have successfully invited user')
             })
     }
 
-    getItems(ev: any) {
+    public getItems(ev: any) {
         // set val to the value of the searchbar
         let val = ev.target.value;
         this.newConnections = this.items;
@@ -31,7 +32,7 @@ export class InviteFriendModalPage {
             this.newConnections = this.items.filter(item => item.email.toLowerCase().includes(val.toLowerCase()))
         }
     }
-    dismiss(response) {
+    public dismiss(response) {
         this.viewCtrl.dismiss(response);
     }
 }

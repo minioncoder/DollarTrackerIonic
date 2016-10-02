@@ -5,14 +5,16 @@ import { ViewController, NavParams } from 'ionic-angular';
 import {CollaboratorService} from './collaborator.service';
 
 @Component({
-    templateUrl: 'collaborator.modal.html',
-    providers: [CollaboratorService]
+    templateUrl: 'collaborator.modal.html'
 })
 export class CollaboratorModalPage {
-    private connections=[];
-    private items = [];
-    private expenseStoryId = null;
-    constructor(private friendsServive:FriendsService, private userService:UserService,public viewCtrl: ViewController, private collaboratorService: CollaboratorService, private params: NavParams) {
+    public connections=[];
+    public items = [];
+    public expenseStoryId = null;
+    public queryText='';
+
+    constructor(public friendsServive:FriendsService, public userService:UserService,public viewCtrl: ViewController,
+     public collaboratorService: CollaboratorService, public params: NavParams) {
         this.expenseStoryId = params.data.expenseStoryId;
         this.friendsServive.getFriends(userService.user.userId)
         .subscribe(result =>{
@@ -21,7 +23,7 @@ export class CollaboratorModalPage {
         })
      }
 
-    add(userId) {
+   public add(userId) {
         if(userId) {
             this.collaboratorService.add(userId, this.expenseStoryId)
             .subscribe(result =>{
@@ -29,7 +31,7 @@ export class CollaboratorModalPage {
             })
         }
     }
-    getItems(ev: any) {
+  public getItems(ev: any) {
         // set val to the value of the searchbar
         let val = ev.target.value;
         this.connections = this.items;
@@ -37,7 +39,7 @@ export class CollaboratorModalPage {
             this.connections = this.items.filter(item => item.email.toLowerCase().includes(val.toLowerCase()))
         }
     }
-     dismiss(response) {
+ public dismiss(response) {
         this.viewCtrl.dismiss(response);
     }
 }

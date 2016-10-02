@@ -11,7 +11,8 @@
     ],
     "module": "es2015",
     "moduleResolution": "node",
-    "target": "es5"
+    "target": "es5",
+    "diagnostics": true
   },
   "exclude": [
     "node_modules"

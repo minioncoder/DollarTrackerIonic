@@ -12,7 +12,7 @@ export class ExpenseStoryService {
     public expenseCategoryById = {};
     public expenseCategories = [];
     public expenseStorySummaries:BehaviorSubject<Array<ExpenseStorySummary>> = new BehaviorSubject<Array<ExpenseStorySummary>>(null) ;
-    constructor(private _apiUrl:ApiUrl, private _apiService:ApiService, private _userService:UserService) {
+    constructor(public _apiUrl:ApiUrl, public _apiService:ApiService, public _userService:UserService) {
         this.loadExpenseCategories();
         this._userService.currentUser
             .filter(x=>x != null)   

@@ -12,6 +12,7 @@
     "run:before": "build"
   },
   "dependencies": {
+    "@ionic/app-scripts": "0.0.27",
     "@ionic/storage": "^1.0.3",
     "angular2-moment": "1.0.0-beta.1",
     "font-awesome": "^4.6.3",
@@ -22,7 +23,7 @@
   "devDependencies": {
     "@ionic/app-scripts": "^0.0.23",
     "typescript": "^2.0.3",
-    "@types/moment" :"2.13.0"
+    "@types/moment": "2.13.0"
   },
   "cordovaPlugins": [
     "cordova-plugin-device",
@@ -31,7 +32,9 @@
     "cordova-plugin-splashscreen",
     "cordova-plugin-statusbar",
     "ionic-plugin-keyboard",
-    "cordova-plugin-file-transfer"
+    "cordova-plugin-file-transfer",
+    "cordova-plugin-secure-storage",
+    "cordova-plugin-touch-id"
   ],
   "cordovaPlatforms": [
     "ios",
