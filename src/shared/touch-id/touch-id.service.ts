@@ -10,26 +10,19 @@ export class TouchIdService {
     private secureStorage: SecureStorage;
     private SecureStorageName = 'dollarTrackerSecureStorage';
     private touchIdAvailable = false;
-    private nav:Nav = null;
+    private nav: Nav = null;
     constructor(private userService: UserService, private alertCtrl: AlertController,
         private login: LoginService, private loadingCtrl: LoadingController) {
     }
-    init(nav:Nav) {
+    init(nav: Nav) {
         this.nav = nav;
         this.secureStorage = new SecureStorage();
         this.secureStorage.create(this.SecureStorageName)
             .then(
             x => {
-                console.log('Storage is ready');
                 this.touchIdAvailable = true;
             },
             error => {
-                let alert = this.alertCtrl.create({
-                    title: 'Storage error',
-                    subTitle: JSON.stringify(error),
-                    buttons: ['OK']
-                });
-                alert.present();
                 console.log(error);
             }
             )
@@ -46,10 +39,12 @@ export class TouchIdService {
         );
     }
     enableTouchId(usr) {
+        if(this.touchIdAvailable) {
         this.secureStorage.set('dollarTrackerUser', JSON.stringify(usr))
             .then(
             (data) => { }
             );
+        }
     }
     touchIdAuthentication(usr) {
         if (usr && this.touchIdAvailable) {
