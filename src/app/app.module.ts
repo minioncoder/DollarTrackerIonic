@@ -47,6 +47,7 @@ import {Plugins} from '../shared/upload/plugins.service';
 
 import {IonicSelectPage} from '../shared/ionic-select/ionic-select';
 import {IonicSearchSelectPage} from '../shared/ionic-select/ionic-search-select';
+import {TouchIdService} from '../shared/touch-id/touch-id.service';
 
 const DT_COMPONENTS = [
     TabsPage,
@@ -82,7 +83,8 @@ const DT_SERVICES = [
     JwtService,
     IconMapperService,
     UploadService,
-    Plugins
+    Plugins,
+    TouchIdService
 ]
 
 @NgModule({

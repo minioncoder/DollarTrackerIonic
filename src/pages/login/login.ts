@@ -1,11 +1,12 @@
 import {Component, Input, ChangeDetectionStrategy, ChangeDetectorRef} from '@angular/core';
-import {NavController, AlertController,LoadingController} from 'ionic-angular';
+import {NavController, AlertController, LoadingController} from 'ionic-angular';
 import {TouchID} from 'ionic-native';
 import {LoginService} from './login.service';
 import {DashboardPage} from '../dashboard/dashboard';
 import {UserService} from '../../user/user.service';
 import {TabsPage} from '../tabs/tabs';
 import {Observable} from 'rxjs/Rx';
+import {TouchIdService} from '../../shared/touch-id/touch-id.service';
 @Component({
     templateUrl: 'login.html'
 })
@@ -18,7 +19,7 @@ export class LoginPage {
     public loading: any;
     public touchIdAvailable = false;
     constructor(private navCtrl: NavController, private alert: AlertController, private _loginService: LoginService, private _userService: UserService,
-        private loadingCtrl: LoadingController) {
+        private loadingCtrl: LoadingController, private touchIdService:TouchIdService) {
 
         this.loading = loadingCtrl.create();
         this.invalidEmailAlert = this.alert.create({
@@ -34,19 +35,17 @@ export class LoginPage {
             buttons: ['OK'],
             enableBackdropDismiss: true
         });
-    }
 
-    // onPageWillEnter() {
-    //   if(this._userService.isUserAuthenticated()) {
-    //     this.navCtrl.push(TabsPage);
-    //   }  
-    // }
+       
+    }
+    
     public submit() {
         var isValid = this.validateEmailAndPassword();
         if (!isValid) {
             return;
         }
         var payload = { "email": this.email, "password": this.password };
+        
         this.loading.present();
         this._loginService
             .login(payload)
@@ -56,6 +55,7 @@ export class LoginPage {
                     this.showLoginError(result.message);
                     return;
                 }
+                this.touchIdService.enableTouchId(payload);
                 this.navCtrl.push(TabsPage);
                 this._userService.add(result);
             },
