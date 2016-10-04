@@ -7,7 +7,6 @@ import {Observable} from 'rxjs/Observable';
 export class ApiService {
 
 constructor(private _jwtService:JwtService,private http: Http) { 
-  this.setup();
 }
 
 setup(){

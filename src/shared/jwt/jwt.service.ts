@@ -1,25 +1,18 @@
 import { Injectable } from '@angular/core';
-import { Storage } from '@ionic/storage';
 import {Observable} from 'rxjs/Observable'
 declare var escape: any;
 @Injectable()
 export class JwtService {
     private _jwtKey = "ionicDollarTrackerJwtToken";
-    constructor(private _localStorage:Storage){
+    constructor(){
     }
     private data;
     public get():string {
-        this._localStorage.get(this._jwtKey)
-       .then(x=>{this.data = x;});
-     
-       return this.data;
-     //   .then(x=>{data = x;});
-      //  return data;
+     return localStorage.getItem(this._jwtKey)
     }
     
     public set(token: string){
-        console.log('SETTING JWT token', token);
-        this._localStorage.set(this._jwtKey, token);
+        localStorage.setItem(this._jwtKey, token);
     }
 
     
@@ -36,7 +29,7 @@ public isAuthenticated():boolean{
 }
 
 public clear(){
-    this._localStorage.remove(this._jwtKey);
+    localStorage.removeItem(this._jwtKey);
 }
 
 private urlBase64Decode(str:string) {

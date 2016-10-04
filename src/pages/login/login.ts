@@ -8,18 +8,19 @@ import {TabsPage} from '../tabs/tabs';
 import {Observable} from 'rxjs/Rx';
 import {TouchIdService} from '../../shared/touch-id/touch-id.service';
 @Component({
-    templateUrl: 'login.html'
+    templateUrl: 'login.html',
+    selector: 'page-login'
 })
 export class LoginPage {
-    public email: string = 'jsrao15@gmail.com';
-    public password: string = 'a';
+    public email: string = null;
+    public password: string = null;
     public EMAIL_REGEXP = /^[a-z0-9!#$%&'*+\/=?^_`{|}~.-]+@[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)*$/i;
     public invalidEmailAlert;
     public invalidPasswordAlert;
     public loading: any;
     public touchIdAvailable = false;
     constructor(private navCtrl: NavController, private alert: AlertController, private _loginService: LoginService, private _userService: UserService,
-        private loadingCtrl: LoadingController, private touchIdService:TouchIdService) {
+        private loadingCtrl: LoadingController, public touchIdService:TouchIdService) {
 
         this.loading = loadingCtrl.create();
         this.invalidEmailAlert = this.alert.create({
@@ -56,8 +57,8 @@ export class LoginPage {
                     return;
                 }
                 this.touchIdService.enableTouchId(payload);
-                this.navCtrl.push(TabsPage);
                 this._userService.add(result);
+                this.navCtrl.push(TabsPage);
             },
             error => {
                 this.loading.dismiss();

@@ -43,11 +43,12 @@ export class UserService {
         return isAuthenticated;
     }
 
-    public add(loginResponse:any){
+    public add(loginResponse:any) : boolean{
        this._jwtService.set(loginResponse.token);
        this.isAuthenticated.next(true);
        this.setCurrent(loginResponse.user);
        localStorage.setItem(this.userKey, JSON.stringify(loginResponse.user));
+       return true;
     }
     
     public setCurrent(newUser: IUser):void {

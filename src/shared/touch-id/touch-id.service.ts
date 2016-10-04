@@ -9,7 +9,7 @@ import {TabsPage} from '../../pages/tabs/tabs';
 export class TouchIdService {
     private secureStorage: SecureStorage;
     private SecureStorageName = 'dollarTrackerSecureStorage';
-    private touchIdAvailable = false;
+    public touchIdAvailable = false;
     private nav: Nav = null;
     constructor(private userService: UserService, private alertCtrl: AlertController,
         private login: LoginService, private loadingCtrl: LoadingController) {
@@ -55,8 +55,8 @@ export class TouchIdService {
                     loading.present();
                     this.login.login(JSON.parse(usr))
                         .subscribe(result => {
-                            this.nav.push(TabsPage);
                             this.userService.add(result);
+                            this.nav.push(TabsPage);
                             loading.dismiss();
                         });
                 },
