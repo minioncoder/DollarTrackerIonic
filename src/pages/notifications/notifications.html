@@ -1,0 +1,20 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-title>
+      Notifications
+      <!--<ion-icon name="add-circle"></ion-icon>-->
+    </ion-title>
+  </ion-navbar>
+  <ion-toolbar>
+    <ion-searchbar [(ngModel)]="queryText" (ionInput)="notificationsService.getItems($event)" placeholder="Search">
+    </ion-searchbar>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+    <p *ngIf="notificationsService.messages.length == 0">
+        No new notifications available.
+    </p>
+    <ion-list *ngFor="let n of notificationsService.messages">
+        <ion-item>{{n.message}}</ion-item>
+    </ion-list>
+</ion-content>

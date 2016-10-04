@@ -1,0 +1,43 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-title>
+      Reports
+      <!--<ion-icon name="add-circle"></ion-icon>-->
+    </ion-title>
+  </ion-navbar>
+ <ion-toolbar no-border-top>
+    <ion-searchbar primary
+                   [(ngModel)]="queryText"
+                   placeholder="Search">
+    </ion-searchbar>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <!--<ion-card *ngFor="let es of  (_expenseStoryService.expenseStorySummaries|async)">
+    <ion-card-header>
+        <b> {{es.expenseStory.title}}</b>
+    </ion-card-header>
+  </ion-card>  -->
+ <ion-list> 
+<ion-item-sliding *ngFor="let es of  (_expenseStoryService.expenseStorySummaries|async)" #slidingItem >
+        <button ion-item (click)="goToDetails(es)">
+          <h3>{{es.expenseStory.title}}</h3>
+          <p>
+            Total Expenditure: ${{es.totalExpenses | number}} <br />
+            Expense Count: #{{es.totalExpenseCount }}
+          </p>
+        </button>
+
+        <ion-item-options side="right">
+          <button color="danger" (click)="removeReport(slidingItem, es, 'Delete Report')" >
+            Remove
+          </button>
+        </ion-item-options>
+
+      </ion-item-sliding>
+</ion-list>
+</ion-content>

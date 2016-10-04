@@ -1,0 +1,36 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-title>Login</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-list>
+
+    <ion-item>
+      <ion-label floating>Email</ion-label>
+      <ion-input type="text" [(ngModel)] ="email"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label floating>Password</ion-label>
+      <ion-input type="password" [(ngModel)] ="password"></ion-input>
+    </ion-item>
+
+  </ion-list>
+
+  <div padding>
+    <button ion-button color ="primary" block (click) = 'submit()'>Sign In</button> 
+    <br />
+    <ion-item no-lines no-padding>
+        <a item-left>Forgot Password?</a>
+        <a  item-right>Join now</a>
+    </ion-item>
+  </div>
+
+	  <div class="fingerprint-container" *ngIf="touchIdService.touchIdAvailable">
+		  	<ion-icon class="ion-icon" (click)="touchIdService.attemptTouchId()" name="finger-print"></ion-icon>
+		</div>
+    
+</ion-content>

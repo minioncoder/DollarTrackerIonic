@@ -1,0 +1,41 @@
+<ion-header>
+    <ion-navbar color="primary">
+        <ion-title>
+            Invite Friends
+        </ion-title>
+        <ion-buttons start>
+            <button ion-button icon-only (click)="dismiss(null)">
+        <!--<span primary showWhen="ios">X</span>-->
+        <ion-icon name="md-close"></ion-icon>
+      </button>
+        </ion-buttons>
+    </ion-navbar>
+    <ion-toolbar>
+        <ion-segment [(ngModel)]="friends">
+            <ion-segment-button value="search">
+                Search Friends
+            </ion-segment-button>
+            <ion-segment-button value="email">
+                Invite By Email
+            </ion-segment-button>
+        </ion-segment>
+
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <div [ngSwitch]="friends">
+        <ion-list *ngSwitchCase="'search'" no-border-bottom>
+            <ion-toolbar>
+                <ion-searchbar primary [(ngModel)]="queryText" (ionInput)="getItems($event)" placeholder="Search">
+                </ion-searchbar>
+            </ion-toolbar>
+            <ion-item *ngFor="let connection of newConnections">
+                {{connection.displayName}} <br/> {{connection.email}}
+                <i class="fa fa-user-plus fa-2x" (click)="inviteUser(connection.userId)" item-right></i>
+            </ion-item>
+        </ion-list>
+        <ion-list *ngSwitchCase="'email'" no-border-bottom>
+        </ion-list>
+    </div>
+</ion-content>
