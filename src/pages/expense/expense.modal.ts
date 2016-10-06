@@ -7,6 +7,7 @@ import {ExpenseStory} from '../expenseStory/expenseStory.model';
 import {Plugins} from '../../shared/upload/plugins.service';
 import {Transfer} from 'ionic-native';
 import {IonicSearchSelectPage} from '../../shared/ionic-select/ionic-search-select';
+import {ActionSheetController} from 'ionic-angular';
 
 @Component({
     templateUrl: 'expense.modal.html'
@@ -26,13 +27,14 @@ export class ExpenseModalPage {
         public expenseService: ExpenseService,
         public plugins: Plugins,
         public navCtrl: NavController,
-        public loadingCtrl: LoadingController
+        public loadingCtrl: LoadingController,
+        public actionSheetCtrl: ActionSheetController
     ) {
         let dt = new Date();
         this.expenseStory = params.data.expenseStory;
         this.expense.expenseUtcDt = dt.toISOString();
-        
-        if(params.data.expense) {
+
+        if (params.data.expense) {
             this.expense = params.data.expense;
         }
         else {
@@ -92,11 +94,47 @@ export class ExpenseModalPage {
     }
 
     public uploadReceipt() {
-        this.plugins.camera.open()
-            .then(imgUrl => {
-                this.images.push(imgUrl);
-                this.base64Image = imgUrl;
-            }, error => { console.log("image upload error", error) })
+
+        let actionSheet = this.actionSheetCtrl.create({
+            title: 'Upload receipt',
+            buttons: [
+                {
+                    text: 'Take Photo',
+                    handler: () => {
+                        this.plugins.camera.open()
+                            .then(imgUrl => {
+                                if (imgUrl) {
+                                    this.images.push(imgUrl);
+                                    this.base64Image = imgUrl;
+                                }
+                            }, error => { console.log("image upload error", error) })
+                    }
+                },
+                {
+                    text: 'Photo Library',
+                    handler: () => {
+                        this.plugins.albums.open()
+                            .then(imgUrl => {
+                                if (imgUrl) {
+                                    this.images.push(imgUrl);
+                                    this.base64Image = imgUrl;
+                                }
+                            }, error => { console.log("image upload error", error) })
+                    }
+                },
+                {
+                    text: 'Cancel',
+                    role: 'cancel',
+                    handler: () => {
+                        console.log('Cancel clicked');
+                    }
+                }
+            ]
+        });
+
+        actionSheet.present();
+
+
     }
     public onSelectCategory(category: any) {
         if (category) {
