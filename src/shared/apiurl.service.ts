@@ -42,4 +42,6 @@ export class ApiUrl {
     public addCollaborator = this.baseUrl + "/api/expenseStory/addCollaborator";
     public getAllCollaborators = this.baseUrl + "/api/expenseStory/getAllCollaborators";
     public downloadReceipt = this.baseUrl + "/api/downloadReceipt";
+
+    public register = this.baseUrl + "/api/register";
 }

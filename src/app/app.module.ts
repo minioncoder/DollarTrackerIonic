@@ -49,6 +49,8 @@ import {IonicSelectPage} from '../shared/ionic-select/ionic-select';
 import {IonicSearchSelectPage} from '../shared/ionic-select/ionic-search-select';
 import {TouchIdService} from '../shared/touch-id/touch-id.service';
 
+import {AccountPage} from '../pages/account/account';
+
 const DT_COMPONENTS = [
     TabsPage,
     SettingPage,
@@ -66,7 +68,8 @@ const DT_COMPONENTS = [
     CollaboratorModalPage,
     IonicSearchSelectPage,
     IonicSelectPage,
-    ExpenseReportPage
+    ExpenseReportPage,
+    AccountPage
 ]
 
 const DT_SERVICES = [
