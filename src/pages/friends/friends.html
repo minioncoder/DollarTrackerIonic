@@ -34,6 +34,7 @@
                 You have no connections.
             </ion-item>
             <ion-item *ngFor="let connection of connections">
+               <ion-img [src]="avatarUrl" height="50" width="50" item-left></ion-img>
                 {{connection.displayName}} <br />
                 {{connection.email}}
             </ion-item>
