@@ -16,7 +16,7 @@ export class CollaboratorModalPage {
     constructor(public friendsServive:FriendsService, public userService:UserService,public viewCtrl: ViewController,
      public collaboratorService: CollaboratorService, public params: NavParams) {
         this.expenseStoryId = params.data.expenseStoryId;
-        this.friendsServive.getFriends(userService.user.userId)
+        this.collaboratorService.getFriendsWhoAreNotCollaborators(this.expenseStoryId)
         .subscribe(result =>{
             this.connections = result.data;
             this.items = result.data;

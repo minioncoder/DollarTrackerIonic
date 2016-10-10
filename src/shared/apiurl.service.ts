@@ -44,4 +44,5 @@ export class ApiUrl {
     public downloadReceipt = this.baseUrl + "/api/downloadReceipt";
 
     public register = this.baseUrl + "/api/register";
+    public getFriendsWhoAreNotCollaborators = this.baseUrl + "/api/collaborator/newCollaborators";
 }

@@ -15,4 +15,9 @@ export class CollaboratorService {
         var url = this.apiUrl.getAllCollaborators + "/" + storyId;
         return this.apiService.get(url);
     }
+
+    getFriendsWhoAreNotCollaborators(storyId) {
+         var url = this.apiUrl.getFriendsWhoAreNotCollaborators + "/" + storyId + "/0/20";
+         return this.apiService.get(url);
+    }
 }
