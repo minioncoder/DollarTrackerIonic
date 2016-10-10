@@ -17,11 +17,9 @@ export class TabsPage {
   public settingTab: any = SettingPage;
   public notificationsTab: any = NotificationsPage;
   public friendsTab: any = FriendsPage;
-  public newMessages:number = 10;
   mySelectedIndex: number;
 
   constructor(navParams: NavParams, public notifications:NotificationsService) {
     this.mySelectedIndex = navParams.data.tabIndex || 0;
-    //this.newMessages = notifications.newMessagesCount;
   }
 }

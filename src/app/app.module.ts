@@ -51,6 +51,7 @@ import {TouchIdService} from '../shared/touch-id/touch-id.service';
 
 import {AccountPage} from '../pages/account/account';
 import {PubnubService} from '../pages/notifications/pubnub.service';
+import {SplitPascalWordPipe} from '../shared/split-word/split-pascal-word.pipe';
 
 const DT_COMPONENTS = [
     TabsPage,
@@ -95,7 +96,8 @@ const DT_SERVICES = [
 @NgModule({
     declarations: [
         DollarTrackerApp,
-        DT_COMPONENTS
+        DT_COMPONENTS,
+        SplitPascalWordPipe
     ],
     imports: [
    //     MomentModule,

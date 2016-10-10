@@ -17,10 +17,12 @@
   <ion-item *ngIf="notificationsService.messages.length == 0" no-border-lines>
     No new notifications available.
   </ion-item>
-  <ion-list *ngFor="let n of notificationsService.messages">
-    <ion-card no-padding>
-      <ion-card-content>
-        <strong> {{n.messageType}}</strong> <br />
+  <ion-list>
+    <ion-card no-padding *ngFor="let n of notificationsService.messages">
+      <ion-card-header>
+        {{n.messageType | splitpascal}}
+      </ion-card-header>
+      <ion-card-content no-padding>
         {{n.message.Message}}
       </ion-card-content>
     </ion-card>
