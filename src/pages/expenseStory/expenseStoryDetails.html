@@ -63,7 +63,7 @@
           <ion-img src="data:image/png;base64,{{es.receiptThumbnail}}" item-right height="60" width="60" alt="User Image" *ngIf="es.receiptThumbnail" (click)="viewReceipt(es)" ></ion-img>
         </ion-item>
         <ion-item-options side="right">
-          <button ion-button color="danger" (click)="removeReport(slidingItem, es, 'Delete Report')">
+          <button ion-button color="danger" (click)="removeExpense(ck, es)">
             Remove
           </button>
           <button color="secondary" ion-button (click)="edit(es)">

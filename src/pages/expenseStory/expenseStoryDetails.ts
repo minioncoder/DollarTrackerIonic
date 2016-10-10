@@ -8,10 +8,12 @@ import { Expense } from '../expense/expense.model';
 import { IconMapperService } from '../../shared/iconmapper/iconmapper.service';
 import { ExpenseStory, ExpenseStorySummary } from './expenseStory.model';
 import { ExpensePage } from '../expense/expense';
+import { ExpenseService } from '../expense/expense.service';
 import { CollaboratorModalPage } from '../collaborator/collaborator.modal';
 import { CollaboratorService } from '../collaborator/collaborator.service';
 import { ExpenseModalPage } from '../expense/expense.modal';
 import { ImageViewerModalPage } from './image-viewer-modal';
+
 @Component({
     templateUrl: 'expenseStoryDetails.html',
 })
@@ -26,7 +28,7 @@ export class ExpenseStoryDetailsPage {
     public queryText = '';
     @Output() notify: EventEmitter<boolean> = new EventEmitter<boolean>();
     constructor(public _expenseStoryService: ExpenseStoryService, public _iconMapper: IconMapperService,
-        public navParams: NavParams, public modalCtrl: ModalController, public collaboratorService: CollaboratorService) {
+        public navParams: NavParams, public modalCtrl: ModalController, public collaboratorService: CollaboratorService, public expenseService:ExpenseService) {
         this.expenseStorySummary = navParams.data;
         //get expenseStorySummary TODO: need to optimize this call
         // this._expenseStoryService
@@ -122,6 +124,17 @@ export class ExpenseStoryDetailsPage {
                 self.loadCollaborators();
                 self.notify.emit(response.data);
             }
+        })
+    }
+    removeExpense(ck, es){
+        this.expenseService
+        .deleteExpense(es.expenseId)
+        .subscribe(result=>{
+            var idx = this.expensesByCategory[ck].expenses.indexOf(es);
+            this.expensesByCategory[ck].total -= es.amount;
+            this.expenseStorySummary.totalExpenses -= es.amount;
+            this.expenseStorySummary.totalExpenseCount -=1;
+            this.expensesByCategory[ck].expenses.splice(idx, 1);
         })
     }
 }
