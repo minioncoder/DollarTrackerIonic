@@ -50,6 +50,7 @@ import {IonicSearchSelectPage} from '../shared/ionic-select/ionic-search-select'
 import {TouchIdService} from '../shared/touch-id/touch-id.service';
 
 import {AccountPage} from '../pages/account/account';
+import {PubnubService} from '../pages/notifications/pubnub.service';
 
 const DT_COMPONENTS = [
     TabsPage,
@@ -87,7 +88,8 @@ const DT_SERVICES = [
     IconMapperService,
     UploadService,
     Plugins,
-    TouchIdService
+    TouchIdService,
+    PubnubService
 ]
 
 @NgModule({

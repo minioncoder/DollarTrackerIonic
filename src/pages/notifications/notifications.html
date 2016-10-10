@@ -11,10 +11,18 @@
   </ion-toolbar>
 </ion-header>
 <ion-content>
-    <p *ngIf="notificationsService.messages.length == 0">
-        No new notifications available.
-    </p>
-    <ion-list *ngFor="let n of notificationsService.messages">
-        <ion-item>{{n.message}}</ion-item>
-    </ion-list>
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <ion-item *ngIf="notificationsService.messages.length == 0" no-border-lines>
+    No new notifications available.
+  </ion-item>
+  <ion-list *ngFor="let n of notificationsService.messages">
+    <ion-card no-padding>
+      <ion-card-content>
+        <strong> {{n.messageType}}</strong> <br />
+        {{n.message.Message}}
+      </ion-card-content>
+    </ion-card>
+  </ion-list>
 </ion-content>
