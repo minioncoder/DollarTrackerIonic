@@ -1,13 +1,13 @@
-import {Component} from '@angular/core';
-import {NavController, LoadingController, ModalController, Platform, NavParams, ViewController, AlertController} from 'ionic-angular';
-import {Expense} from './expense.model';
-import {Camera} from 'ionic-native';
-import {ExpenseService} from './expense.service';
-import {ExpenseStory} from '../expenseStory/expenseStory.model';
-import {Plugins} from '../../shared/upload/plugins.service';
-import {Transfer} from 'ionic-native';
-import {IonicSearchSelectPage} from '../../shared/ionic-select/ionic-search-select';
-import {ActionSheetController} from 'ionic-angular';
+import { Component } from '@angular/core';
+import { NavController, LoadingController, ModalController, Platform, NavParams, ViewController, AlertController } from 'ionic-angular';
+import { Expense } from './expense.model';
+import { Camera } from 'ionic-native';
+import { ExpenseService } from './expense.service';
+import { ExpenseStory } from '../expenseStory/expenseStory.model';
+import { Plugins } from '../../shared/upload/plugins.service';
+import { Transfer } from 'ionic-native';
+import { IonicSearchSelectPage } from '../../shared/ionic-select/ionic-search-select';
+import { ActionSheetController } from 'ionic-angular';
 
 @Component({
     templateUrl: 'expense.modal.html'
@@ -19,6 +19,7 @@ export class ExpenseModalPage {
     public images: Array<string> = [];
     public loading: any;
     public base64Image: string = null;
+    private isEdit = false;
     constructor(
         public platform: Platform,
         public params: NavParams,
@@ -36,6 +37,7 @@ export class ExpenseModalPage {
 
         if (params.data.expense) {
             this.expense = params.data.expense;
+            this.isEdit = true;
         }
         else {
             this.expense.expenseStoryId = this.expenseStory.expenseStoryId;
@@ -51,11 +53,21 @@ export class ExpenseModalPage {
 
             var file = new File(this._imageBlob, fileName);
             var files: Array<any> = [file];
-            fn = this.expenseService
-                .addExpense(this.expense, this.images);
+            if (this.isEdit) {
+                fn = this.expenseService.updateExpense(this.expense, this.images);
+            }
+            else {
+                fn = this.expenseService
+                    .addExpense(this.expense, this.images);
+            }
         }
         else {
-            fn = this.expenseService.addOnlyExpense(this.expense)
+            if (this.isEdit) {
+                fn = this.expenseService.updateOnlyExpense(this.expense);
+            }
+            else {
+                fn = this.expenseService.addOnlyExpense(this.expense);
+            }
         }
         if (fn) {
             fn.subscribe((response) => {
