@@ -30,12 +30,6 @@ export class ExpenseStoryDetailsPage {
     constructor(public _expenseStoryService: ExpenseStoryService, public _iconMapper: IconMapperService,
         public navParams: NavParams, public modalCtrl: ModalController, public collaboratorService: CollaboratorService, public expenseService:ExpenseService) {
         this.expenseStorySummary = navParams.data;
-        //get expenseStorySummary TODO: need to optimize this call
-        // this._expenseStoryService
-        // .getExpenseStorySummary(id)
-        // .subscribe(es =>{
-        //     this.expenseStorySummary = es.data;
-        // });
         this.loadExpenses();
         this.loadCollaborators();
     }

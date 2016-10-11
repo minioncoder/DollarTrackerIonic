@@ -4,12 +4,14 @@ import { AlertController, App, ItemSliding, List, ModalController, NavController
 import {ExpenseStoryDetailsPage} from '../expenseStory/expenseStoryDetails';
 import {ApiService} from '../../shared/api/api.service';
 import {ApiUrl} from '../../shared/apiurl.service';
+import {NewExpenseReportModalPage} from './newExpenseReport.modal';
 @Component({
   templateUrl: 'expenseReport.html'
 })
 export class ExpenseReportPage {
   public queryText='';
-  constructor(private alertCtrl: AlertController, private navCtrl: NavController, public _expenseStoryService:ExpenseStoryService, private apiService:ApiService, private _apiUrl:ApiUrl) {
+  constructor(private alertCtrl: AlertController, private navCtrl: NavController, public _expenseStoryService:ExpenseStoryService,
+   private apiService:ApiService, private _apiUrl:ApiUrl, public modalCtrl: ModalController) {
   }
   ionViewWillEnter() {
      this._expenseStoryService.loadExpenseStorySummaries(false);
@@ -25,7 +27,6 @@ export class ExpenseReportPage {
         })
   }
   goToDetails(es:any) {
-    console.log("in go to details");
     this.navCtrl.push(ExpenseStoryDetailsPage, es);
   }
   removeReport(slidingItem: ItemSliding, sessionData, title) {
@@ -56,5 +57,15 @@ export class ExpenseReportPage {
     });
     // now present the alert on top of all other content
     alert.present();
+  }
+
+  addReport() {
+    let reportModal = this.modalCtrl.create(NewExpenseReportModalPage);
+    reportModal.present();
+     reportModal.onDidDismiss(function(response) {
+      if(response && response.success) {
+         this._expenseStoryService.loadExpenseStorySummaries(false);
+      }
+    })
   }
 }

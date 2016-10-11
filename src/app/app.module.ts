@@ -26,6 +26,7 @@ import {ExpenseStoryDetailsPage} from '../pages/expenseStory/expenseStoryDetails
 import {ImageViewerModalPage} from '../pages/expenseStory/image-viewer-modal';
 
 import {ExpenseReportPage} from '../pages/expenseReport/expenseReport';
+import {NewExpenseReportModalPage} from '../pages/expenseReport/newExpenseReport.modal';
 
 import {ExpensePage} from '../pages/expense/expense';
 import {ExpenseModalPage} from '../pages/expense/expense.modal';
@@ -53,6 +54,7 @@ import {AccountPage} from '../pages/account/account';
 import {PubnubService} from '../pages/notifications/pubnub.service';
 import {SplitPascalWordPipe} from '../shared/split-word/split-pascal-word.pipe';
 
+
 const DT_COMPONENTS = [
     TabsPage,
     SettingPage,
@@ -71,7 +73,8 @@ const DT_COMPONENTS = [
     IonicSearchSelectPage,
     IonicSelectPage,
     ExpenseReportPage,
-    AccountPage
+    AccountPage,
+    NewExpenseReportModalPage
 ]
 
 const DT_SERVICES = [

@@ -1,0 +1,34 @@
+<ion-header>
+    <ion-navbar color="primary">
+        <ion-title>
+            New Report
+        </ion-title>
+        <ion-buttons start>
+            <button ion-button icon-only (click)="dismiss(null)">
+            <!--<span primary showWhen="ios">X</span>-->
+            <ion-icon name="md-close"></ion-icon>
+            </button>
+        </ion-buttons>
+         <ion-buttons end>
+            <button ion-button icon-only (click)="save()">
+                Save
+            </button>
+        </ion-buttons>
+    </ion-navbar>
+</ion-header>
+<ion-content>
+     <ion-item>
+      <i class="fa fa-list" item-left></i>
+      <ion-input [(ngModel)]="expenseStory.title" placeholder="Report title"></ion-input>
+    </ion-item>
+    <ion-item>
+      <i class="fa fa-1x fa-calendar" item-left></i>
+      <ion-label>Start Dt</ion-label>
+      <ion-datetime displayFormat="MM/DD/YYYY" placeholder="Start Date" [(ngModel)]="expenseStory.startDt"></ion-datetime>
+    </ion-item>
+    <ion-item>
+      <i class="fa fa-1x fa-calendar" item-left></i>
+      <ion-label>End Dt</ion-label>
+      <ion-datetime displayFormat="MM/DD/YYYY" placeholder="End Date" [(ngModel)]="expenseStory.endDt"></ion-datetime>
+    </ion-item>
+</ion-content>
