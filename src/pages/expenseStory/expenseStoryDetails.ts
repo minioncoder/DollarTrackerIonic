@@ -84,11 +84,13 @@ export class ExpenseStoryDetailsPage {
         modal.onDidDismiss(function (response) {
             if (response && response.success) {
                 //    self.notify.emit(<Expense>response.data);
+                //self.updateExpenseSummary(expense.expenseCategoryId, expense);
             }
         })
     }
-    onNotify(expense: Expense): void {
+    onAddExpenseNotify(expense): void {
         if (expense) {
+            this.updateExpenseSummaryOnAddExpense(expense.expenseCategoryId, expense);
             this.loadExpenses();
         }
     }
@@ -134,11 +136,24 @@ export class ExpenseStoryDetailsPage {
         this.expenseService
             .deleteExpense(es.expenseId)
             .subscribe(result => {
-                var idx = this.expensesByCategory[ck].expenses.indexOf(es);
-                this.expensesByCategory[ck].total -= es.amount;
-                this.expenseStorySummary.totalExpenses -= es.amount;
-                this.expenseStorySummary.totalExpenseCount -= 1;
-                this.expensesByCategory[ck].expenses.splice(idx, 1);
+                this.updateExpenseSummaryOnRemoveExpense(ck, es);
             })
+    }
+
+    private updateExpenseSummaryOnAddExpense(categoryId, expense) {
+        console.log("categoryId", categoryId);
+        console.log(expense);
+       // this.expensesByCategory[categoryId].expenses.push(expense);
+       // this.expensesByCategory[categoryId].total += expense.amount;
+        this.expenseStorySummary.totalExpenses += expense.amount;
+        this.expenseStorySummary.totalExpenseCount += 1;
+    }
+
+    private updateExpenseSummaryOnRemoveExpense(categoryId, expense) {
+        var idx = this.expensesByCategory[categoryId].expenses.indexOf(expense);
+        this.expensesByCategory[categoryId].total -= expense.amount;
+        this.expenseStorySummary.totalExpenses -= expense.amount;
+        this.expenseStorySummary.totalExpenseCount -= 1;
+        this.expensesByCategory[categoryId].expenses.splice(idx, 1);
     }
 }

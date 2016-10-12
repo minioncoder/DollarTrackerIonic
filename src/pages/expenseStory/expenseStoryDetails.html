@@ -8,7 +8,7 @@
       <button ion-button icon-only (click)="addCollaborator()">
         <ion-icon name="people"></ion-icon>
      </button>
-      <expense (notify)="onNotify($event)" [expenseStory]="expenseStorySummary.expenseStory"></expense>
+      <expense (notify)="onAddExpenseNotify($event)" [expenseStory]="expenseStorySummary.expenseStory"></expense>
     </ion-buttons>
   </ion-navbar>
   <ion-toolbar>

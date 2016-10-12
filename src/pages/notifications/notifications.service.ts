@@ -14,15 +14,14 @@ export class NotificationsService {
     constructor(private _apiUrl: ApiUrl, private _apiService: ApiService, private _pubnubService: PubnubService, private _userService: UserService) {
         this._pubnubService.isReady.subscribe(x => {
             if (x) {
-
-                this._userService.currentUser.subscribe(user=>{
-                this._pubnubService.listen(this._userService.user.userId)
-                    .filter(x => x.Author != _userService.user.userId)
-                    .subscribe(msg => {
-                        this.isNewMessageAvailable = true;
-                        this.newMessagesCount += 1;
-                    });
-            });
+                this._userService.currentUser.subscribe(user => {
+                    this._pubnubService.listen(this._userService.user.userId)
+                        .filter(x => x.Author != _userService.user.userId)
+                        .subscribe(msg => {
+                            this.isNewMessageAvailable = true;
+                            this.newMessagesCount += 1;
+                        });
+                });
             }
         });
     }
@@ -37,13 +36,12 @@ export class NotificationsService {
                 this.items = x.data;
                 this.isNewMessageAvailable = false;
                 this.newMessagesCount = 0;
-                if(refresher) {
-                     refresher.complete();
+                if (refresher) {
+                    refresher.complete();
                 }
             })
     }
 
-    
     public setMessageCount(count) {
         this.newMessagesCount = count;
     }
