@@ -25,20 +25,30 @@ export class ExpenseStoryDetailsPage {
     public categoryKeys = [];
     public itemKeys = [];
     public collaborators = [];
+    public collaboratorById = {};
     public queryText = '';
     @Output() notify: EventEmitter<boolean> = new EventEmitter<boolean>();
     constructor(public _expenseStoryService: ExpenseStoryService, public _iconMapper: IconMapperService,
-        public navParams: NavParams, public modalCtrl: ModalController, public collaboratorService: CollaboratorService, public expenseService:ExpenseService) {
+        public navParams: NavParams, public modalCtrl: ModalController, public collaboratorService: CollaboratorService, public expenseService: ExpenseService) {
         this.expenseStorySummary = navParams.data;
-        this.loadExpenses();
         this.loadCollaborators();
+        this.loadExpenses();
     }
-    
+
     private loadCollaborators() {
         this.collaboratorService.getAll(this.expenseStorySummary.expenseStory.expenseStoryId)
             .subscribe(result => {
                 this.collaborators = result.data;
+                this.buildCollaboratorById();
             })
+    }
+    private buildCollaboratorById() {
+        var len = this.collaborators.length;
+        var collboratorsById = {};
+        for (var i = 0; i < len; i++) {
+            collboratorsById[this.collaborators[i].collaboratorId] = this.collaborators[i];
+        }
+        this.collaboratorById = collboratorsById;
     }
     private loadExpenses() {
         this._expenseStoryService
@@ -120,15 +130,15 @@ export class ExpenseStoryDetailsPage {
             }
         })
     }
-    removeExpense(ck, es){
+    removeExpense(ck, es) {
         this.expenseService
-        .deleteExpense(es.expenseId)
-        .subscribe(result=>{
-            var idx = this.expensesByCategory[ck].expenses.indexOf(es);
-            this.expensesByCategory[ck].total -= es.amount;
-            this.expenseStorySummary.totalExpenses -= es.amount;
-            this.expenseStorySummary.totalExpenseCount -=1;
-            this.expensesByCategory[ck].expenses.splice(idx, 1);
-        })
+            .deleteExpense(es.expenseId)
+            .subscribe(result => {
+                var idx = this.expensesByCategory[ck].expenses.indexOf(es);
+                this.expensesByCategory[ck].total -= es.amount;
+                this.expenseStorySummary.totalExpenses -= es.amount;
+                this.expenseStorySummary.totalExpenseCount -= 1;
+                this.expensesByCategory[ck].expenses.splice(idx, 1);
+            })
     }
 }

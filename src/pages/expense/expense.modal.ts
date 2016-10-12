@@ -55,7 +55,7 @@ export class ExpenseModalPage {
             var files: Array<any> = [file];
             if (this.isEdit) {
                 fn = this.expenseService.updateExpense(this.expense, this.images);
-            }
+            } 
             else {
                 fn = this.expenseService
                     .addExpense(this.expense, this.images);
