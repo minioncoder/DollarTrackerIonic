@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild, Output, EventEmitter } from '@angular/core';
 import { ExpenseStoryService } from './expenseStory.service';
 import { Observable } from 'rxjs/Rx';
-import { ModalController, Platform, NavParams, ViewController } from 'ionic-angular';
+import { ModalController, Platform, NavParams, ViewController, ActionSheetController, LoadingController } from 'ionic-angular';
 
 //import {ExpenseService} from '../expense/expense.service';
 import { Expense } from '../expense/expense.model';
@@ -27,12 +27,56 @@ export class ExpenseStoryDetailsPage {
     public collaborators = [];
     public collaboratorById = {};
     public queryText = '';
+    public selectOptionsActionSheet;
+    public displayResult = "category";
+    public expensesByWeekly;
+    public expensesBySubCategory;
+    public expensesByDate;
+    public expensesByDateKeys;
+    public expensesBySubCategoryKeys;
+    private loading;
+
     @Output() notify: EventEmitter<boolean> = new EventEmitter<boolean>();
     constructor(public _expenseStoryService: ExpenseStoryService, public _iconMapper: IconMapperService,
-        public navParams: NavParams, public modalCtrl: ModalController, public collaboratorService: CollaboratorService, public expenseService: ExpenseService) {
+        public navParams: NavParams, public modalCtrl: ModalController, public collaboratorService: CollaboratorService,
+        public expenseService: ExpenseService, private actionSheetCtrl: ActionSheetController, private loadingCtrl: LoadingController) {
         this.expenseStorySummary = navParams.data;
         this.loadCollaborators();
         this.loadExpenses();
+        this.selectOptionsActionSheet = this.actionSheetCtrl.create({
+            title: 'Sort By',
+            buttons: [
+                {
+                    text: 'Date',
+                    handler: () => {
+                        console.log('Archive clicked');
+                        this.displayResult = "date";
+                        this.buildExpensesByDate();
+                    }
+                },
+                {
+                    text: 'Category',
+                    handler: () => {
+                        this.displayResult = "category";
+                     //   this.loadExpenses();
+                    }
+                },
+                {
+                    text: 'Name',
+                    handler: () => {
+                        this.displayResult = "name";
+                        this.buildExpensesBySubCategory();
+                    }
+                },
+                {
+                    text: 'Cancel',
+                    role: 'cancel',
+                    handler: () => {
+                        console.log('Cancel clicked');
+                    }
+                }
+            ]
+        });
     }
 
     private loadCollaborators() {
@@ -141,10 +185,6 @@ export class ExpenseStoryDetailsPage {
     }
 
     private updateExpenseSummaryOnAddExpense(categoryId, expense) {
-        console.log("categoryId", categoryId);
-        console.log(expense);
-       // this.expensesByCategory[categoryId].expenses.push(expense);
-       // this.expensesByCategory[categoryId].total += expense.amount;
         this.expenseStorySummary.totalExpenses += expense.amount;
         this.expenseStorySummary.totalExpenseCount += 1;
     }
@@ -155,5 +195,69 @@ export class ExpenseStoryDetailsPage {
         this.expenseStorySummary.totalExpenses -= expense.amount;
         this.expenseStorySummary.totalExpenseCount -= 1;
         this.expensesByCategory[categoryId].expenses.splice(idx, 1);
+    }
+
+    private buildExpensesByDate() {
+        if (!this.expensesByDate) {
+            this.loading = this.loadingCtrl.create();
+            this.loading.present();
+            this._expenseStoryService
+                .getAllExpensesByDate(this.expenseStorySummary.expenseStory.expenseStoryId)
+                .subscribe(es => {
+                    this.loading.dismiss();
+                    this.expensesByDate = es.data;
+                    this.expensesByDateKeys = Object.keys(this.expensesByDate);
+                });
+        }
+    }
+    private buildExpensesBySubCategory() {
+        if (!this.expensesBySubCategory) {
+            this.loading = this.loadingCtrl.create();
+            this.loading.present();
+            this._expenseStoryService
+                .getAllExpensesBySubCategory(this.expenseStorySummary.expenseStory.expenseStoryId)
+                .subscribe(es => {
+                    this.loading.dismiss();
+                    this.expensesBySubCategory = es.data;
+                    this.expensesBySubCategoryKeys = Object.keys(this.expensesBySubCategory);
+                });
+        }
+    }
+    presentSortFilters() {
+        let actionSheet = this.actionSheetCtrl.create({
+            title: 'Sort By',
+            buttons: [
+                {
+                    text: 'Date',
+                    handler: () => {
+                        console.log('Archive clicked');
+                        this.displayResult = "date";
+                        this.buildExpensesByDate();
+                    }
+                },
+                {
+                    text: 'Category',
+                    handler: () => {
+                        this.displayResult = "category";
+                        this.loadExpenses();
+                    }
+                },
+                {
+                    text: 'Sub Category',
+                    handler: () => {
+                        this.displayResult = "name";
+                        this.buildExpensesBySubCategory();
+                    }
+                },
+                {
+                    text: 'Cancel',
+                    role: 'cancel',
+                    handler: () => {
+                        console.log('Cancel clicked');
+                    }
+                }
+            ]
+        });
+        actionSheet.present();
     }
 }
