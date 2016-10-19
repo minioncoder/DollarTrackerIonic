@@ -53,7 +53,7 @@ import {TouchIdService} from '../shared/touch-id/touch-id.service';
 import {AccountPage} from '../pages/account/account';
 import {PubnubService} from '../pages/notifications/pubnub.service';
 import {SplitPascalWordPipe} from '../shared/split-word/split-pascal-word.pipe';
-
+import {ForgotPasswordPage} from '../pages/forgotPassword/forgotPassword';
 
 const DT_COMPONENTS = [
     TabsPage,
@@ -74,7 +74,8 @@ const DT_COMPONENTS = [
     IonicSelectPage,
     ExpenseReportPage,
     AccountPage,
-    NewExpenseReportModalPage
+    NewExpenseReportModalPage,
+    ForgotPasswordPage
 ]
 
 const DT_SERVICES = [

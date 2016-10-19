@@ -29,7 +29,7 @@ export class ExpenseReportPage {
   goToDetails(es:any) {
     this.navCtrl.push(ExpenseStoryDetailsPage, es);
   }
-  removeReport(slidingItem: ItemSliding, sessionData, title) {
+  removeReport(slidingItem: ItemSliding, es, title) {
     let alert = this.alertCtrl.create({
       title: title,
       message: 'Are you sure you want to delete this expense report? You would loose all the associated expenses to this report.',
@@ -45,12 +45,9 @@ export class ExpenseReportPage {
         {
           text: 'Remove',
           handler: () => {
-            // they want to remove this session from their favorites
-            // this.user.removeFavorite(sessionData.name);
-            // this.updateSchedule();
-
             // close the sliding item and hide the option buttons
-            slidingItem.close();
+           this._expenseStoryService.deleteExpenseStory(es.expenseStoryId);
+           slidingItem.close();
           }
         }
       ]
@@ -61,6 +58,15 @@ export class ExpenseReportPage {
 
   addReport() {
     let reportModal = this.modalCtrl.create(NewExpenseReportModalPage);
+    reportModal.present();
+     reportModal.onDidDismiss(function(response) {
+      if(response && response.success) {
+         this._expenseStoryService.loadExpenseStorySummaries(false);
+      }
+    })
+  }
+  editReport(es) {
+  let reportModal = this.modalCtrl.create(NewExpenseReportModalPage, es);
     reportModal.present();
      reportModal.onDidDismiss(function(response) {
       if(response && response.success) {

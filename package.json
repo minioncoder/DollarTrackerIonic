@@ -24,17 +24,18 @@
   "devDependencies": {
     "@ionic/app-scripts": "^0.0.23",
     "@types/moment": "2.13.0",
-    "karma": "^1.3.0",
-    "karma-chrome-launcher": "^2.0.0",
-    "karma-jasmine": "^1.0.2",
-    "typescript": "^2.0.3",
-    "jasmine-core": "^2.5.2",
-    "run-sequence": "^1.2.2",
-    "karma-browserify": "^5.1.0",
     "browserify": "13.1.0",
     "browserify-istanbul": "2.0.0",
+    "isparta": "4.0.0",
+    "jasmine-core": "^2.5.2",
+    "karma": "^1.3.0",
+    "karma-browserify": "^5.1.0",
+    "karma-chrome-launcher": "^2.0.0",
+    "karma-jasmine": "^1.0.2",
+    "run-sequence": "^1.2.2",
     "tsify": "2.0.2",
-    "isparta": "4.0.0"
+    "typescript": "^2.0.3",
+    "watchify": "^3.7.0"
   },
   "cordovaPlugins": [
     "cordova-plugin-device",

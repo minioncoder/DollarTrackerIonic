@@ -24,6 +24,7 @@ export class ApiUrl {
     public expenseStorySummary = this.baseUrl + "/api/expenseStorySummary";
     public addExpenseStory = this.baseUrl + "/api/addExpenseStory";
     public deleteExpenseStory = this.baseUrl + "/api/deleteExpenseStory";
+    public editExpenseStory = this.baseUrl + "/api/editExpenseStory";
 
     public pubnubSubscribeKey = this.baseUrl + "/api/pubnub/subscribekey";
     public getAllActiveExpenseStories = this.baseUrl + "/api/getAllActiveExpenseStories";
@@ -47,4 +48,5 @@ export class ApiUrl {
 
     public register = this.baseUrl + "/api/register";
     public getFriendsWhoAreNotCollaborators = this.baseUrl + "/api/collaborator/newCollaborators";
+    public forgotPassword = this.baseUrl + "/api/user/forgotPassword";
 }

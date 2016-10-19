@@ -8,6 +8,7 @@ import {TabsPage} from '../tabs/tabs';
 import {Observable} from 'rxjs/Rx';
 import {TouchIdService} from '../../shared/touch-id/touch-id.service';
 import {AccountPage} from '../account/account';
+import {ForgotPasswordPage} from '../forgotPassword/forgotPassword';
 @Component({
     templateUrl: 'login.html',
     selector: 'page-login'
@@ -89,5 +90,8 @@ export class LoginPage {
 
     gotoCreateAccount() {
         this.app.getRootNav().setRoot(AccountPage);
+    }
+    gotoForgotPassword() {
+        this.app.getRootNav().setRoot(ForgotPasswordPage);
     }
 }

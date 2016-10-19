@@ -69,7 +69,11 @@ export class ExpenseStoryService {
                 this.loadExpenseStorySummaries(active)
             });
     }
-
+    public editExpenseStory(story) {
+        var url = this._apiUrl.editExpenseStory;
+        return this._apiService
+            .post(url, story)
+    }
     public loadExpenseStorySummaries(active) {
         var url = this._apiUrl.report + "?active=" + active;
         this._apiService

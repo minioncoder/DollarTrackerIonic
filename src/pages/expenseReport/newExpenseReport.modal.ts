@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ExpenseStory } from '../expenseStory/expenseStory.model';
 import { ExpenseStoryService } from '../expenseStory/expenseStory.service';
-import { ViewController, AlertController, LoadingController } from 'ionic-angular';
+import { ViewController, AlertController, LoadingController, NavParams } from 'ionic-angular';
 
 @Component({
     templateUrl: 'newExpenseReport.modal.html'
@@ -9,25 +9,37 @@ import { ViewController, AlertController, LoadingController } from 'ionic-angula
 export class NewExpenseReportModalPage {
     public expenseStory: ExpenseStory;
     public loading: any;
+    public editReport: boolean = false;
     constructor(private _expenseStoryService: ExpenseStoryService, public viewCtrl: ViewController, private alert: AlertController,
-     private loadingCtrl: LoadingController) {
+        private loadingCtrl: LoadingController, private params: NavParams) {
         this.expenseStory = new ExpenseStory();
-        let dt = new Date();
-        this.expenseStory.startDt = dt.toISOString();
-        var endDt = new Date(); 
-        endDt.setDate(endDt.getDate() + 30);
-        this.expenseStory.endDt = endDt.toISOString();
-        this.loading = loadingCtrl.create();
+        if (params.data) {
+            this.expenseStory = params.data;
+            console.log('Edit expense story');
+            console.log(JSON.stringify(this.expenseStory));
+            this.editReport = true;
+        }
+        else {
+            let dt = new Date();
+            this.expenseStory.startDt = dt.toISOString();
+            var endDt = new Date();
+            endDt.setDate(endDt.getDate() + 30);
+            this.expenseStory.endDt = endDt.toISOString();
+        }
+
     }
     public save() {
         if (!this.validate()) return;
         if (this.expenseStory) {
+            this.loading = this.loadingCtrl.create();
             this.loading.present();
-            this._expenseStoryService
-                .addExpenseStory(this.expenseStory)
-                .subscribe(response => {
-                    this.dismiss(response);
-                });
+            var fn = this._expenseStoryService.addExpenseStory(this.expenseStory);
+            if (this.editReport) {
+                fn = this._expenseStoryService.editExpenseStory(this.expenseStory);
+            }
+            fn.subscribe(response => {
+                this.dismiss(response);
+            });
         }
     }
     public dismiss(response) {
