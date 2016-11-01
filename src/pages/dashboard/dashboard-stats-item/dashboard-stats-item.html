@@ -1,7 +1,6 @@
 <ion-item *ngIf="recentlyAddedItem">
    <p>
      <dashboard-stats-item-icon [expenseSubCategoryId] = "recentlyAddedItem.expenseSubCategoryId"></dashboard-stats-item-icon>
-      You spent 
-       <strong>${{recentlyAddedItem.amount|number}}</strong> for <strong>{{recentlyAddedItem.categoryDescription}}</strong>  {{recentlyAddedItem.expenseDtUtc | date:"MMM"}}, {{recentlyAddedItem.expenseDtUtc | date:"dd"}} 
+      <dashboard-stats-item-text [recentlyAddedItem] = "recentlyAddedItem"></dashboard-stats-item-text>
     </p>  
 </ion-item>

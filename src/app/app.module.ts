@@ -37,6 +37,7 @@ import {DashboardService} from '../pages/dashboard/dashboard.service';
 import {DashboardStats} from '../pages/dashboard/dashboard-stats/dashboard-stats';
 import {DashboardStatsItem} from '../pages/dashboard/dashboard-stats-item/dashboard-stats-item';
 import {DashboardStatsItemIcon} from '../pages/dashboard/dashboard-stats-item/dashboard-stats-item-icon';
+import {DashboardStatsItemText} from '../pages/dashboard/dashboard-stats-item/dashboard-stats-item-text';
 
 
 import {CollaboratorModalPage} from '../pages/collaborator/collaborator.modal';
@@ -76,6 +77,7 @@ const DT_COMPONENTS = [
     DashboardStats,
     DashboardStatsItem,
     DashboardStatsItemIcon,
+    DashboardStatsItemText,
     CollaboratorModalPage,
     IonicSearchSelectPage,
     IonicSelectPage,
