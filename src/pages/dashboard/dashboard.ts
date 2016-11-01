@@ -16,6 +16,7 @@ export class DashboardPage {
       this._dashboardService.getDashboardStats()
       .subscribe(ds => {
         this.dashboardStats = ds.data;
+        console.log(this.dashboardStats);
         if(refresher) {
           refresher.complete();
         }

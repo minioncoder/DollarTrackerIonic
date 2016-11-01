@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {Http, Headers, Request, RequestOptions, RequestOptionsArgs, RequestMethod, Response} from '@angular/http';
+import {Http, Headers,  RequestOptions, RequestOptionsArgs, RequestMethod, Response} from '@angular/http';
 import {JwtService} from '../jwt/jwt.service'
 import {Observable} from 'rxjs/Observable';
 
