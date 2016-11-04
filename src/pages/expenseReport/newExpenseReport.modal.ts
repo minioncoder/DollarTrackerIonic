@@ -13,9 +13,9 @@ export class NewExpenseReportModalPage {
     constructor(private _expenseStoryService: ExpenseStoryService, public viewCtrl: ViewController, private alert: AlertController,
         private loadingCtrl: LoadingController, private params: NavParams) {
         this.expenseStory = new ExpenseStory();
-        if (params.data) {
+        if (params.data && params.data.expenseStoryId) {
             this.expenseStory = params.data;
-            console.log('Edit expense story');
+            console.log('Edit expense story', params.data);
             console.log(JSON.stringify(this.expenseStory));
             this.editReport = true;
         }
