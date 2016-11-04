@@ -11,9 +11,7 @@ interface PageObj {
 }
 
 @Component({
-  template: `
-              <ion-nav [root]="rootPage" swipeBackEnabled="false"></ion-nav>
-            `
+  template: `<ion-nav [root]="rootPage" swipeBackEnabled="false"></ion-nav>`
 })
 export class DollarTrackerApp {
 
