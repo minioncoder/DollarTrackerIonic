@@ -28,13 +28,7 @@
 	<ion-list>
 		<ion-item-sliding *ngFor="let es of  (_expenseStoryService.expenseStorySummaries|async)" #slidingItem>
 			<button ion-item (click)="goToDetails(es)">
-          <h3>{{es.expenseStory.title}}</h3>
-          <p>
-            Total Expenditure: ${{es.totalExpenses | number}} <br />
-            Expense Count: #{{es.totalExpenseCount }} <br />
-            Start Dt: {{es.expenseStory.startDt | date}} <br />
-            End Dt: {{es.expenseStory.endDt | date}} <br />
-          </p>
+         	<expense-report-item [es]="es"></expense-report-item>
         </button>
 
 			<ion-item-options side="right">
