@@ -6,6 +6,7 @@ import {ApiService} from '../../shared/api/api.service';
 import {ApiUrl} from '../../shared/apiurl.service';
 import {NewExpenseReportModalPage} from './newExpenseReport.modal';
 @Component({
+  selector: 'expense-report',
   templateUrl: 'expenseReport.html'
 })
 export class ExpenseReportPage {

@@ -26,18 +26,17 @@
     </ion-card-header>
   </ion-card>  -->
 	<ion-list>
-		<ion-item-sliding *ngFor="let es of  (_expenseStoryService.expenseStorySummaries|async)" #slidingItem>
+		<ion-item-sliding *ngFor="let es of  (_expenseStoryService.expenseStorySummaries|async)" #slidingItem class="ion-item-sliding-bg">
 			<button ion-item (click)="goToDetails(es)">
-         	<expense-report-item [es]="es"></expense-report-item>
-        </button>
-
+         		<expense-report-item [es]="es"></expense-report-item>
+        	</button>
 			<ion-item-options side="right">
 				<button ion-button color="danger" (click)="removeReport(slidingItem, es.expenseStory, 'Delete Report')">
-            Remove
-          </button>
+					Remove
+          		</button>
 				<button color="secondary" ion-button (click)="editReport(es.expenseStory)">
-            Edit
-        </button>
+           		 Edit
+        		</button>
 			</ion-item-options>
 		</ion-item-sliding>
 	</ion-list>
