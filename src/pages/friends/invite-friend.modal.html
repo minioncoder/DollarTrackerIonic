@@ -33,7 +33,7 @@
             <ion-item *ngFor="let connection of newConnections">
                  <ion-img item-left src = "data:image/png;base64,{{connection.profilePic}}" width=50 height=50 *ngIf="connection.profilePic"></ion-img>
                  <ion-img item-left src = "assets/images/user.jpg" width=50 height=50 *ngIf="!connection.profilePic"></ion-img>
-                {{connection.displayName}} <br/> {{connection.email}}
+                {{connection.displayName}} <!--<br/> {{connection.email}} -->
                 <i class="fa fa-user-plus fa-1x" style="color:green" (click)="inviteUser(connection.userId)" item-right></i>
             </ion-item>
         </ion-list>

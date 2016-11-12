@@ -27,8 +27,7 @@ export class ExpenseStoryDetailsPage {
     public collaborators = [];
     public collaboratorById = {};
     public queryText = '';
-    public selectOptionsActionSheet;
-    public displayResult = "category";
+    public displayResult = "name";
     public expensesByWeekly;
     public expensesBySubCategory;
     public expensesByDate;
@@ -42,41 +41,7 @@ export class ExpenseStoryDetailsPage {
         public expenseService: ExpenseService, private actionSheetCtrl: ActionSheetController, private loadingCtrl: LoadingController) {
         this.expenseStorySummary = navParams.data;
         this.loadCollaborators();
-        this.loadExpenses();
-        this.selectOptionsActionSheet = this.actionSheetCtrl.create({
-            title: 'Sort By',
-            buttons: [
-                {
-                    text: 'Date',
-                    handler: () => {
-                        console.log('Archive clicked');
-                        this.displayResult = "date";
-                        this.buildExpensesByDate();
-                    }
-                },
-                {
-                    text: 'Category',
-                    handler: () => {
-                        this.displayResult = "category";
-                     //   this.loadExpenses();
-                    }
-                },
-                {
-                    text: 'Name',
-                    handler: () => {
-                        this.displayResult = "name";
-                        this.buildExpensesBySubCategory();
-                    }
-                },
-                {
-                    text: 'Cancel',
-                    role: 'cancel',
-                    handler: () => {
-                        console.log('Cancel clicked');
-                    }
-                }
-            ]
-        });
+        this.buildExpensesBySubCategory(null);
     }
 
     private loadCollaborators() {
@@ -94,27 +59,10 @@ export class ExpenseStoryDetailsPage {
         }
         this.collaboratorById = collboratorsById;
     }
-    private loadExpenses() {
-        this._expenseStoryService
-            .getAllExpensesByCategory(this.expenseStorySummary.expenseStory.expenseStoryId)
-            .subscribe(es => {
-                this.expensesByCategory = es.data;
-                this.items = es.data;
-                this.categoryKeys = Object.keys(es.data);
-                this.itemKeys = Object.keys(es.data);
-            });
-    }
+  
     doRefresh(refresher) {
-        this._expenseStoryService
-            .getAllExpensesByCategory(this.expenseStorySummary.expenseStory.expenseStoryId)
-            .subscribe(es => {
-                this.expensesByCategory = es.data;
-                this.items = es.data;
-                this.categoryKeys = Object.keys(es.data);
-                this.itemKeys = Object.keys(es.data);
-                refresher.complete();
-            });
-    }
+        this.buildExpensesBySubCategory(refresher);
+     }
 
     viewReceipt(expense) {
         let modal = this.modalCtrl.create(ImageViewerModalPage, expense);
@@ -135,10 +83,11 @@ export class ExpenseStoryDetailsPage {
     onAddExpenseNotify(expense): void {
         if (expense) {
             this.updateExpenseSummaryOnAddExpense(expense.expenseCategoryId, expense);
-            this.loadExpenses();
+            this.buildExpensesBySubCategory(null);
         }
     }
 
+     //TODO: revisit this
     getItems(ev: any) {
 
         // set val to the value of the searchbar
@@ -210,13 +159,16 @@ export class ExpenseStoryDetailsPage {
                 });
         }
     }
-    private buildExpensesBySubCategory() {
-        if (!this.expensesBySubCategory) {
+    private buildExpensesBySubCategory(refresher) {
+        if (!this.expensesBySubCategory || refresher) {
             this.loading = this.loadingCtrl.create();
             this.loading.present();
             this._expenseStoryService
                 .getAllExpensesBySubCategory(this.expenseStorySummary.expenseStory.expenseStoryId)
                 .subscribe(es => {
+                    if(refresher) {
+                        refresher.complete();
+                    }
                     this.loading.dismiss();
                     this.expensesBySubCategory = es.data;
                     this.expensesBySubCategoryKeys = Object.keys(this.expensesBySubCategory);
@@ -238,15 +190,8 @@ export class ExpenseStoryDetailsPage {
                 {
                     text: 'Category',
                     handler: () => {
-                        this.displayResult = "category";
-                        this.loadExpenses();
-                    }
-                },
-                {
-                    text: 'Sub Category',
-                    handler: () => {
                         this.displayResult = "name";
-                        this.buildExpensesBySubCategory();
+                        this.buildExpensesBySubCategory(null);
                     }
                 },
                 {

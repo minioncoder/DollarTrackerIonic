@@ -12,6 +12,7 @@ export class InviteFriendModalPage {
     public queryText = '';
     constructor(public viewCtrl: ViewController, public friendsService: FriendsService) {
         this.friendsService.getNewConnections()
+            //.filter(x=> x.displayName != null)
             .subscribe(result => {
                 this.newConnections = result.data;
                 this.items = result.data;

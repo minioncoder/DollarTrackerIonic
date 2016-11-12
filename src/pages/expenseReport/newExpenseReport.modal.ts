@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ExpenseStory } from '../expenseStory/expenseStory.model';
 import { ExpenseStoryService } from '../expenseStory/expenseStory.service';
 import { ViewController, AlertController, LoadingController, NavParams } from 'ionic-angular';
+import { Observable } from 'rxjs/Rx';
 
 @Component({
     templateUrl: 'newExpenseReport.modal.html'
@@ -29,18 +30,20 @@ export class NewExpenseReportModalPage {
 
     }
     public save() {
-        if (!this.validate()) return;
-        if (this.expenseStory) {
+        const addFn =  this._expenseStoryService.addExpenseStory(this.expenseStory);
+        const editFn = this._expenseStoryService.editExpenseStory(this.expenseStory);
+        const loadingFn = () => {
             this.loading = this.loadingCtrl.create();
             this.loading.present();
-            var fn = this._expenseStoryService.addExpenseStory(this.expenseStory);
-            if (this.editReport) {
-                fn = this._expenseStoryService.editExpenseStory(this.expenseStory);
-            }
-            fn.subscribe(response => {
-                this.dismiss(response);
-            });
         }
+        Observable
+        .of(this.expenseStory)
+        .filter((x) => this.validate() && x != null)
+        .do(x => loadingFn())
+        .switchMap(()=> Observable.if(()=> this.editReport, editFn, addFn))
+        .subscribe(response => {
+              this.dismiss(response);
+         })
     }
     public dismiss(response) {
         this.viewCtrl.dismiss(response);

@@ -18,13 +18,16 @@
     No new notifications available.
   </ion-item>
   <ion-list>
-    <ion-card no-padding *ngFor="let n of notificationsService.messages">
-      <ion-card-header>
-        {{n.messageType | splitpascal}}
-      </ion-card-header>
-      <ion-card-content no-padding>
+    <ion-item *ngFor="let n of notificationsService.messages" text-wrap>
+      <strong>{{n.messageType | splitpascal}}</strong> 
+      <div>
+        <p>
         {{n.message.Message}}
-      </ion-card-content>
-    </ion-card>
+        </p>
+      </div>
+      <div>
+      <small>  {{n.createdDt | amTimeAgo}} </small>
+      </div>
+    </ion-item>
   </ion-list>
 </ion-content>
