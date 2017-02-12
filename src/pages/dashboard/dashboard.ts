@@ -8,6 +8,7 @@ import {IconMapperService} from '../../shared/iconmapper/iconmapper.service'
 export class DashboardPage {
   public dashboardStats: any;
   public loading: any;
+  public segment:string = 'recent';
   constructor(public navCtrl: NavController, public _dashboardService: DashboardService,
     public _iconMapper: IconMapperService) {
       this.doRefresh(null);

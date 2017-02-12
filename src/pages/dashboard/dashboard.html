@@ -4,10 +4,27 @@
        Dashboard
     </ion-title>
   </ion-navbar>
+   <ion-toolbar>
+        <ion-segment [(ngModel)]="segment">
+            <ion-segment-button value="recent">
+                Recent
+            </ion-segment-button>
+            <ion-segment-button value="stats">
+                Stats
+            </ion-segment-button>
+        </ion-segment>
+    </ion-toolbar>
 </ion-header>
 <ion-content>
+  <div  [ngSwitch]="segment">
+ <ion-list *ngSwitchCase="'recent'" no-border-bottom> 
  <ion-refresher (ionRefresh)="doRefresh($event)">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
  <dashboard-stats [recentlyAdded] = "dashboardStats.recentlyAdded" *ngIf="dashboardStats && dashboardStats.recentlyAdded"></dashboard-stats>
+ </ion-list>
+ <ion-list *ngSwitchCase="'stats'" no-border-bottom>
+   abc
+ </ion-list>
+  </div>
 </ion-content>
