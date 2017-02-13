@@ -3,7 +3,6 @@ const ProgressBar = require('progressbar.js');
 
 import {Component, Input, ElementRef} from '@angular/core';
 
-import {ShapeOptions} from './progress-bar';
 
 @Component({
   selector: 'progress-bar-circle',
@@ -12,7 +11,7 @@ import {ShapeOptions} from './progress-bar';
 `
 })
 export class ProgressBarCircleComponent {
-  @Input() options: ShapeOptions;
+  @Input() options: any;
   private shape: any;
 
   constructor(private elementRef: ElementRef) {
