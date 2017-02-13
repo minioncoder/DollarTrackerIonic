@@ -32,4 +32,6 @@ export class ForgotPasswordPage {
                 successAlert.present();
             });
     }
+
+    gotoLogin() {}
 }

@@ -24,7 +24,7 @@
  <dashboard-stats [recentlyAdded] = "dashboardStats.recentlyAdded" *ngIf="dashboardStats && dashboardStats.recentlyAdded"></dashboard-stats>
  </ion-list>
  <ion-list *ngSwitchCase="'stats'" no-border-bottom>
-   abc
+      <progress-bar-circle [options]= "options"></progress-bar-circle>
  </ion-list>
   </div>
 </ion-content>

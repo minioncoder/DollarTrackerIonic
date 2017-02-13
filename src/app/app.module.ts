@@ -51,6 +51,7 @@ import {JwtService} from '../shared/jwt/jwt.service';
 import {IconMapperService} from '../shared/iconmapper/iconmapper.service';
 import {UploadService} from '../shared/upload/upload.service';
 import {Plugins} from '../shared/upload/plugins.service';
+import {ProgressBarCircleComponent} from '../shared/progress-bar/progress-bar-circle.component' 
 
 import {IonicSelectPage} from '../shared/ionic-select/ionic-select';
 import {IonicSearchSelectPage} from '../shared/ionic-select/ionic-search-select';
@@ -86,7 +87,8 @@ const DT_COMPONENTS = [
     ExpenseReportItem,
     AccountPage,
     NewExpenseReportModalPage,
-    ForgotPasswordPage
+    ForgotPasswordPage,
+    ProgressBarCircleComponent
 ]
 
 const DT_SERVICES = [

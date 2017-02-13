@@ -46,6 +46,9 @@
     "typescript": "^2.0.9",
     "watchify": "^3.7.0"
   },
+  "config": {
+    "ionic_copy": "./config/copy.config.js"
+  },
   "cordovaPlugins": [
     "cordova-plugin-device",
     "cordova-plugin-console",
