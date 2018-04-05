@@ -1,14 +1,16 @@
 import {Injectable} from "@angular/core";
-import {Camera, ImagePicker} from 'ionic-native';
+import {Camera} from '@ionic-native/camera';
+import {ImagePicker} from '@ionic-native/image-picker';
+ 
 
 @Injectable()
 export class Plugins {
     
-    constructor() { }     
+    constructor(private _camera:Camera) { }     
     
     albums = {            
         open () : Promise<any>  { 
-            return ImagePicker.getPictures({
+            return ImagePicker.getPlugin().getPictures({
                     quality: 50,                        
                     maximumImagesCount: 1,
             }).then((imgUrls) => {
@@ -34,7 +36,7 @@ export class Plugins {
                 saveToPhotoAlbum: false,            
                 correctOrientation: true,
             };        
-            return Camera.getPicture(options).then((imgUrl) => {
+            return Camera.getPlugin().getPicture(options).then((imgUrl) => {
                 console.log("In camera get picture",imgUrl);
                 return imgUrl;
             }, (err) => {                
