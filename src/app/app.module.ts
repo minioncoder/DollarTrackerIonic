@@ -6,6 +6,7 @@ import {MomentModule} from 'angular2-moment';
 import { BrowserModule } from '@angular/platform-browser';
 import { StatusBar } from '@ionic-native/status-bar';
 import { TouchID } from '@ionic-native/touch-id';
+import { Camera } from '@ionic-native/camera';
 import { HttpModule } from '@angular/http';
 import {DollarTrackerApp} from './app.component';
 
@@ -113,6 +114,9 @@ const DT_SERVICES = [
     TouchIdService,
     PubnubService
 ]
+const IONIC_PROVIDERS = [
+    StatusBar, TouchID, NativeStorage, Camera
+]
 
 @NgModule({
     declarations: [
@@ -132,6 +136,6 @@ const DT_SERVICES = [
     ],
     bootstrap: [IonicApp],
     entryComponents: [DollarTrackerApp, DT_COMPONENTS],
-    providers: [DT_SERVICES, {provide: ErrorHandler, useClass: IonicErrorHandler}, StatusBar, TouchID, NativeStorage]
+    providers: [DT_SERVICES, {provide: ErrorHandler, useClass: IonicErrorHandler}, IONIC_PROVIDERS]
 })
 export class AppModule { }
