@@ -6,6 +6,7 @@ import {SettingPage} from '../setting/setting';
 import {NotificationsPage} from '../notifications/notifications'
 import {FriendsPage} from '../friends/friends';
 import { NavParams } from 'ionic-angular';
+import {NotificationsService} from '../notifications/notifications.service';
 @Component({
   templateUrl: 'tabs.html'
 })
@@ -18,7 +19,7 @@ export class TabsPage {
   public friendsTab: any = FriendsPage;
   mySelectedIndex: number;
 
-  constructor(navParams: NavParams) {
+  constructor(navParams: NavParams, public notifications:NotificationsService) {
     this.mySelectedIndex = navParams.data.tabIndex || 0;
   }
 }

@@ -1,5 +1,5 @@
 import {Component, Input, ChangeDetectionStrategy, ChangeDetectorRef} from '@angular/core';
-import {NavController, AlertController, LoadingController} from 'ionic-angular';
+import {NavController, AlertController, LoadingController, App} from 'ionic-angular';
 import {TouchID} from 'ionic-native';
 import {LoginService} from './login.service';
 import {DashboardPage} from '../dashboard/dashboard';
@@ -7,6 +7,8 @@ import {UserService} from '../../user/user.service';
 import {TabsPage} from '../tabs/tabs';
 import {Observable} from 'rxjs/Rx';
 import {TouchIdService} from '../../shared/touch-id/touch-id.service';
+import {AccountPage} from '../account/account';
+import {ForgotPasswordPage} from '../forgotPassword/forgotPassword';
 @Component({
     templateUrl: 'login.html',
     selector: 'page-login'
@@ -20,7 +22,7 @@ export class LoginPage {
     public loading: any;
     public touchIdAvailable = false;
     constructor(private navCtrl: NavController, private alert: AlertController, private _loginService: LoginService, private _userService: UserService,
-        private loadingCtrl: LoadingController, public touchIdService:TouchIdService) {
+        private loadingCtrl: LoadingController, public touchIdService:TouchIdService, private app:App) {
 
         this.loading = loadingCtrl.create();
         this.invalidEmailAlert = this.alert.create({
@@ -36,9 +38,7 @@ export class LoginPage {
             buttons: ['OK'],
             enableBackdropDismiss: true
         });
-
-       
-    }
+}
     
     public submit() {
         var isValid = this.validateEmailAndPassword();
@@ -86,5 +86,12 @@ export class LoginPage {
             return false;
         }
         return true;
+    }
+
+    gotoCreateAccount() {
+        this.app.getRootNav().setRoot(AccountPage);
+    }
+    gotoForgotPassword() {
+        this.app.getRootNav().setRoot(ForgotPasswordPage);
     }
 }

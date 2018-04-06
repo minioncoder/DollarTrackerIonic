@@ -9,8 +9,8 @@ export class Plugins {
     albums = {            
         open () : Promise<any>  { 
             return ImagePicker.getPictures({
-                    quality: 100,                        
-                    maximumImagesCount: 15,
+                    quality: 50,                        
+                    maximumImagesCount: 1,
             }).then((imgUrls) => {
                 return imgUrls;
             }, (err) => {                                   

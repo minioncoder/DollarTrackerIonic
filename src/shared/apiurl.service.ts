@@ -5,11 +5,11 @@ export class ApiUrl {
 
     constructor() { }
 
-    private baseUrl:string = "http://dev-dollartracker.azurewebsites.net";
-    public loginUrl:string = this.baseUrl + "/api/login";
-    public signupUrl:string = this.baseUrl + "/api/register";
-    public dashboardStatsUrl:string = this.baseUrl + "/api/dashboardStats";
-    public report:string = this.baseUrl + "/api/dashboard";
+    private baseUrl: string = "http://dev-dollartracker.azurewebsites.net";
+    public loginUrl: string = this.baseUrl + "/api/login";
+    public signupUrl: string = this.baseUrl + "/api/register";
+    public dashboardStatsUrl: string = this.baseUrl + "/api/dashboardStats";
+    public report: string = this.baseUrl + "/api/dashboard";
     public addOnlyExpense = this.baseUrl + "/api/addOnlyExpense";
     public addExpense = this.baseUrl + "/api/addExpense";
     public updateOnlyExpense = this.baseUrl + "/api/updateOnlyExpense";
@@ -17,11 +17,14 @@ export class ApiUrl {
     public deleteExpense = this.baseUrl + "/api/Expense";
 
     public getAllExpenses = this.baseUrl + "/api/expense";
-    public getAllExpensesByCategory = this.baseUrl +"/api/getAllExpensesByCategory";
+    public getAllExpensesByCategory = this.baseUrl + "/api/getAllExpensesByCategory";
+    public getAllExpensesByDate = this.baseUrl + "/api/getAllExpensesByDate";
+    public getAllExpensesBySubCategory = this.baseUrl + "/api/getAllExpensesBySubCategory";
     public expenseCategory = this.baseUrl + "/api/expenseCategory";
     public expenseStorySummary = this.baseUrl + "/api/expenseStorySummary";
     public addExpenseStory = this.baseUrl + "/api/addExpenseStory";
     public deleteExpenseStory = this.baseUrl + "/api/deleteExpenseStory";
+    public editExpenseStory = this.baseUrl + "/api/editExpenseStory";
 
     public pubnubSubscribeKey = this.baseUrl + "/api/pubnub/subscribekey";
     public getAllActiveExpenseStories = this.baseUrl + "/api/getAllActiveExpenseStories";
@@ -42,4 +45,8 @@ export class ApiUrl {
     public addCollaborator = this.baseUrl + "/api/expenseStory/addCollaborator";
     public getAllCollaborators = this.baseUrl + "/api/expenseStory/getAllCollaborators";
     public downloadReceipt = this.baseUrl + "/api/downloadReceipt";
+
+    public register = this.baseUrl + "/api/register";
+    public getFriendsWhoAreNotCollaborators = this.baseUrl + "/api/collaborator/newCollaborators";
+    public forgotPassword = this.baseUrl + "/api/user/forgotPassword";
 }

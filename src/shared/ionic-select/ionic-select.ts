@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {ViewController} from 'ionic-angular';
-import {ExpenseStoryService} from '../../pages/expenseStory/expenseStory.service';
-import {ApiUrl} from '../apiurl.service';
-import {ApiService} from '../api/api.service';
+import { ViewController } from 'ionic-angular';
+import { ExpenseStoryService } from '../../pages/expenseStory/expenseStory.service';
+import { ApiUrl } from '../apiurl.service';
+import { ApiService } from '../api/api.service';
 
 @Component({
     selector: 'ionic-select',
@@ -11,40 +11,40 @@ import {ApiService} from '../api/api.service';
 export class IonicSelectPage {
     public expenseCategories = [];
     public items = [];
-    public queryText='';
-    constructor(public viewCtrl: ViewController, public _apiUrl:ApiUrl, public _apiService:ApiService) { 
-        
+    public queryText = '';
+    constructor(public viewCtrl: ViewController, public _apiUrl: ApiUrl, public _apiService: ApiService) {
+
     }
-    ionViewWillEnter(){
+    ionViewWillEnter() {
         this.loadExpenseCategories();
-    } 
-   
-    selected(expenseCategory:any) {
+    }
+
+    selected(expenseCategory: any) {
         this.dismiss(expenseCategory);
     }
- getItems(ev: any) {
-   
-    // set val to the value of the searchbar
-    let val = ev.target.value;
+    getItems(ev: any) {
 
-    // if the value is an empty string don't filter the items
-    if (val && val.trim() != '') {
-      this.expenseCategories = this.items.filter((item) => {
-        return item.description.toLowerCase().includes(val.toLowerCase());
-      });
+        // set val to the value of the searchbar
+        let val = ev.target.value;
+
+        // if the value is an empty string don't filter the items
+        if (val && val.trim() != '') {
+            this.expenseCategories = this.items.filter((item) => {
+                return item.description.toLowerCase().includes(val.toLowerCase());
+            });
+        }
     }
-  }
-    
-     dismiss(data:any) {
+
+    dismiss(data: any) {
         this.viewCtrl.dismiss(data);
     }
     //todo: move this code to service
-     private loadExpenseCategories(){
+    private loadExpenseCategories() {
         this._apiService
-        .get(this._apiUrl.expenseCategory)
-        .subscribe(ec=>{
-            this.expenseCategories = ec;
-            this.items = ec;
-        })
+            .get(this._apiUrl.expenseCategory)
+            .subscribe(ec => {
+                this.expenseCategories = ec;
+                this.items = ec;
+            })
     }
 }

@@ -1,12 +1,13 @@
-import {Component} from '@angular/core';
-import {NavController, LoadingController, ModalController, Platform, NavParams, ViewController, AlertController} from 'ionic-angular';
-import {Expense} from './expense.model';
-import {Camera} from 'ionic-native';
-import {ExpenseService} from './expense.service';
-import {ExpenseStory} from '../expenseStory/expenseStory.model';
-import {Plugins} from '../../shared/upload/plugins.service';
-import {Transfer} from 'ionic-native';
-import {IonicSearchSelectPage} from '../../shared/ionic-select/ionic-search-select';
+import { Component } from '@angular/core';
+import { NavController, LoadingController, ModalController, Platform, NavParams, ViewController, AlertController } from 'ionic-angular';
+import { Expense } from './expense.model';
+import { Camera } from 'ionic-native';
+import { ExpenseService } from './expense.service';
+import { ExpenseStory } from '../expenseStory/expenseStory.model';
+import { Plugins } from '../../shared/upload/plugins.service';
+import { Transfer } from 'ionic-native';
+import { IonicSearchSelectPage } from '../../shared/ionic-select/ionic-search-select';
+import { ActionSheetController } from 'ionic-angular';
 
 @Component({
     templateUrl: 'expense.modal.html'
@@ -18,6 +19,7 @@ export class ExpenseModalPage {
     public images: Array<string> = [];
     public loading: any;
     public base64Image: string = null;
+    private isEdit = false;
     constructor(
         public platform: Platform,
         public params: NavParams,
@@ -26,14 +28,16 @@ export class ExpenseModalPage {
         public expenseService: ExpenseService,
         public plugins: Plugins,
         public navCtrl: NavController,
-        public loadingCtrl: LoadingController
+        public loadingCtrl: LoadingController,
+        public actionSheetCtrl: ActionSheetController
     ) {
         let dt = new Date();
         this.expenseStory = params.data.expenseStory;
         this.expense.expenseUtcDt = dt.toISOString();
-        
-        if(params.data.expense) {
+
+        if (params.data.expense) {
             this.expense = params.data.expense;
+            this.isEdit = true;
         }
         else {
             this.expense.expenseStoryId = this.expenseStory.expenseStoryId;
@@ -49,11 +53,21 @@ export class ExpenseModalPage {
 
             var file = new File(this._imageBlob, fileName);
             var files: Array<any> = [file];
-            fn = this.expenseService
-                .addExpense(this.expense, this.images);
+            if (this.isEdit) {
+                fn = this.expenseService.updateExpense(this.expense, this.images);
+            }
+            else {
+                fn = this.expenseService
+                    .addExpense(this.expense, this.images);
+            }
         }
         else {
-            fn = this.expenseService.addOnlyExpense(this.expense)
+            if (this.isEdit) {
+                fn = this.expenseService.updateOnlyExpense(this.expense);
+            }
+            else {
+                fn = this.expenseService.addOnlyExpense(this.expense);
+            }
         }
         if (fn) {
             fn.subscribe((response) => {
@@ -92,11 +106,47 @@ export class ExpenseModalPage {
     }
 
     public uploadReceipt() {
-        this.plugins.camera.open()
-            .then(imgUrl => {
-                this.images.push(imgUrl);
-                this.base64Image = imgUrl;
-            }, error => { console.log("image upload error", error) })
+
+        let actionSheet = this.actionSheetCtrl.create({
+            title: 'Upload receipt',
+            buttons: [
+                {
+                    text: 'Take Photo',
+                    handler: () => {
+                        this.plugins.camera.open()
+                            .then(imgUrl => {
+                                if (imgUrl) {
+                                    this.images.push(imgUrl);
+                                    this.base64Image = imgUrl;
+                                }
+                            }, error => { console.log("image upload error", error) })
+                    }
+                },
+                {
+                    text: 'Photo Library',
+                    handler: () => {
+                        this.plugins.albums.open()
+                            .then(imgUrl => {
+                                if (imgUrl) {
+                                    this.images.push(imgUrl);
+                                    this.base64Image = imgUrl;
+                                }
+                            }, error => { console.log("image upload error", error) })
+                    }
+                },
+                {
+                    text: 'Cancel',
+                    role: 'cancel',
+                    handler: () => {
+                        console.log('Cancel clicked');
+                    }
+                }
+            ]
+        });
+
+        actionSheet.present();
+
+
     }
     public onSelectCategory(category: any) {
         if (category) {

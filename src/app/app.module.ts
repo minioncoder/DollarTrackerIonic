@@ -1,7 +1,7 @@
 import {NgModule} from '@angular/core';
 import {IonicApp, IonicModule} from 'ionic-angular';
 import {Storage} from '@ionic/storage';
-//import {MomentModule} from 'angular2-moment';
+import {MomentModule} from 'angular2-moment';
 
 import {DollarTrackerApp} from './app.component';
 
@@ -26,6 +26,8 @@ import {ExpenseStoryDetailsPage} from '../pages/expenseStory/expenseStoryDetails
 import {ImageViewerModalPage} from '../pages/expenseStory/image-viewer-modal';
 
 import {ExpenseReportPage} from '../pages/expenseReport/expenseReport';
+import {NewExpenseReportModalPage} from '../pages/expenseReport/newExpenseReport.modal';
+import {ExpenseReportItem} from '../pages/expenseReport/expense-report-item';
 
 import {ExpensePage} from '../pages/expense/expense';
 import {ExpenseModalPage} from '../pages/expense/expense.modal';
@@ -33,6 +35,11 @@ import {ExpenseService} from '../pages/expense/expense.service';
 
 import {DashboardPage} from '../pages/dashboard/dashboard';
 import {DashboardService} from '../pages/dashboard/dashboard.service';
+import {DashboardStats} from '../pages/dashboard/dashboard-stats/dashboard-stats';
+import {DashboardStatsItem} from '../pages/dashboard/dashboard-stats-item/dashboard-stats-item';
+import {DashboardStatsItemIcon} from '../pages/dashboard/dashboard-stats-item/dashboard-stats-item-icon';
+import {DashboardStatsItemText} from '../pages/dashboard/dashboard-stats-item/dashboard-stats-item-text';
+
 
 import {CollaboratorModalPage} from '../pages/collaborator/collaborator.modal';
 import {CollaboratorService} from '../pages/collaborator/collaborator.service';
@@ -44,10 +51,16 @@ import {JwtService} from '../shared/jwt/jwt.service';
 import {IconMapperService} from '../shared/iconmapper/iconmapper.service';
 import {UploadService} from '../shared/upload/upload.service';
 import {Plugins} from '../shared/upload/plugins.service';
+import {ProgressBarCircleComponent} from '../shared/progress-bar/progress-bar-circle.component' 
 
 import {IonicSelectPage} from '../shared/ionic-select/ionic-select';
 import {IonicSearchSelectPage} from '../shared/ionic-select/ionic-search-select';
 import {TouchIdService} from '../shared/touch-id/touch-id.service';
+
+import {AccountPage} from '../pages/account/account';
+import {PubnubService} from '../pages/notifications/pubnub.service';
+import {SplitPascalWordPipe} from '../shared/split-word/split-pascal-word.pipe';
+import {ForgotPasswordPage} from '../pages/forgotPassword/forgotPassword';
 
 const DT_COMPONENTS = [
     TabsPage,
@@ -63,10 +76,19 @@ const DT_COMPONENTS = [
     ExpensePage,
     ExpenseModalPage,
     DashboardPage,
+    DashboardStats,
+    DashboardStatsItem,
+    DashboardStatsItemIcon,
+    DashboardStatsItemText,
     CollaboratorModalPage,
     IonicSearchSelectPage,
     IonicSelectPage,
-    ExpenseReportPage
+    ExpenseReportPage,
+    ExpenseReportItem,
+    AccountPage,
+    NewExpenseReportModalPage,
+    ForgotPasswordPage,
+    ProgressBarCircleComponent
 ]
 
 const DT_SERVICES = [
@@ -84,16 +106,18 @@ const DT_SERVICES = [
     IconMapperService,
     UploadService,
     Plugins,
-    TouchIdService
+    TouchIdService,
+    PubnubService
 ]
 
 @NgModule({
     declarations: [
         DollarTrackerApp,
-        DT_COMPONENTS
+        DT_COMPONENTS,
+        SplitPascalWordPipe
     ],
     imports: [
-   //     MomentModule,
+        MomentModule,
         IonicModule.forRoot(DollarTrackerApp),
     ],
     bootstrap: [IonicApp],

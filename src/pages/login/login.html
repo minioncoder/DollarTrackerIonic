@@ -24,8 +24,8 @@
     <button ion-button color ="primary" block (click) = 'submit()'>Sign In</button> 
     <br />
     <ion-item no-lines no-padding>
-        <a item-left>Forgot Password?</a>
-        <a  item-right>Join now</a>
+        <a item-left (click)="gotoForgotPassword()">Forgot Password?</a>
+        <a  item-right (click)="gotoCreateAccount()">Join now</a>
     </ion-item>
   </div>
 

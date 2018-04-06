@@ -5,7 +5,7 @@ import { InviteFriendModalPage } from './invite-friend.modal';
     selector: 'invite-friend',
     template: `
         <button ion-button icon-only (click)="openModal()">
-          <ion-icon name="add"></ion-icon>
+         <i class="fa fa-1x fa-plus"></i>
         </button>
    `
 })
