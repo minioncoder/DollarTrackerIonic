@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import {AlertController, Nav, LoadingController} from 'ionic-angular';
 import { TouchID } from '@ionic-native/touch-id';
-import { SecureStorage } from '@ionic-native/secure-storage';
+// import { SecureStorage } from '@ionic-native/secure-storage';
+import { NativeStorage } from '@ionic-native/native-storage';
 import {UserService} from '../../user/user.service';
 import {LoginService} from '../../pages/login/login.service';
 import {TabsPage} from '../../pages/tabs/tabs';
@@ -13,19 +14,19 @@ export class TouchIdService {
     public touchIdAvailable = false;
     private nav: Nav = null;
     constructor(private userService: UserService, private alertCtrl: AlertController, private touchId: TouchID,
-        private login: LoginService, private loadingCtrl: LoadingController, private secureStorage: SecureStorage) {
+        private login: LoginService, private loadingCtrl: LoadingController, private secureStorage: NativeStorage) {
     }
     init(nav: Nav) {
         this.nav = nav;
-        this.secureStorage.create(this.SecureStorageName)
-            .then(
-            x => {
-                this.touchIdAvailable = true;
-            },
-            error => {
-                console.log(error);
-            }
-            )
+        // this.secureStorage.create(this.SecureStorageName)
+        //     .then(
+        //     x => {
+        //         this.touchIdAvailable = true;
+        //     },
+        //     error => {
+        //         console.log(error);
+        //     }
+        //     )
 
     }
     attemptTouchId() {

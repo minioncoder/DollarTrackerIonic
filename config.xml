@@ -86,4 +86,5 @@
     <plugin name="com.synconset.imagepicker" spec="~2.1.10">
         <variable name="PHOTO_LIBRARY_USAGE_DESCRIPTION" value="your usage message" />
     </plugin>
+    <engine name="browser" spec="5.0.3" />
 </widget>
