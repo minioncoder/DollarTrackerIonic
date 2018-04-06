@@ -1,24 +1,26 @@
 declare var require;
 const ProgressBar = require('progressbar.js');
 
-import {Component, Input, ElementRef} from '@angular/core';
+import {Component, Input, ElementRef, ViewChild} from '@angular/core';
 
 
 @Component({
   selector: 'progress-bar-circle',
   template: `
-    <ng-content style="width:100px; height:100px"></ng-content>
+    <div id="container" #container style="width:50%; height:50%">
+      
+    </div>
 `
 })
 export class ProgressBarCircleComponent {
   @Input() options: any;
   private shape: any;
-
+ @ViewChild('container') container
   constructor(private elementRef: ElementRef) {
   }
 
   ngOnInit() {
-    this.shape = new ProgressBar.Circle(this.elementRef.nativeElement, this.options);
+    this.shape = new ProgressBar.Circle(this.container.nativeElement, this.options);
     this.shape.animate(1.0);
   }
 }

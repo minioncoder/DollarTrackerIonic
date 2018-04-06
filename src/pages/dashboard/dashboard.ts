@@ -21,8 +21,24 @@ export class DashboardPage {
   trailWidth: 1,
   easing: 'easeInOut',
   duration: 1400,
+  svgStyle: {
+        display: 'block',
+        // Important: make sure that your container has same
+        // aspect ratio as the SVG canvas. See SVG canvas sizes above.
+        width: '30%'
+    },
   text: {
-    autoStyleContainer: false
+    autoStyleContainer: true,
+    style:{
+      position: 'absolute', 
+      left: '15%', 
+      top: '50%', 
+      padding: '0px', 
+      margin: '0px', 
+      transform: 'translate(-50%, -50%)',
+      color: 'rgb(170, 170, 170)'
+    }
+  
   },
   from: { color: '#aaa', width: 1 },
   to: { color: '#333', width: 4 },

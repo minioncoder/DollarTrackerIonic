@@ -1,8 +1,13 @@
-import {NgModule} from '@angular/core';
-import {IonicApp, IonicModule} from 'ionic-angular';
-import {Storage} from '@ionic/storage';
+import {NgModule, ErrorHandler} from '@angular/core';
+import {IonicApp, IonicModule, IonicErrorHandler} from 'ionic-angular';
+import {IonicStorageModule} from '@ionic/Storage';
+import { NativeStorage } from '@ionic-native/native-storage';
 import {MomentModule} from 'angular2-moment';
-
+import { BrowserModule } from '@angular/platform-browser';
+import { StatusBar } from '@ionic-native/status-bar';
+import { TouchID } from '@ionic-native/touch-id';
+import { Camera } from '@ionic-native/camera';
+import { HttpModule } from '@angular/http';
 import {DollarTrackerApp} from './app.component';
 
 import {TabsPage} from '../pages/tabs/tabs';
@@ -109,6 +114,9 @@ const DT_SERVICES = [
     TouchIdService,
     PubnubService
 ]
+const IONIC_PROVIDERS = [
+    StatusBar, TouchID, NativeStorage, Camera
+]
 
 @NgModule({
     declarations: [
@@ -118,10 +126,16 @@ const DT_SERVICES = [
     ],
     imports: [
         MomentModule,
+        BrowserModule,
+        HttpModule,
         IonicModule.forRoot(DollarTrackerApp),
+        IonicStorageModule.forRoot({
+            name: '__yourappname',
+            driverOrder: ['indexeddb', 'sqlite', 'websql']
+          })
     ],
     bootstrap: [IonicApp],
     entryComponents: [DollarTrackerApp, DT_COMPONENTS],
-    providers: [DT_SERVICES, Storage]
+    providers: [DT_SERVICES, {provide: ErrorHandler, useClass: IonicErrorHandler}, IONIC_PROVIDERS]
 })
 export class AppModule { }

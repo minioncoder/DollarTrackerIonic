@@ -1,6 +1,7 @@
 import {Component, ViewChild} from '@angular/core';
 import {Platform, Nav, AlertController} from 'ionic-angular';
-import {StatusBar, TouchID} from 'ionic-native';
+import {StatusBar} from '@ionic-native/status-bar';
+import { TouchID } from '@ionic-native/touch-id';
 import {LoginPage} from  '../pages/login/login';
 import { TabsPage } from '../pages/tabs/tabs';
 import {TouchIdService} from '../shared/touch-id/touch-id.service';
@@ -14,7 +15,7 @@ export class DollarTrackerApp {
   @ViewChild(Nav) nav: Nav;
   public rootPage: any;
 
-  constructor(private platform: Platform, private alert: AlertController, private touchIdService: TouchIdService, private user:UserService) {
+  constructor(private platform: Platform, statusBar: StatusBar, private touchId: TouchID, private alert: AlertController, private touchIdService: TouchIdService, private user:UserService) {
     this.rootPage = LoginPage;
 
     this.user.init();
@@ -27,8 +28,8 @@ export class DollarTrackerApp {
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
-      StatusBar.styleDefault();
-      TouchID.isAvailable().
+      statusBar.styleDefault();
+      touchId.isAvailable().
         then(x => {
           this.touchIdService.init(this.nav);
           this.touchIdService.attemptTouchId();

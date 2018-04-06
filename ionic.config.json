@@ -1,6 +1,9 @@
 {
   "name": "Dollar Tracker",
   "app_id": "",
-  "v2": true,
-  "typescript": true
+  "integrations": {
+    "cordova": {}
+  },
+  "hooks": {},
+  "type": "ionic-angular"
 }
