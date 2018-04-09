@@ -5,6 +5,7 @@ import { NativeStorage } from '@ionic-native/native-storage';
 import {MomentModule} from 'angular2-moment';
 import { BrowserModule } from '@angular/platform-browser';
 import { StatusBar } from '@ionic-native/status-bar';
+import { SplashScreen } from '@ionic-native/splash-screen';
 import { TouchID } from '@ionic-native/touch-id';
 import { Camera } from '@ionic-native/camera';
 import { HttpModule } from '@angular/http';
@@ -23,7 +24,6 @@ import {HomePage} from '../pages/home/home';
 
 import {FriendsPage} from '../pages/friends/friends';
 import {FriendsService} from '../pages/friends/friends.service';
-import {InviteFriendPage} from '../pages/friends/invite-friend';
 import {InviteFriendModalPage} from '../pages/friends/invite-friend.modal';
 
 import {ExpenseStoryService} from '../pages/expenseStory/expenseStory.service';
@@ -74,7 +74,6 @@ const DT_COMPONENTS = [
     LoginPage,
     HomePage,
     FriendsPage,
-    InviteFriendPage,
     InviteFriendModalPage,
     ExpenseStoryDetailsPage,
     ImageViewerModalPage,
@@ -115,7 +114,7 @@ const DT_SERVICES = [
     PubnubService
 ]
 const IONIC_PROVIDERS = [
-    StatusBar, TouchID, NativeStorage, Camera
+    StatusBar, TouchID, NativeStorage, Camera, SplashScreen
 ]
 
 @NgModule({

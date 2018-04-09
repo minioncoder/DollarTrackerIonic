@@ -24,7 +24,7 @@
     "@ionic-native/image-picker": "4.5.3",
     "@ionic-native/native-storage": "^4.6.0",
     "@ionic-native/secure-storage": "4.6.0",
-    "@ionic-native/splash-screen": "4.5.3",
+    "@ionic-native/splash-screen": "^4.5.3",
     "@ionic-native/status-bar": "4.5.3",
     "@ionic-native/touch-id": "4.5.3",
     "@ionic-native/transfer": "3.14.0",
@@ -68,9 +68,6 @@
     "tsify": "^3.0.4",
     "watchify": "^3.11.0"
   },
-  "config": {
-    "ionic_copy": "./config/copy.config.js"
-  },
   "cordovaPlugins": [
     "cordova-plugin-device",
     "cordova-plugin-console",
@@ -93,7 +90,6 @@
   "cordova": {
     "plugins": {
       "cordova-plugin-touch-id": {},
-      "cordova-plugin-camera": {},
       "com.synconset.imagepicker": {
         "PHOTO_LIBRARY_USAGE_DESCRIPTION": "your usage message"
       },
@@ -101,7 +97,8 @@
       "cordova-plugin-device": {},
       "cordova-plugin-splashscreen": {},
       "cordova-plugin-ionic-webview": {},
-      "cordova-plugin-ionic-keyboard": {}
+      "cordova-plugin-ionic-keyboard": {},
+      "cordova-plugin-camera": {}
     },
     "platforms": [
       "browser"
