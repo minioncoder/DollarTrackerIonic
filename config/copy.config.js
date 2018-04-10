@@ -25,5 +25,11 @@ module.exports = {
   copyCustom: {
       src: './node_modules/progressbar.js/dist/progressbar.min.js',
       dest: '{{BUILD}}'
+    },
+    platforms: {
+      ios: {
+        statusbarPadding: false
+      }
     }
+    
 }
