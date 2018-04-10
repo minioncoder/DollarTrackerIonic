@@ -48,3 +48,13 @@ $colors: (
 
 $ionicons-font-path: "../assets/fonts";
 @import "ionic.ionicons";
+
+
+@font-face {
+  font-family: 'Open Sans';
+  src: local('Open Sans Regular'), local('OpenSans-Regular'), url('../assets/fonts/open-sans-latin.woff2') format('woff2');
+}
+
+* {
+   font-family: 'Open Sans'
+}

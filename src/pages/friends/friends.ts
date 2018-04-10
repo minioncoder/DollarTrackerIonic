@@ -1,7 +1,6 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import {FriendsService} from './friends.service';
 import {UserService} from '../../user/user.service';
-import {InviteFriendPage} from './invite-friend';
 import {ApiUrl} from '../../shared/apiurl.service';
 import { InviteFriendModalPage } from './invite-friend.modal';
 import { ModalController } from 'ionic-angular';
