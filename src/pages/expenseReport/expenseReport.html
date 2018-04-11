@@ -2,7 +2,6 @@
 	<ion-navbar color="primary">
 		<ion-title>
 			Reports
-			<!--<ion-icon name="add-circle"></ion-icon>-->
 		</ion-title>
 		<ion-buttons end>
 			<button ion-button icon-only (click)="addReport()">
@@ -20,34 +19,13 @@
 	<ion-refresher (ionRefresh)="doRefresh($event)">
 		<ion-refresher-content></ion-refresher-content>
 	</ion-refresher>
-	<!--<ion-card *ngFor="let es of  (_expenseStoryService.expenseStorySummaries|async)">
-    <ion-card-header>
-        <b> {{es.expenseStory.title}}</b>
-    </ion-card-header>
-  </ion-card>  -->
 	<ion-list>
 		<ion-item-sliding *ngFor="let es of  (_expenseStoryService.expenseStorySummaries|async)" #slidingItem class="ion-item-sliding-bg">
-				<ion-item>
-						<ion-badge item-start color="favorite" style="min-width:50px">${{es.totalExpenses | number}}</ion-badge>
-						<!-- <div style="min-width:50px" item-start> -->
-						  <!-- <img src="img/thumbnail-totoro.png"> -->
-						  <!-- ${{es.totalExpenses | number}} -->
-						<!-- </div> -->
-						<h2>{{es.expenseStory.title }}</h2>
-						<p>{{es.expenseStory.startDt | date}} - {{es.expenseStory.endDt | date}}</p>
-						<button ion-button clear item-end (click)="goToDetails(es)">View</button>
-					  </ion-item>
-			<!-- <button ion-item (click)="goToDetails(es)"> -->
-				<!-- <expense-report-item [es]="es"></expense-report-item> -->
-				<!-- <ion-label>{{es.expenseStory.title }} ({{es.totalExpenseCount }})</ion-label> -->
-				<!-- <ion-label>{{es.expenseStory.startDt | date}} - {{es.expenseStory.endDt | date}}</ion-label> -->
-				<!-- <div>
-					<small>{{es.expenseStory.startDt | date}}
-						<strong>to</strong> {{es.expenseStory.endDt | date}}</small>
-				</div> -->
-				<!-- <small> Total Spent: ${{es.totalExpenses | number}}</small> -->
-			<!-- </button> -->
-
+			<ion-item (click)="goToDetails(es)">
+				<h2>{{es.expenseStory.title }}</h2>
+				<p>{{es.expenseStory.startDt | date}} - {{es.expenseStory.endDt | date}}</p>
+				<ion-badge item-end color="favorite">${{es.totalExpenses | number}}</ion-badge>
+			</ion-item>
 			<ion-item-options side="right">
 				<button ion-button color="danger" (click)="removeReport(slidingItem, es.expenseStory, 'Delete Report')">
 					Remove
