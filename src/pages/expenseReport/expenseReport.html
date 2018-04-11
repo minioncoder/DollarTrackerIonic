@@ -6,14 +6,14 @@
 		</ion-title>
 		<ion-buttons end>
 			<button ion-button icon-only (click)="addReport()">
-        <i class="fa fa-1x fa-plus"></i>
-      </button>
+				<i class="fa fa-1x fa-plus"></i>
+			</button>
 		</ion-buttons>
 	</ion-navbar>
-	<ion-toolbar no-border-top>
+	<!-- <ion-toolbar no-border-top>
 		<ion-searchbar primary [(ngModel)]="queryText" placeholder="Search">
 		</ion-searchbar>
-	</ion-toolbar>
+	</ion-toolbar> -->
 </ion-header>
 
 <ion-content>
@@ -27,16 +27,34 @@
   </ion-card>  -->
 	<ion-list>
 		<ion-item-sliding *ngFor="let es of  (_expenseStoryService.expenseStorySummaries|async)" #slidingItem class="ion-item-sliding-bg">
-			<button ion-item (click)="goToDetails(es)">
-         		<expense-report-item [es]="es"></expense-report-item>
-        	</button>
+				<ion-item>
+						<ion-badge item-start color="favorite" style="min-width:50px">${{es.totalExpenses | number}}</ion-badge>
+						<!-- <div style="min-width:50px" item-start> -->
+						  <!-- <img src="img/thumbnail-totoro.png"> -->
+						  <!-- ${{es.totalExpenses | number}} -->
+						<!-- </div> -->
+						<h2>{{es.expenseStory.title }}</h2>
+						<p>{{es.expenseStory.startDt | date}} - {{es.expenseStory.endDt | date}}</p>
+						<button ion-button clear item-end (click)="goToDetails(es)">View</button>
+					  </ion-item>
+			<!-- <button ion-item (click)="goToDetails(es)"> -->
+				<!-- <expense-report-item [es]="es"></expense-report-item> -->
+				<!-- <ion-label>{{es.expenseStory.title }} ({{es.totalExpenseCount }})</ion-label> -->
+				<!-- <ion-label>{{es.expenseStory.startDt | date}} - {{es.expenseStory.endDt | date}}</ion-label> -->
+				<!-- <div>
+					<small>{{es.expenseStory.startDt | date}}
+						<strong>to</strong> {{es.expenseStory.endDt | date}}</small>
+				</div> -->
+				<!-- <small> Total Spent: ${{es.totalExpenses | number}}</small> -->
+			<!-- </button> -->
+
 			<ion-item-options side="right">
 				<button ion-button color="danger" (click)="removeReport(slidingItem, es.expenseStory, 'Delete Report')">
 					Remove
-          		</button>
+				</button>
 				<button color="secondary" ion-button (click)="editReport(es.expenseStory)">
-           		 Edit
-        		</button>
+					Edit
+				</button>
 			</ion-item-options>
 		</ion-item-sliding>
 	</ion-list>
