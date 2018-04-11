@@ -32,7 +32,6 @@ import {ImageViewerModalPage} from '../pages/expenseStory/image-viewer-modal';
 
 import {ExpenseReportPage} from '../pages/expenseReport/expenseReport';
 import {NewExpenseReportModalPage} from '../pages/expenseReport/newExpenseReport.modal';
-import {ExpenseReportItem} from '../pages/expenseReport/expense-report-item';
 
 import {ExpensePage} from '../pages/expense/expense';
 import {ExpenseModalPage} from '../pages/expense/expense.modal';
@@ -88,7 +87,6 @@ const DT_COMPONENTS = [
     IonicSearchSelectPage,
     IonicSelectPage,
     ExpenseReportPage,
-    ExpenseReportItem,
     AccountPage,
     NewExpenseReportModalPage,
     ForgotPasswordPage,
