@@ -3,7 +3,7 @@ import {ApiUrl} from '../../shared/apiurl.service';
 import {ApiService} from '../../shared/api/api.service';
 import {Observable} from 'rxjs/Rx'
 import {UploadService} from '../../shared/upload/upload.service';
-import {Transfer} from 'ionic-native';
+import {Transfer} from '@ionic-native/transfer';
 import {JwtService} from '../../shared/jwt/jwt.service';
 @Injectable()
 export class ExpenseService {
@@ -46,7 +46,7 @@ export class ExpenseService {
             params: { 'DTD': JSON.stringify(payload) }
         };
         //ft.onProgress(this.onProgress);
-        return Observable.fromPromise(ft.upload(image, this._apiurl.addExpense, options, false));
+        return Observable.fromPromise(ft.create().upload(image, this._apiurl.addExpense, options, false));
 
     }
 }

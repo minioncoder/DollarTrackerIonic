@@ -1,6 +1,6 @@
 <ion-header>
   <ion-navbar color="primary">
-    <ion-title center>
+    <ion-title>
        Dashboard
     </ion-title>
   </ion-navbar>
@@ -24,7 +24,8 @@
  <dashboard-stats [recentlyAdded] = "dashboardStats.recentlyAdded" *ngIf="dashboardStats && dashboardStats.recentlyAdded"></dashboard-stats>
  </ion-list>
  <ion-list *ngSwitchCase="'stats'" no-border-bottom>
-      <progress-bar-circle [options]= "options"></progress-bar-circle>
+     No stats available
+      <!-- <progress-bar-circle [options]= "options"></progress-bar-circle> -->
  </ion-list>
   </div>
 </ion-content>

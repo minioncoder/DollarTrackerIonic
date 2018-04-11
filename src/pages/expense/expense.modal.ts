@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
 import { NavController, LoadingController, ModalController, Platform, NavParams, ViewController, AlertController } from 'ionic-angular';
 import { Expense } from './expense.model';
-import { Camera } from 'ionic-native';
+import { Camera } from '@ionic-native/camera';
 import { ExpenseService } from './expense.service';
 import { ExpenseStory } from '../expenseStory/expenseStory.model';
 import { Plugins } from '../../shared/upload/plugins.service';
-import { Transfer } from 'ionic-native';
+import { Transfer } from '@ionic-native/transfer';
 import { IonicSearchSelectPage } from '../../shared/ionic-select/ionic-search-select';
 import { ActionSheetController } from 'ionic-angular';
 

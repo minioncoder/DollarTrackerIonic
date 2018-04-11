@@ -1,6 +1,5 @@
 import {Component, Input, ChangeDetectionStrategy, ChangeDetectorRef} from '@angular/core';
 import {NavController, AlertController, LoadingController, App} from 'ionic-angular';
-import {TouchID} from 'ionic-native';
 import {LoginService} from './login.service';
 import {DashboardPage} from '../dashboard/dashboard';
 import {UserService} from '../../user/user.service';

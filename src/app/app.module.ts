@@ -1,8 +1,14 @@
-import {NgModule} from '@angular/core';
-import {IonicApp, IonicModule} from 'ionic-angular';
-import {Storage} from '@ionic/storage';
+import {NgModule, ErrorHandler} from '@angular/core';
+import {IonicApp, IonicModule, IonicErrorHandler} from 'ionic-angular';
+import {IonicStorageModule} from '@ionic/Storage';
+import { NativeStorage } from '@ionic-native/native-storage';
 import {MomentModule} from 'angular2-moment';
-
+import { BrowserModule } from '@angular/platform-browser';
+import { StatusBar } from '@ionic-native/status-bar';
+import { SplashScreen } from '@ionic-native/splash-screen';
+import { TouchID } from '@ionic-native/touch-id';
+import { Camera } from '@ionic-native/camera';
+import { HttpModule } from '@angular/http';
 import {DollarTrackerApp} from './app.component';
 
 import {TabsPage} from '../pages/tabs/tabs';
@@ -18,7 +24,6 @@ import {HomePage} from '../pages/home/home';
 
 import {FriendsPage} from '../pages/friends/friends';
 import {FriendsService} from '../pages/friends/friends.service';
-import {InviteFriendPage} from '../pages/friends/invite-friend';
 import {InviteFriendModalPage} from '../pages/friends/invite-friend.modal';
 
 import {ExpenseStoryService} from '../pages/expenseStory/expenseStory.service';
@@ -27,7 +32,6 @@ import {ImageViewerModalPage} from '../pages/expenseStory/image-viewer-modal';
 
 import {ExpenseReportPage} from '../pages/expenseReport/expenseReport';
 import {NewExpenseReportModalPage} from '../pages/expenseReport/newExpenseReport.modal';
-import {ExpenseReportItem} from '../pages/expenseReport/expense-report-item';
 
 import {ExpensePage} from '../pages/expense/expense';
 import {ExpenseModalPage} from '../pages/expense/expense.modal';
@@ -69,7 +73,6 @@ const DT_COMPONENTS = [
     LoginPage,
     HomePage,
     FriendsPage,
-    InviteFriendPage,
     InviteFriendModalPage,
     ExpenseStoryDetailsPage,
     ImageViewerModalPage,
@@ -84,7 +87,6 @@ const DT_COMPONENTS = [
     IonicSearchSelectPage,
     IonicSelectPage,
     ExpenseReportPage,
-    ExpenseReportItem,
     AccountPage,
     NewExpenseReportModalPage,
     ForgotPasswordPage,
@@ -109,6 +111,9 @@ const DT_SERVICES = [
     TouchIdService,
     PubnubService
 ]
+const IONIC_PROVIDERS = [
+    StatusBar, TouchID, NativeStorage, Camera, SplashScreen
+]
 
 @NgModule({
     declarations: [
@@ -118,10 +123,16 @@ const DT_SERVICES = [
     ],
     imports: [
         MomentModule,
+        BrowserModule,
+        HttpModule,
         IonicModule.forRoot(DollarTrackerApp),
+        IonicStorageModule.forRoot({
+            name: '__yourappname',
+            driverOrder: ['indexeddb', 'sqlite', 'websql']
+          })
     ],
     bootstrap: [IonicApp],
     entryComponents: [DollarTrackerApp, DT_COMPONENTS],
-    providers: [DT_SERVICES, Storage]
+    providers: [DT_SERVICES, {provide: ErrorHandler, useClass: IonicErrorHandler}, IONIC_PROVIDERS]
 })
 export class AppModule { }

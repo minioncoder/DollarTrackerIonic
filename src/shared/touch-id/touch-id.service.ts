@@ -1,54 +1,55 @@
 import { Injectable } from '@angular/core';
 import {AlertController, Nav, LoadingController} from 'ionic-angular';
-import { SecureStorage, TouchID } from 'ionic-native';
+import { TouchID } from '@ionic-native/touch-id';
+// import { SecureStorage } from '@ionic-native/secure-storage';
+import { NativeStorage } from '@ionic-native/native-storage';
 import {UserService} from '../../user/user.service';
 import {LoginService} from '../../pages/login/login.service';
 import {TabsPage} from '../../pages/tabs/tabs';
 
 @Injectable()
 export class TouchIdService {
-    private secureStorage: SecureStorage;
+    
     private SecureStorageName = 'dollarTrackerSecureStorage';
     public touchIdAvailable = false;
     private nav: Nav = null;
-    constructor(private userService: UserService, private alertCtrl: AlertController,
-        private login: LoginService, private loadingCtrl: LoadingController) {
+    constructor(private userService: UserService, private alertCtrl: AlertController, private touchId: TouchID,
+        private login: LoginService, private loadingCtrl: LoadingController, private secureStorage: NativeStorage) {
     }
     init(nav: Nav) {
         this.nav = nav;
-        this.secureStorage = new SecureStorage();
-        this.secureStorage.create(this.SecureStorageName)
-            .then(
-            x => {
-                this.touchIdAvailable = true;
-            },
-            error => {
-                console.log(error);
-            }
-            )
+        // this.secureStorage.create(this.SecureStorageName)
+        //     .then(
+        //     x => {
+        //         this.touchIdAvailable = true;
+        //     },
+        //     error => {
+        //         console.log(error);
+        //     }
+        //     )
 
     }
     attemptTouchId() {
-        this.secureStorage.get('dollarTrackerUser').then(
-            (usr) => {
-                this.touchIdAuthentication(usr);
-            },
-            (err) => {
+        // this.secureStorage.get('dollarTrackerUser').then(
+        //     (usr) => {
+        //         this.touchIdAuthentication(usr);
+        //     },
+        //     (err) => {
 
-            }
-        );
+        //     }
+        // );
     }
     enableTouchId(usr) {
-        if(this.touchIdAvailable) {
-        this.secureStorage.set('dollarTrackerUser', JSON.stringify(usr))
-            .then(
-            (data) => { }
-            );
-        }
+       // if(this.touchIdAvailable) {
+        // this.secureStorage.set('dollarTrackerUser', JSON.stringify(usr))
+        //     .then(
+        //     (data) => { }
+        //     );
+        // }
     }
     touchIdAuthentication(usr) {
         if (usr && this.touchIdAvailable) {
-            TouchID.verifyFingerprint('Authenticate to login to your Dollar Tracker account')
+            this.touchId.verifyFingerprint('Authenticate to login to your Dollar Tracker account')
                 .then(
                 res => {
                     let loading = this.loadingCtrl.create();
