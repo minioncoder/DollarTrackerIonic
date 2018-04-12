@@ -32,7 +32,6 @@ import {ImageViewerModalPage} from '../pages/expenseStory/image-viewer-modal';
 
 import {ExpenseReportPage} from '../pages/expenseReport/expenseReport';
 import {NewExpenseReportModalPage} from '../pages/expenseReport/newExpenseReport.modal';
-import {ExpenseReportItem} from '../pages/expenseReport/expense-report-item';
 
 import {ExpensePage} from '../pages/expense/expense';
 import {ExpenseModalPage} from '../pages/expense/expense.modal';
@@ -41,9 +40,6 @@ import {ExpenseService} from '../pages/expense/expense.service';
 import {DashboardPage} from '../pages/dashboard/dashboard';
 import {DashboardService} from '../pages/dashboard/dashboard.service';
 import {DashboardStats} from '../pages/dashboard/dashboard-stats/dashboard-stats';
-import {DashboardStatsItem} from '../pages/dashboard/dashboard-stats-item/dashboard-stats-item';
-import {DashboardStatsItemIcon} from '../pages/dashboard/dashboard-stats-item/dashboard-stats-item-icon';
-import {DashboardStatsItemText} from '../pages/dashboard/dashboard-stats-item/dashboard-stats-item-text';
 
 
 import {CollaboratorModalPage} from '../pages/collaborator/collaborator.modal';
@@ -81,14 +77,10 @@ const DT_COMPONENTS = [
     ExpenseModalPage,
     DashboardPage,
     DashboardStats,
-    DashboardStatsItem,
-    DashboardStatsItemIcon,
-    DashboardStatsItemText,
     CollaboratorModalPage,
     IonicSearchSelectPage,
     IonicSelectPage,
     ExpenseReportPage,
-    ExpenseReportItem,
     AccountPage,
     NewExpenseReportModalPage,
     ForgotPasswordPage,
