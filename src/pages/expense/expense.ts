@@ -7,7 +7,7 @@ import {ExpenseStory} from '../expenseStory/expenseStory.model'
     selector: 'expense',
     template: `
       <button ion-button icon-only (click)="openModal()">
-        <i class="fa fa-1x fa-plus"></i>
+        <ion-icon name="add"></ion-icon>
       </button>
     `
 })
