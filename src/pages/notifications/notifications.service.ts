@@ -15,12 +15,15 @@ export class NotificationsService {
         this._pubnubService.isReady.subscribe(x => {
             if (x) {
                 this._userService.currentUser.subscribe(user => {
-                    this._pubnubService.listen(this._userService.user.userId)
-                        .filter(x => x.Author != _userService.user.userId)
-                        .subscribe(msg => {
-                            this.isNewMessageAvailable = true;
-                            this.newMessagesCount += 1;
-                        });
+                    //TODO: need to un-subscribe on logout
+                    if (this._userService.user) {
+                        this._pubnubService.listen(this._userService.user.userId)
+                            .filter(x => x.Author != _userService.user.userId)
+                            .subscribe(msg => {
+                                this.isNewMessageAvailable = true;
+                                this.newMessagesCount += 1;
+                            });
+                    }
                 });
             }
         });
