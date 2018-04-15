@@ -53,8 +53,12 @@ export class AccountPage {
                 let successAlert = this.alert.create({
                     title: 'Success Created Account',
                     message: 'Please login now',
-                    buttons: ['OK'],
-                    enableBackdropDismiss: true
+                    buttons: [{
+                       text: 'OK',
+                       handler: d=>{ this.gotoLogin(); }
+                    }
+                    ],
+                    enableBackdropDismiss: true,
                 });
                 this.account = new Account();
                 successAlert.present();
